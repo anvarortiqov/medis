@@ -1,0 +1,161 @@
+
+.add-patinet, .book-room, .select-service, .take-analyse{
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    width: 100%;
+    height: 95%;
+    display: none;
+    justify-content: center;
+    background-color: transparent;
+    margin-top: 30px;
+}
+.add-patient-exist{
+    display: flex;
+
+}
+.add-patient_content, .book-room_content, .select-service_content{
+    height: 95%;
+    width: 95%;
+    border-radius: 30.538px;
+    border: 5.09px solid var(--Neutral-300, #EFF0F6);
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(25.448572158813477px);
+    
+}
+.add-patient_head, .book-room_head, .select-service_head{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 95%;
+    margin-left: 2.5%;
+}
+.add-patient_head > h1, .book-room_head > h1, .select-service_head > h1{
+    color: var(--text-dark-blue);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 35px; /* 145.833% */
+    margin: 20px 0 0 0;
+}
+.add-patient_head p, .book-room_head > p, .select-service_head > p{
+    color: var(--text-grey);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px; /* 166.667% */
+    margin: 10px 0;
+}
+.add-patient_content-backspace, .book-room_content-backspace, .select-service-backspace{
+    position: absolute;
+    right: 0;
+    font-size: 28px;
+    top: 20px;
+    color: var(--text-blue);
+    cursor: pointer;
+}
+.addpatient-hr, .book-room-hr, .select-service-hr{
+    width: 100%;
+}
+.add-patient_form{
+    width: 95%;
+    padding: 0;
+    margin-left: 2.5%;
+    margin-top: 40px;
+    background-color: transparent;
+    display: flex;
+}
+.add-patient-form_child{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+}
+.add-patient-form_child2{
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-patient-form_child2 > div{
+    width: 80%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.add-patient-form_child > div {   
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+.add-patient_form input{
+    padding: 15px 0 15px 0 ;
+    width: 100%;
+}
+.add-patient_form input:focus,
+.add-patient_form input:focus-visible,
+.add-patient_form select:focus,
+.add-patient_form select:focus-visible
+.add-patient_form textarea:focus,
+.add-patient_form textarea:focus-visible{
+  outline: 1px auto var(--text-grey);
+}
+.add-patient_form label{
+    font-size: 14px;
+    color: #170F49;
+    margin-top: 10px;
+}
+.add-patient_form input::placeholder, .add-patient_form select{
+    padding-left: 15px;
+}
+
+.add-patient_form select, .add-patient_form textarea{
+    width: 100%;
+    height: 100%;
+    padding: 15px 0 15px 0 ;
+    border: 1px solid var(--Neutral-300, #EFF0F6);
+    border-radius: 20px;
+    background: var(--Neutral-100, #FFF);
+    box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.07);
+    color: #6F6C90 !important;
+}
+.add-patient_form textarea{
+    width: 100%;
+    padding: 15px 0 0 15px ;
+    border-radius: 20px;
+}
+.add-patient-form_btn{
+    border: none;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 40px;
+    color: var(--color-white);
+    background: linear-gradient(92.96deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 30px 0 0 0;
+}
+.add-patient-tolov-holati{
+    width: 90%;
+}
+.add-patient-tolov-holati button{
+    padding: 15px 0;
+    width: 150px;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: red;
+    color: var(--color-white);
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.add-patient-tolov-holati button:first-child{
+    background:  var(--text-blue);
+    color: var(--color-white);
+}

@@ -1,0 +1,13 @@
+.employees{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.employees .patientdata_navbar-block{
+    width: 95%;
+    height: 65px;
+}
+.employee-content{
+    width: 95%;
+}

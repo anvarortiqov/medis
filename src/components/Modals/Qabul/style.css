@@ -1,0 +1,160 @@
+.qabul{
+    width: 100%;
+    height: calc(100vh - 155px);
+    overflow: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.qabul-head{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+}
+.qabul h2{
+    color: rgb(111, 108, 144);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+.qabul h1{
+    color: rgb(23, 15, 73);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0%;
+    text-align: left;
+}
+.qabul .qabul-con{
+    border-top: 1px solid grey;
+    padding-top: 20px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: auto;
+    height: calc(100vh - 450px);
+}
+.qabul::-webkit-scrollbar, .qabul .qabul-con::-webkit-scrollbar{
+    display: none;
+}
+.qabul-row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2% 1fr 1fr 1fr 3%;
+    gap: 15px;
+}
+.qabul-row-del{
+    color: red;
+    font-size: 25px;
+    cursor: pointer;
+}
+.qabul-row div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.qabul-add{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(150.16deg, rgb(93, 95, 239) 20.509%,rgba(236, 49, 240, 0.35) 179.445%);
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid rgb(93, 95, 239);
+    transition: all 0.4s;
+    margin-right: 2px;
+}
+.qabul-add:hover{
+    transform: rotate(90deg);
+    background: transparent;
+    color:  rgb(93, 95, 239);
+}
+.qabul-foot-box{
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 15px;
+}
+.qabul-foot{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+.qabul-foot input, .qabul-foot select, .qabul-row input, .qabul-row select {
+    margin: 0;
+}
+.qabul-foot input,.qabul-foot select{
+    width: 100%;
+}
+.qabul-row2{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+}
+.qabul-row-last{
+    display: flex;
+    align-items: end;
+}
+
+.qabul-btns{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 20px;
+}
+.qabul-btns button:hover{
+    color: rgb(93, 95, 239);
+}
+
+
+/* promokod */
+.promokod-box{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 450px;
+    gap: 20px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 10px 30px 50px 30px rgba(55, 69, 87, 0.10);
+}
+.promokod-box-active{
+    display: flex;
+}
+.promokod-box label{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.promokod-cancel{
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--text-dark-blue);
+}
+.promokod-box input{
+    margin: 0;
+}
+.promokod-box a{
+    width: 100%;
+}
+.promokod-box button{
+    width: 100%;
+    height: 50px;
+    padding: 0 ;
+    font-size: 15px;
+}

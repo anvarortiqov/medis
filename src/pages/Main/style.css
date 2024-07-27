@@ -1,0 +1,173 @@
+.main-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-page_head{
+    width: 98%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+/* main page statistics section's css part */
+.main-page-head_title{
+    color: var(--text-dark-blue);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.main-page-head_statistics{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 22.5% 22.5% 15% 15% 15% ;
+    gap: 2.5%;
+    height: 110px;
+}
+.main-page-head_statistics li{
+    list-style: none;
+    background-color:  var(--bg-white);
+    padding: 10px 0;
+    box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.05);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-page-head_icon{
+    font-size: 30px;
+    color: var(--text-blue);
+
+}
+.main-page-head_statistics li h4{
+    color: var(--text-grey);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 7px 0;
+}
+.main-page-head_statistics li h3{
+    color: var(--text-dark-blue);
+    font-size: 15px;
+    font-weight: 400;
+    display: flex;
+}
+.main-page-head_statistics li button{
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--bg-white);
+    font-size: 13px;
+    margin: 0 0 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-blue);
+    border: 2px solid var(--text-blue);
+    cursor: pointer;
+}
+.main-page-head_statistics li button:hover{
+    background: linear-gradient(92.96deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%);
+    color: var(--color-white);
+}
+/* main page form section css  */
+.main-page > .main-page_bottom > form {
+    margin: 8px 0 0 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 28% 28% 20% 20%;
+    justify-content: space-between;
+    align-items: start;
+    height: auto;
+}
+.main-head_from-items{
+    margin: 0;
+    border-radius: 10px!important;
+    padding: 0 12px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+/*main page bottom side  */
+.main-page_bottom{
+    width: 98%;
+    height: calc(100vh - 230px);
+    display: flex;
+    flex-direction: column;
+}
+
+.main-bottom_left-classlist{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    margin: 10px 0 20px 0;
+}
+/* .main-bottom_left-classlist:nth-child(odd) > a > li > div{
+    background-color: red;
+}
+.main-bottom_left-classlist:nth-child(even) > a > li > div{
+    background-color: var(--text-grey);
+} */
+.main-bottom_left-classlist::-webkit-scrollbar {
+    display: none;
+}
+
+/* compleated component section css  */
+
+.compleated{
+    margin: 0 0 0 5%;
+    width: 90%;
+    height: 95%;
+    border-radius: 30.538px;
+    border: 5.09px solid var(--bg-color-f5f5f5);
+    background: var(--text-grey);
+    backdrop-filter: blur(25.448572158813477px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.compleated_content{
+    position: relative;
+    width: 608px;
+    height: 455px;
+    flex-shrink: 0;
+    border-radius: 34px;
+    border: 1px solid var(--Neutral-300, #EFF0F6);
+    background: var(--Neutral-100, #FFF);
+    box-shadow: 0px 5px 16px 0px rgba(8, 15, 52, 0.06); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.comp-icon{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 30px;
+    color: var(--text-blue);
+    cursor: pointer;
+}
+.comp-img{
+    width: 140px;
+    height: 130px;
+    flex-shrink: 0;
+}
+.comp-title{
+    margin: 1rem 0;
+    color: var(--text-dark-blue);
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 35px; /* 145.833% */
+}
+.comp-oaragraph{
+    width: 90%;
+    text-align: center;
+    color: var(--text-grey);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 166.667% */
+}

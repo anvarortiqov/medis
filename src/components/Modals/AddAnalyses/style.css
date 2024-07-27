@@ -1,0 +1,11 @@
+.add-analys-content{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: end;
+    gap: 20px;
+    padding: 30px 0;
+}
+.add-analys-content div input, .add-analys-content div select{
+    width: 100%;
+}

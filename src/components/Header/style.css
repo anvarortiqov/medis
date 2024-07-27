@@ -1,0 +1,116 @@
+.haeder{
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    
+}
+
+.header_container{
+    width: 97%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-block{
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+}
+.logo-icon{
+    width: 50px;
+    height: 50px;
+    background: var(--asosiy-btn, linear-gradient(93deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%));
+    border-radius: 10px;
+}
+.logo-name{
+    margin-left: 1rem;
+    color: var(--text-dark-blue);
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 45px;
+}
+/* header-center  */
+.header_center{
+    display: flex;
+    align-items: center;
+}
+.header_center div{
+    min-width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    margin-left: 40px;
+    font-size: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 20px 70px 0px #0027601F;
+    background: linear-gradient(92.96deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%);
+}
+.header_center div:first-child{
+    margin-left: 0;
+}
+.header_center h4{
+    margin-left: 10px;
+    color: var(--text-dark-blue);
+    font-size: 15px;
+}
+/* right side of header section */
+.header_right-side{
+    display: flex;
+    align-items: center;
+}
+/* notification block of account */
+.header_notification-block{
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--Supporting-Color-yellow-Shade, #f7efe1);
+}
+.header_notification-icon{
+    font-size: 24px;
+    color: #FFA412;
+}
+/* header accaunt block css */
+.header_account-block{
+    display: flex;
+}
+.header-account-block_user-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    background-size: cover;
+    margin: 0 1rem 0 1.5rem;
+}
+.header-account-block-texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.header-account-block-texts h4{
+    color: var(--text-dark-blue);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 24px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+.header_account-block-icon{
+    margin-left: 1rem;
+}
+.header-account-block-texts h5{
+    color: var(--text-grey);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}

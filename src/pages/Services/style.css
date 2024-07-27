@@ -1,0 +1,15 @@
+.services-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.services-box .patientdata_navbar-block{
+    width: 95%;
+    height: 65px;
+}
+
+.services-content{
+    width: 95%;
+}

@@ -1,0 +1,66 @@
+.book-room{
+    display: none;
+}
+.book-room-exist{
+    display: flex;
+}
+.book-room_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* book-room up to  */
+.book-room-up, .book-room-center, .book-room-down{
+    width: 94%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;    
+    margin-top: 20px;
+}
+.book-room-up > div, .book-room-center > div, .book-room-down > div, .book-room_result > div{
+    width: 31.5%;
+    display: flex;
+    flex-direction: column;
+}
+.book-room-up > div > select, .book-room-center > div > select, .book-room-down > div > textarea{
+    width: calc(100% - 15px);
+    height: 100%;
+    padding: 15px 0 15px 15px;
+    border: 1px solid var(--Neutral-300, #EFF0F6);
+    border-radius: 20px;
+    
+    box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.07);
+    color: #6F6C90 !important;
+}
+/* book-room center */
+.book-room-center > div{
+    width: 15%;
+}
+/* book-room-down */
+.book-room-down > div > textarea{
+    border-radius: 20px;
+}
+.book-room_result{
+    width: 31.5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.book-room_result > div{
+    width: 45%;
+    margin: 0;
+}
+.book-room_result button{
+    border: none;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 40px;
+    color: var(--color-white);
+    background: linear-gradient(92.96deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 30px 0 0 0;
+}
