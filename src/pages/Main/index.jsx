@@ -7,6 +7,9 @@ import Mainavatar1 from "../../assets/images/mainlist_avatar.png";
 import Mainavatar2 from "../../assets/images/mainlist_avatar2.png";
 import Mainavatar3 from "../../assets/images/mainlist_avatar3.png";
 
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 function index() {
   const MainInfoList = [
     {
@@ -101,7 +104,19 @@ function index() {
     },
   ];
 
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    // Проверка, посещал ли пользователь сайт ранее
+    const hasVisited = localStorage.getItem('hasVisited');
+
+    if (!hasVisited) {
+      // Установка флага в localStorage
+      localStorage.setItem('hasVisited', 'true');
+      // Перенаправление пользователя на другой маршрут
+      navigate('/login');
+    }
+  }, [navigate]);
 
   return (
     <div className="main-page">

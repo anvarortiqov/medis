@@ -9,6 +9,7 @@ import Laboratory from './pages/Labaratory/index'
 import Sozlamalar from './pages/Sozlamalar/index'
 import Statistics from './pages/Statistics/index'
 import Accaunting from './pages/Accaunting/index'
+import Login from './pages/Login/index'
 // components
 import Header from './components/Header/index'
 import Navbar from './components/Navbar/index'
@@ -52,7 +53,8 @@ function App() {
         <div className='app-content'>
           <Routes>
             <Route path='/' element={<Main />}></Route>
-             <Route path='/patient' element={<Patient />}>
+            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/patient' element={<Patient />}>
               <Route path='personal' element={<Personal/>}></Route>
               <Route path='analyses' element={<Analyses/>}></Route>
               <Route path='sickhistory' element={<SicknessHistory/>}></Route>
@@ -88,20 +90,6 @@ function App() {
               <Route path="shifohona" element={<Hospital/>}></Route>
             </Route>
             <Route path='*' element={<NotFoundPage/>}></Route>
-
-            {/*<Route path='/doctor' element={<Doctor />}></Route>
-            <Route path='/doctor/doctorinfo' element={<DoctorInfo/>}></Route>
-            <Route path='/doctor/add' element={<AddWorker />}></Route>
-            <Route path='/doctor/info' element={<AboutDoctor />}></Route>
-            <Route path='/rooms' element={<Rooms/>}></Route>
-            <Route path='/rooms/add' element={<Add/>}></Route>
-            <Route path='/services' element={<Services/>}></Route>
-
-            <Route path='/bemorlar' element={<Bemorlar/>}></Route>
-            <Route path='/laboratory' element={<Laboratory/>}></Route>
-            <Route path='/accounting' element={<Accounting/>}></Route>
-            <Route path='/settings' element={<Settings/>}></Route>
-            <Route path='/logout' element={<Logout/>}></Route> */}
           </Routes >
         </div>
       </div>
