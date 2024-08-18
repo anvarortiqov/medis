@@ -90,8 +90,7 @@ const index = () => {
         <div className='patientdata-right_information'>
           <div className='patientdata-information_left'>
             <Outlet />
-          </div>
-          
+          </div>          
         </div>
     </div>
   )
