@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
 import { FaPlus } from "react-icons/fa6";
 import { usePDF } from 'react-to-pdf';
@@ -6,19 +6,38 @@ import QabulCard from '../../Cards/QabulCard/index'
 import { MdDeleteForever } from "react-icons/md";
 import { FaDownload } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { amointService, removeServiceItem } from '../../../redux/slices/receptionSlice';
 
 
 const index = () => {
+  const ServicesStore = useSelector(state => state.reception);
+  const dispatch = useDispatch();
 
-  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
-
-  const [qabulCount, setqabulCount]=useState(1)
-
-  const count=Array.from(Array(qabulCount).keys())
-  
+  const [PaidAmount, setPaidAmount] = useState(0);
   const [open, setOpen] = useState(false)
+  const [qabulCount, setqabulCount] = useState(1);
+  const [FilteredServices, setFilteredServices] = useState([])
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+  const count = Array.from(Array(qabulCount).keys())
+
+  useEffect(() => {
+    if (PaidAmount > 0) {
+      dispatch(amointService(parseFloat(PaidAmount)))
+    }
+  }, [PaidAmount])
+
+  useEffect(() => {
+    dispatch(removeServiceItem(FilteredServices))
+  }, [FilteredServices])
+
   const HandleOpen = () => {
     setOpen(!open)
+  }
+
+  const onDelete = (id) => {
+    setFilteredServices(ServicesStore.services.filter(item => item.row !== id))
+    setqabulCount(prev => (prev - 1) < 1 ? 1 : prev - 1)
   }
 
   return (
@@ -34,10 +53,10 @@ const index = () => {
         <h2>#983274has723</h2>
         <h1>Qabul: Olimov Ali</h1>
       </div>
-      <div className='qabul-con' ref={targetRef}> 
+      <div className='qabul-con' ref={targetRef}>
         <div className='qabul-row'>
           <div>
-          <label className='form-label-style' htmlFor="qabul">N</label>
+            <label className='form-label-style' htmlFor="qabul">N</label>
           </div>
           <div>
             <label className='form-label-style' htmlFor="qabul">Xizmat</label>
@@ -50,28 +69,28 @@ const index = () => {
           </div>
         </div>
         {
-          count.map(order=>{
-            if(order==qabulCount-1){
-              return <QabulCard id={order} delates={<MdDeleteForever className='qabul-row-del' />}/>
+          count.map((order, index) => {
+            if (order == qabulCount - 1) {
+              return <QabulCard id={order} delates={<MdDeleteForever onClick={() => onDelete(index)} className='qabul-row-del' />} />
             }
-            else{
+            else {
               return <QabulCard id={order} />
             }
           })
         }
       </div>
       <div className='qabul-row2'>
-          <div>
-            Hzimat Qo'shish
-          </div>
-          <button className='qabul-add' onClick={()=>setqabulCount(qabulCount+1)}>
-            <FaPlus />
-          </button>
+        <div>
+          Hzimat Qo'shish
+        </div>
+        <button className='qabul-add' onClick={() => setqabulCount(qabulCount + 1)}>
+          <FaPlus />
+        </button>
       </div>
       <div className='qabul-foot-box'>
         <div className='qabul-foot'>
-          <label  htmlFor="jami">Jami Narxi:</label>
-          <input className='input-style' type="number" id='jami' value="20000" disabled />
+          <label htmlFor="jami">Jami Narxi:</label>
+          <input className='input-style' type="number" id='jami' value={ServicesStore.totalPrice} readOnly />
         </div>
         <div className='qabul-foot'>
           <label htmlFor="type">To'lov turi</label>
@@ -82,14 +101,14 @@ const index = () => {
           </select>
         </div>
         <div className='qabul-foot'>
-          <label  htmlFor="jami">To'langan Summa</label>
-          <input required className='input-style' type="number" id='jami' placeholder="0 so'm" />
+          <label htmlFor="jami">To'langan Summa</label>
+          <input required className='input-style' onChange={e => setPaidAmount(e.target.value)} type="number" id='jami' placeholder="0 so'm" />
         </div>
       </div>
       <div className='qabul-btns'>
         <button onClick={HandleOpen} className='form-btn'>Promo Kod</button>
         <button type='submit' className='form-btn'>Saqlash</button>
-        <button className='form-btn'  onClick={() => toPDF()}>Check</button>
+        <button disabled={ServicesStore.checkStatus} className='form-btn' onClick={() => toPDF()}>Check</button>
       </div>
     </div>
   )

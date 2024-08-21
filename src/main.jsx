@@ -2,13 +2,199 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { BrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+// pages
+import Main from './pages/Main/index'
+import Patient from './pages/Patient/index'
+import Rooms from './pages/Rooms/index'
+import Services from './pages/Services/index'
+import Employees from './pages/Employees/index'
+import Laboratory from './pages/Labaratory/index'
+import Sozlamalar from './pages/Sozlamalar/index'
+import Statistics from './pages/Statistics/index'
+import Accaunting from './pages/Accaunting/index'
+import Login from './pages/Login/index'
+// components
+import NotFoundPage from './components/NotFound/index'
+import Personal from './components/PatientInfo/patientinfo'
+import Analyses from './components/PatientInfo/analyses'
+import SicknessHistory from './components/PatientInfo/servicehistory'
+import Statsionar from './components/PatientInfo/statsionar'
+import Massaj from './components/ServicesInfo/massaj'
+import Employers from './components/EmployeeInfo/Rahbariyat'
+import Doctors from './components/EmployeeInfo/Shifokorlar'
+import TechEmployees from './components/EmployeeInfo/TechEmployee'
+import Rsults from './components/LabaratoryInfo/natijalar'
+import Allanalyses from './components/LabaratoryInfo/allanalyses'
+import AddEmployee from './components/Modals/AddEmployee/index'
+import Addanalyses from './components/Modals/AddAnalyses/index'
+import AddService from './components/Modals/AddServices/index'
+import NewServiceType from './components/Modals/NewServiceType/index'
+import NewEquipment from './components/Modals/NewEquipment/index'
+import Hospital from './components/HospitalInfo/hospital'
+import Payments from './components/AccauntingInfo/payments'
+import Harajatlar from './components/AccauntingInfo/harajatlar'
+import Qabul from './components/Modals/Qabul/index'
+import PaymentInside from './components/PaymentInside/index'
+import HarajatInside from './components/HarajatInside/index'
+import QabulCheck from './components/Checks/QabulCheck/index'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.jsx'
 
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Main />
+      },
+      {
+        path: "patient",
+        element: <Patient />,
+        children: [
+          {
+            path: "personal",
+            element: <Personal />
+          },
+          {
+            path: "analyses",
+            element: <Analyses />
+          },
+          {
+            path: "sickhistory",
+            element: <SicknessHistory />
+          },
+          {
+            path: "statsionar",
+            element: <Statsionar />
+          },
+          {
+            path: "qabul",
+            element: <Qabul />
+          }
+        ]
+      },
+      {
+        path: "rooms",
+        element: <Rooms />
+      },
+      {
+        path: "services",
+        element: <Services />,
+        children: [
+          {
+            path: "massaj",
+            element: <Massaj />
+          },
+          {
+            path: "addservice",
+            element: <AddService />
+          },
+          {
+            path: "newservicetype",
+            element: <NewServiceType />
+          }
+        ]
+      },
+      {
+        path: "hodimlar",
+        element: <Employees />,
+        children: [
+          {
+            path: "rahbarlar",
+            element: <Employees />
+          },
+          {
+            path: "shifokorlar",
+            element: <Doctors />
+          },
+          {
+            path: "texhodimlar",
+            element: <TechEmployees />
+          },
+          {
+            path: "addemployee",
+            element: <AddEmployee />
+          }
+        ]
+      },
+      {
+        path: "laboratory",
+        element: <Laboratory />,
+        children: [
+          {
+            path: "analyseresults",
+            element: <Rsults />
+          },
+          {
+            path: "allanalyses",
+            element: <Allanalyses />
+          },
+          {
+            path: "addanalyses",
+            element: <Addanalyses />
+          },
+          {
+            path: "newequipment",
+            element: <NewEquipment />
+          }
+        ]
+      },
+      {
+        path: "statistics",
+        element: <Statistics />
+      },
+      {
+        path: "accaunting",
+        element: <Accaunting />,
+        children: [
+          {
+            path: "payments",
+            element: <Payments />
+          },
+          {
+            path: "harajatlar",
+            element: <Harajatlar />
+          },
+          {
+            path: "payment-info",
+            element: <HarajatInside />
+          },
+          {
+            path: "harajat-info",
+            element: <HarajatInside />
+          }
+        ]
+      },
+      {
+        path: "settings",
+        element: <Sozlamalar />,
+        children: [
+          {
+            path: "shifohona",
+            element: <Hospital />
+          }
+        ]
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />
+      }
+    ]
+  },
+  {
+    path: "/login",
+    element: <Login />
+  }
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </BrowserRouter>
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
 )
