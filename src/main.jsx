@@ -13,6 +13,7 @@ import Laboratory from './pages/Labaratory/index'
 import Sozlamalar from './pages/Sozlamalar/index'
 import Statistics from './pages/Statistics/index'
 import Accaunting from './pages/Accaunting/index'
+import QabulXona from './pages/QabulXona/index.jsx'
 import Login from './pages/Login/index'
 // components
 import NotFoundPage from './components/NotFound/index'
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />
+      },
+      {
+        path: "qabulxona",
+        element: <QabulXona />,
       },
       {
         path: "patient",
@@ -105,7 +110,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "rahbarlar",
-            element: <Employees />
+            element: <Employers />
           },
           {
             path: "shifokorlar",

@@ -18,7 +18,7 @@ const index = () => {
         <Link to="/">
           <div className="logo-block">
               <div className="logo-icon"></div>
-              <div className="logo-name"><h3>Medbrat</h3></div>
+              <div className="logo-name"><h3>Medis</h3></div>
           </div>
         </Link>
         <div className='header_center'>

@@ -59,6 +59,10 @@ const index = () => {
                         <MdOutlineBedroomChild className="navbar_link-icon" />
                         <h4>Xonalar</h4>
                     </NavLink>
+                    <NavLink to='qabulxona' className="navbar_link">
+                        <MdOutlineBedroomChild className="navbar_link-icon" />
+                        <h4>Qabulxona</h4>
+                    </NavLink>
                     <div>
                         <NavLink to="services/massaj" onClick={() => handleAuto()} className="navbar_link" >
                             <MdManageAccounts className="navbar_link-icon" />

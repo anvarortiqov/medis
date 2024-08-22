@@ -2,107 +2,13 @@ import "./style.css";
 import { FaPlus } from "react-icons/fa";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { BsCashCoin } from "react-icons/bs";
-import MainListItem from "../../components/Cards/MainListCard/index";
-import Mainavatar1 from "../../assets/images/mainlist_avatar.png";
-import Mainavatar2 from "../../assets/images/mainlist_avatar2.png";
-import Mainavatar3 from "../../assets/images/mainlist_avatar3.png";
+
 
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function index() {
-  const MainInfoList = [
-    {
-      id: 1,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar1,
-    },
-    {
-      id: 2,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar1,
-    },
-    {
-      id: 3,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar2,
-    },
-    {
-      id: 4,
-      name: "ilhomjon",
-      surname: "Solijonov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar1,
-    },
-    {
-      id: 5,
-      name: "Muslima",
-      surname: "Ortiqova",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar3,
-    },
-    {
-      id: 6,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar2,
-    },
-    {
-      id: 7,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar2,
-    },
-    {
-      id: 8,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar3,
-    },
-    {
-      id: 9,
-      name: "Anvarjon",
-      surname: "Ortiqov",
-      year: 1998,
-      month: 2,
-      day: 18,
-      number: 948373745,
-      img: Mainavatar1,
-    },
-  ];
+  
 
   const navigate = useNavigate();
 
@@ -157,7 +63,7 @@ function index() {
           </li>
         </ul>
       </div>
-      <div className="main-page_bottom">
+      {/* <div className="main-page_bottom">
         <form>
           <input
             className="main-head_from-items input-style"
@@ -194,7 +100,7 @@ function index() {
             />
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }
