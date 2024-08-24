@@ -32,7 +32,7 @@ const index = () => {
     }
 
     const onLogout = () => {
-        localStorage.setItem("token", null);
+        window.sessionStorage.setItem("token", null);
         setIsAuthenticated(false);
         navigate("/login", { replace: true })
     }

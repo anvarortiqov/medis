@@ -22,9 +22,9 @@ import Analyses from './components/PatientInfo/analyses'
 import SicknessHistory from './components/PatientInfo/servicehistory'
 import Statsionar from './components/PatientInfo/statsionar'
 import Massaj from './components/ServicesInfo/massaj'
-import Employers from './components/EmployeeInfo/Rahbariyat'
-import Doctors from './components/EmployeeInfo/Shifokorlar'
-import TechEmployees from './components/EmployeeInfo/TechEmployee'
+// import Employers from './components/EmployeeInfo/Rahbariyat'
+// import Doctors from './components/EmployeeInfo/Shifokorlar'
+// import TechEmployees from './components/EmployeeInfo/TechEmployee'
 import Rsults from './components/LabaratoryInfo/natijalar'
 import Allanalyses from './components/LabaratoryInfo/allanalyses'
 import AddEmployee from './components/Modals/AddEmployee/index'
@@ -36,9 +36,9 @@ import Hospital from './components/HospitalInfo/hospital'
 import Payments from './components/AccauntingInfo/payments'
 import Harajatlar from './components/AccauntingInfo/harajatlar'
 import Qabul from './components/Modals/Qabul/index'
-import PaymentInside from './components/PaymentInside/index'
+// import PaymentInside from './components/PaymentInside/index'
 import HarajatInside from './components/HarajatInside/index'
-import QabulCheck from './components/Checks/QabulCheck/index'
+// import QabulCheck from './components/Checks/QabulCheck/index'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.jsx'
 
@@ -105,26 +105,12 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: "hodimlar",
+        path: "hodimlar/:position",
         element: <Employees />,
-        children: [
-          {
-            path: "rahbarlar",
-            element: <Employers />
-          },
-          {
-            path: "shifokorlar",
-            element: <Doctors />
-          },
-          {
-            path: "texhodimlar",
-            element: <TechEmployees />
-          },
-          {
-            path: "addemployee",
-            element: <AddEmployee />
-          }
-        ]
+      },
+      {
+        path: "hodimlar/addemployee",
+        element: <AddEmployee />
       },
       {
         path: "laboratory",

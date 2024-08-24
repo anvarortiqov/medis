@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { getColor } from '../../../redux/slices/colorsSlice';
+import Status from '../../Status';
 
 
-const index = (props) => {
+const index = ({ index, name, position, status, number, ...props }) => {
+  const ColorsStore = useSelector(state => state.colors);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getColor(status))
+  }, [status]);
+
+  console.log(ColorsStore);
+
+
   const HandleAlert = () => {
     Alert.fire({
       title: "Do you want to delete this item?",
@@ -23,19 +36,17 @@ const index = (props) => {
     });
   }
 
-    const {index, name, position, status, number} = props
-
   return (
     <div className='serviec-card'>
-        <div>{index + 1}</div>
-        <div>{name}</div>
-        <div>{position}</div>
-        <div>+998 {number}</div>
-        <div>{status}</div>
-        <div>
-          <div className='service-edit'><LuClipboardEdit /></div>
-          <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
-        </div>
+      <div>{index + 1}</div>
+      <div>{name}</div>
+      <div>{position}</div>
+      <div>+998 {number}</div>
+      <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
+      <div>
+        <div className='service-edit'><LuClipboardEdit /></div>
+        <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
+      </div>
     </div>
   )
 }
