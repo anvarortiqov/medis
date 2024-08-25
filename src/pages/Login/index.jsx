@@ -2,29 +2,36 @@ import './style.css'
 import Login_Img from '../../assets/images/login_img.png'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import Form from '../../components/Form'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const index = () => {
   const { setIsAuthenticated, setLoading } = useAuth();
 
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    window.sessionStorage.setItem('token', null)
+  }, [])
+
+  const handleLogin = async (values) => {
     setLoading(true);
 
-    const formData = new FormData(e.target);
-    const formValues = Object.fromEntries(formData.entries());
+    await axios.post(import.meta.env.VITE_API + "/dj-rest-auth/login/", values).then(response => {
+      const data = response.data;
 
-    if (formValues?.password !== "" && formValues?.email !== "") {
-      localStorage.setItem("token", JSON.stringify(formValues));
-      localStorage.setItem("token",JSON.stringify(formValues));
+      if (data.key) {
+        window.sessionStorage.setItem("token", data.key);
 
-      setTimeout(() => {
-        setIsAuthenticated(true);
-        setLoading(false);
-        navigate('/', { replace: true });
-      }, 1500);
-    }
+        setTimeout(() => {
+          setIsAuthenticated(true);
+          setLoading(false);
+          navigate('/', { replace: true });
+        }, 1500);
+      }
+
+    })
   };
 
   return (
@@ -36,11 +43,12 @@ const index = () => {
         <div className='login-right'>
           <h1>Tizimga Kirish</h1>
           <p>Tizimga kirish orqali siz <a href="#">Foydalanish shartlari</a> va <a href="#">Maxfiylik <br /> siyosatiga</a> rozilik bildirasiz.</p>
-          <form onSubmit={handleLogin}>
-            <input name='email' className='input-style' type="text" placeholder='Email Kiriting' />
+          <Form onFininsh={handleLogin}>
+            <input name='username' className='input-style' type="text" placeholder='Username Kiriting' />
             <input name='password' type="password" className='input-style' placeholder='Password kiriting' />
-            <button className='form-btn'>Kirish</button>
-          </form>
+            <button type='submit' className='form-btn'>Kirish</button>
+          </Form>
+          
           <p>Parolni unitdingizmi? <a href="#">Tiklash</a>.</p>
         </div>
       </div>

@@ -18,21 +18,18 @@ export const receptionSlice = createSlice({
                 state.totalPrice += parseFloat(action.payload.amount)
             }
         },
-
         amointService(state, action) {
             state.paidAmount = action.payload;
-
-            if (state.paidAmount > 0) {
-                state.checkStatus = false
-            }
         },
-
-        removeServiceItem(state, action){
+        removeServiceItem(state, action) {
             state.services = action.payload
+        },
+        saveServices(state) {
+            state.checkStatus = false
         }
     },
 })
 
-export const { addService, amointService, removeServiceItem } = receptionSlice.actions
+export const { addService, amointService, removeServiceItem, saveServices } = receptionSlice.actions
 
 export default receptionSlice.reducer

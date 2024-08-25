@@ -7,7 +7,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaDownload } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { amointService, removeServiceItem } from '../../../redux/slices/receptionSlice';
+import { amointService, removeServiceItem, saveServices } from '../../../redux/slices/receptionSlice';
 
 
 const index = () => {
@@ -31,8 +31,12 @@ const index = () => {
     dispatch(removeServiceItem(FilteredServices))
   }, [FilteredServices])
 
-  const HandleOpen = () => {
-    setOpen(!open)
+  const HandleOpen = () => setOpen(!open)
+
+  console.log(ServicesStore);
+
+  const onSave = () => {
+    dispatch(saveServices())
   }
 
   const onDelete = (id) => {
@@ -110,8 +114,8 @@ const index = () => {
       </div>
       <div className='qabul-btns'>
         <button onClick={HandleOpen} className='form-btn'>Promo Kod</button>
-        <button type='submit' className='form-btn'>Saqlash</button>
-        <button disabled={ServicesStore.checkStatus} className='form-btn' onClick={() => toPDF()}>Check</button>
+        <button onClick={onSave} className='form-btn'>Saqlash</button>
+        <button  style={ServicesStore.checkStatus ? { background: "#fff", color: "#000" } : null} disabled={ServicesStore.checkStatus} className='form-btn' onClick={() => toPDF()}>Check</button>
       </div>
     </div>
   )
