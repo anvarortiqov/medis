@@ -46,11 +46,21 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow: auto;
+    overflow-y: auto;
     height: calc(100vh - 450px);
 }
-.qabul::-webkit-scrollbar, .qabul .qabul-con::-webkit-scrollbar{
+.qabul::-webkit-scrollbar{
     display: none;
+}
+.qabul .qabul-con::-webkit-scrollbar{
+   width: 7px;
+}
+.qabul-con::-webkit-scrollbar-thumb{
+    background-color: rgb(169, 169, 169);
+    border-radius: 5px;
+}
+.qabul-con::-webkit-scrollbar-track{
+    background-color: rgb(227, 227, 227);
 }
 .qabul-row{
     width: 100%;

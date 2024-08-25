@@ -4,7 +4,7 @@ import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getColor } from '../../../redux/slices/colorsSlice';
 import Status from '../../Status';
 
@@ -16,13 +16,7 @@ const index = ({ index, name, position, status, number, ...props }) => {
   useEffect(() => {
     dispatch(getColor(status))
   }, [status]);
-
-
-  const navigate = useNavigate();
-
-    const handleClick = ()=> {
-        navigate("../../about-workforce")
-    }
+ 
 
   const HandleAlert = () => {
     Alert.fire({
@@ -45,8 +39,8 @@ const index = ({ index, name, position, status, number, ...props }) => {
   return (
     <Link onClick={handleClick} className='serviec-card'>
       <div>{index + 1}</div>
-      <div>{name}</div>
-      <div>{position}</div>
+      <div><Link to="about-workforce/worker-info">{name}</Link></div>
+      <div><Link to="about-workforce/worker-info">{position}</Link></div>
       <div>+998 {number}</div>
       <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
       <div>
