@@ -2,9 +2,18 @@ import React from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 
 const index = (props) => {
+  
+  const navigate = useNavigate();
+
+    const handleClick = ()=> {
+        navigate("../../about-workforce")
+    }
+
   const HandleAlert = () => {
     Alert.fire({
       title: "Do you want to delete this item?",
@@ -26,7 +35,7 @@ const index = (props) => {
     const {index, name, position, status, number} = props
 
   return (
-    <div className='serviec-card'>
+    <Link onClick={handleClick} className='serviec-card'>
         <div>{index + 1}</div>
         <div>{name}</div>
         <div>{position}</div>
@@ -36,7 +45,7 @@ const index = (props) => {
           <div className='service-edit'><LuClipboardEdit /></div>
           <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
         </div>
-    </div>
+    </Link>
   )
 }
 
