@@ -1,4 +1,25 @@
 .qabulhona-title{
-    font-size: 25px;
-    margin: 15px 0 5px;
+    font-size: 22px;
+}
+
+.qabulhona-head{
+    margin: 15px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qabulhona-btn{
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    border: 1px solid rgb(93, 95, 239) ;
+    padding: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.qabulhona-btn:hover{
+    color: rgb(93, 95, 239);
 }

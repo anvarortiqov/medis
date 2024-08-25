@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
+
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { getColor } from '../../../redux/slices/colorsSlice';
 import Status from '../../Status';
 
@@ -15,7 +17,11 @@ const index = ({ index, name, position, status, number, ...props }) => {
     dispatch(getColor(status))
   }, [status]);
 
-  console.log(ColorsStore);
+  const navigate = useNavigate();
+
+    const handleClick = ()=> {
+        navigate("../../about-workforce")
+    }
 
 
   const HandleAlert = () => {
@@ -48,6 +54,7 @@ const index = ({ index, name, position, status, number, ...props }) => {
         <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
       </div>
     </div>
+
   )
 }
 

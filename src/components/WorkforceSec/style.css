@@ -1,0 +1,100 @@
+.workforce-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 0 0;
+}
+.abempl-left{
+    width: 38%;
+}
+.abempl-left img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.abempl-left h1{
+    margin: 20px 0 15px;
+    color: rgb(24, 26, 30);
+    font-size: 28px;
+    font-weight: 700;
+}
+.abempl-left div{
+    margin-bottom: 15px;
+}
+.abempl-left h2{
+    color: rgb(24, 26, 30);    
+    font-size: 18px;
+    font-weight: 600;
+}
+.abempl-left h3{
+    color: rgb(78, 84, 95);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+.abemp_right{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+.abemp_right h2{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(24, 26, 30);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.abemp_right h2:nth-child(1){
+    margin: 0;
+}
+.abemp_right p{
+    color: rgb(78, 84, 95);
+    font-size: 15px;
+    font-weight: 400;
+}
+.abemp_right span{
+    color: rgb(24, 26, 30);
+    font-weight: 700;
+}
+
+.forkforce-edu-work li{
+    height: auto;
+    display: flex;
+}
+.workforce-left{
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.resume-left-indicator{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+.resume-left-hr{
+    width: 1px;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+}
+
+.forkforce-edu-work li:nth-child(2) .workforce-left  .resume-left-hr{
+    display: none;
+}
+.workforce-right h3{
+    color: rgb(33, 36, 41);
+    font-size: 18px;
+    font-weight: 500;
+}
+.workforce-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}

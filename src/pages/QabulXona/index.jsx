@@ -3,6 +3,7 @@ import MainListItem from "../../components/Cards/MainListCard/index";
 import Mainavatar1 from "../../assets/images/mainlist_avatar.png";
 import Mainavatar2 from "../../assets/images/mainlist_avatar2.png";
 import Mainavatar3 from "../../assets/images/mainlist_avatar3.png";
+import { FaPlus } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 
@@ -179,7 +180,11 @@ const index = () => {
 
   return (
     <div className="main-page_bottom">
+      <div className='qabulhona-head'>
         <h1 className='qabulhona-title'>Kasallar Ro'yhati: </h1>
+        
+          <button className='qabulhona-btn form-btn'>Bemor Qo'shish<FaPlus/></button>
+      </div>
         <form>
           <input
             className="main-head_from-items input-style"

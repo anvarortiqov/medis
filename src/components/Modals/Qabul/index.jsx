@@ -54,8 +54,11 @@ const index = () => {
       </div>
       {/* promokod */}
       <div className='qabul-head'>
-        <h2>#983274has723</h2>
-        <h1>Qabul: Olimov Ali</h1>
+        <div>
+          <h2>#983274has723</h2>
+          <h1>Qabul: Olimov Ali</h1>
+        </div>
+          <input className='input-style' id='reason' type="text" placeholder='Kelish Sababini Kiritig...' />  
       </div>
       <div className='qabul-con' ref={targetRef}>
         <div className='qabul-row'>

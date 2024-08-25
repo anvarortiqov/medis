@@ -51,6 +51,10 @@ const index = () => {
                         <FiBarChart2 className="navbar_link-icon" />
                         <h4>Asosiy</h4>
                     </NavLink>
+                    <NavLink to='qabulxona' className="navbar_link">
+                        <MdOutlineBedroomChild className="navbar_link-icon" />
+                        <h4>Qabulxona</h4>
+                    </NavLink>
                     <NavLink to='bemorlar' className="navbar_link">
                         <FaBedPulse className="navbar_link-icon" />
                         <h4>Bemorlar</h4>
@@ -59,10 +63,7 @@ const index = () => {
                         <MdOutlineBedroomChild className="navbar_link-icon" />
                         <h4>Xonalar</h4>
                     </NavLink>
-                    <NavLink to='qabulxona' className="navbar_link">
-                        <MdOutlineBedroomChild className="navbar_link-icon" />
-                        <h4>Qabulxona</h4>
-                    </NavLink>
+                    
                     <div>
                         <NavLink to="services/massaj" onClick={() => handleAuto()} className="navbar_link" >
                             <MdManageAccounts className="navbar_link-icon" />
