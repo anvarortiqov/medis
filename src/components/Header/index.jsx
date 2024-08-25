@@ -23,11 +23,13 @@ const index = () => {
         </Link>
         <div className='header_center'>
           <div>53</div>
-          <h4>Bemorlar</h4>
+          <h4>Statsionar <span>Bemorlar</span></h4>
           <div>62</div>
           <h4>Band Xonalar</h4>
           <div>23</div>
           <h4>Analizlar</h4>
+          <div>38</div>
+          <h4>Qabul</h4>
         </div>
         <div className='header_right-side'>
           <div className='header_notification-block'>
