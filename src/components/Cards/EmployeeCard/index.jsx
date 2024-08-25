@@ -4,10 +4,8 @@ import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getColor } from '../../../redux/slices/colorsSlice';
 import Status from '../../Status';
-
 
 const index = ({ index, name, position, status, number, ...props }) => {
   const ColorsStore = useSelector(state => state.colors);
@@ -37,17 +35,18 @@ const index = ({ index, name, position, status, number, ...props }) => {
   }
 
   return (
-    <Link onClick={handleClick} className='serviec-card'>
+    // about-workforce/worker-info
+    <div className='serviec-card' {...props}>
       <div>{index + 1}</div>
-      <div><Link to="about-workforce/worker-info">{name}</Link></div>
-      <div><Link to="about-workforce/worker-info">{position}</Link></div>
+      <div>{name}</div>
+      <div>{position}</div>
       <div>+998 {number}</div>
       <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
       <div>
         <div className='service-edit'><LuClipboardEdit /></div>
         <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
       </div>
-    </Link>
+    </div>
   )
 }
 

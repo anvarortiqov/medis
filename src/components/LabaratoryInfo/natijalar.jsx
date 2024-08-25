@@ -4,6 +4,7 @@ import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import LabaratoryCard2 from '../Cards/LabaratoryCard2/index'
 import { FaDownload } from "react-icons/fa6";
+import { Dropdown, Input } from '../Form';
 
 const natijalar = () => {
 
@@ -11,60 +12,59 @@ const natijalar = () => {
     {
       id: 1,
       name: "Ali Yuldashev",
-      date: "12,05,2024", 
-      status: "Tayyor", 
+      date: "12,05,2024",
+      status: "Tayyor",
       servicetype: "Qon Analizi"
     },
     {
       id: 2,
       name: "Ali Yuldashev",
-      date: "12,05,2024", 
-      status: "In proccess", 
+      date: "12,05,2024",
+      status: "In proccess",
       servicetype: "Qon Analizi"
     },
     {
       id: 3,
       name: "Ali Yuldashev",
-      date: "12,05,2024",  
-      status: "Tayyor", 
+      date: "12,05,2024",
+      status: "Tayyor",
       servicetype: "Qon Analizi"
     },
     {
       id: 4,
       name: "Ali Yuldashev",
-      date: "12,05,2024", 
-      status: "Tayyor", 
+      date: "12,05,2024",
+      status: "Tayyor",
       servicetype: "Qon Analizi"
     },
     {
       id: 5,
       name: "Ali Yuldashev",
-      date: "12,05,2024", 
-      status: "Tayyor", 
+      date: "12,05,2024",
+      status: "Tayyor",
       servicetype: "Qon Analizi"
     },
     {
       id: 6,
       name: "Ali Yuldashev",
-      date: "12,05,2024", 
-      status: "Tayyor", 
+      date: "12,05,2024",
+      status: "Tayyor",
       servicetype: "Qon Analizi"
     },
-    
+
   ]
 
   return (
     <div className='results-analyses'>
-      <div className='rooms-head'>
-          <input className='input-style' type="search" placeholder='Search...' />
-          <select className='input-style'>
-              <option disabled value="">Choose Category</option>
-              <option value="1">Premium Xonalar</option>
-              <option value="2">2-kishilik Xonalar</option>
-              <option value="4">1-kishilik Xonalar</option>
-              <option value="3">Bo'sh Xonalar</option>
-          </select>
+      <div className='rooms-head rooms-head-wrapper'>
+        <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
+
+        <Dropdown options={[
+          { value: "ACTIVE", label: "ACTIVE" },
+          { value: "DELETED", label: "DELETED" }
+        ]} />
       </div>
+
       <div className='massaj-head'>
         <div>N</div>
         <div>Bemor Ismi</div>
@@ -73,7 +73,7 @@ const natijalar = () => {
         <div>Status</div>
       </div>
       <div className='massaj-content'>
-        {Massaj.map((item,index) => (
+        {Massaj.map((item, index) => (
           <LabaratoryCard2
             index={index}
             key={item.id}

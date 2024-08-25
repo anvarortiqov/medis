@@ -16,8 +16,16 @@
     max-width: 600px;
 }
 
-.add-employee-form {
+.add-employee-form{
     padding: 50px 0;
+}
+
+.add-employee-form>*+* {
+    margin-top: 20px;
+}
+
+.add-employee-form-content {
+    
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;

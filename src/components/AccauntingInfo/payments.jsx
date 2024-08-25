@@ -3,12 +3,13 @@ import './style.css'
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import PaymentsCard from "../Cards/AccountingFeeCard/index"
+import { Dropdown, Input } from '../Form';
 
 const payments = () => {
 
   const Payments = [
     {
-      id: 1, 
+      id: 1,
       name: "ilhomjon Solijonov",
       name2: "Anvar Ortiqov",
       reason: "Qon Analizi",
@@ -19,7 +20,7 @@ const payments = () => {
       status: "To'langan"
     },
     {
-      id: 2, 
+      id: 2,
       name: "ilhomjon Solijonov",
       name2: "Anvar Ortiqov",
       reason: "Qon Analizi",
@@ -30,7 +31,7 @@ const payments = () => {
       status: "To'langan"
     },
     {
-      id: 3, 
+      id: 3,
       name: "ilhomjon Solijonov",
       name2: "Anvar Ortiqov",
       reason: "Qon Analizi",
@@ -41,7 +42,7 @@ const payments = () => {
       status: "To'langan"
     },
     {
-      id: 4, 
+      id: 4,
       name: "ilhomjon Solijonov",
       name2: "Anvar Ortiqov",
       reason: "Qon Analizi",
@@ -55,16 +56,15 @@ const payments = () => {
 
   return (
     <div className='massaj'>
-      <div className='rooms-head'>
-          <input className='input-style' type="search" placeholder='Search...' />
-          <select className='input-style'>
-              <option disabled value="">Choose Category</option>
-              <option value="1">Premium Xonalar</option>
-              <option value="2">2-kishilik Xonalar</option>
-              <option value="4">1-kishilik Xonalar</option>
-              <option value="3">Bo'sh Xonalar</option>
-          </select>
+      <div className='rooms-head rooms-head-wrapper'>
+        <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
+
+        <Dropdown options={[
+          { value: "ACTIVE", label: "ACTIVE" },
+          { value: "DELETED", label: "DELETED" }
+        ]} />
       </div>
+
       <div className='payment-head'>
         <div>N</div>
         <div>Tolovchi F.I.O</div>
@@ -77,11 +77,11 @@ const payments = () => {
       </div>
       <div className='payment-content'>
         {
-          Payments.map((item, index)=>(
-            <PaymentsCard 
+          Payments.map((item, index) => (
+            <PaymentsCard
               index={index}
-              id={item.id} 
-              name={item.name} 
+              id={item.id}
+              name={item.name}
               price={item.price}
               reason={item.reason}
               feetype={item.feetype}

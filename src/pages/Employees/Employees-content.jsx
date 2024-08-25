@@ -5,6 +5,7 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
 import './style.css'
 import EmployeeCard from "../../components/Cards/EmployeeCard/index"
+import { Dropdown, Input } from "../../components/Form";
 
 const EmployeesContent = () => {
 
@@ -34,15 +35,15 @@ const EmployeesContent = () => {
 
     return (
         <div className='rahbarlar'>
-            <div className='rooms-head'>
-                <input className='input-style' type="search" placeholder='Search...' />
-                <select className='input-style'>
-                    <option disabled value="">Choose Category</option>
-                    <option value="1">Active Shifokorlar</option>
-                    <option value="2">DisActive Shifokorlar</option>
-                </select>
+            <div className='rooms-head rooms-head-wrapper'>
+                <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
 
+                <Dropdown options={[
+                    { value: "ACTIVE", label: "ACTIVE" },
+                    { value: "DELETED", label: "DELETED" }
+                ]} />
             </div>
+            
             <div className='massaj-head'>
                 <div>N</div>
                 <div>Name</div>

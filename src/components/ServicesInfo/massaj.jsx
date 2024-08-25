@@ -5,69 +5,69 @@ import ServiceCard from '../Cards/ServiceCard/index'
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
+import { Dropdown, Input } from '../Form';
 
 const massaj = () => {
-   
-  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
 
   const Massaj = [
     {
       id: 1,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "faol", 
+      price: 123000,
+      status: "faol",
       doctor: "Anvarjon Artiqov"
     },
     {
       id: 2,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "no faol", 
+      price: 123000,
+      status: "no faol",
       doctor: "Anvarjon Artiqov"
     },
     {
       id: 3,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "bo'sh", 
+      price: 123000,
+      status: "bo'sh",
       doctor: "Anvarjon Artiqov"
     },
     {
       id: 4,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "bo'sh", 
+      price: 123000,
+      status: "bo'sh",
       doctor: "Anvarjon Artiqov"
     },
     {
       id: 5,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "bo'sh", 
+      price: 123000,
+      status: "bo'sh",
       doctor: "Anvarjon Artiqov"
     },
     {
       id: 6,
       name: "fziyo terapia",
-      price: 123000, 
-      status: "bo'sh", 
+      price: 123000,
+      status: "bo'sh",
       doctor: "Anvarjon Artiqov"
     },
-    
+
   ]
 
   return (
     <div className='massaj'>
-      <div className='rooms-head'>
-          <input className='input-style' type="search" placeholder='Search...' />
-          <select className='input-style'>
-              <option disabled value="">Choose Category</option>
-              <option value="1">Premium Xonalar</option>
-              <option value="2">2-kishilik Xonalar</option>
-              <option value="4">1-kishilik Xonalar</option>
-              <option value="3">Bo'sh Xonalar</option>
-          </select>
+      <div className='rooms-head rooms-head-wrapper'>
+        <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
+
+        <Dropdown options={[
+          { value: "ACTIVE", label: "ACTIVE" },
+          { value: "DELETED", label: "DELETED" }
+        ]} />
       </div>
+
       <div className='massaj-head'>
         <div>N</div>
         <div>Serviec Name</div>
@@ -75,8 +75,8 @@ const massaj = () => {
         <div>Price</div>
         <div>Status</div>
       </div>
-      <div className='massaj-content'  ref={targetRef}>
-        {Massaj.map((item,index) => (
+      <div className='massaj-content' ref={targetRef}>
+        {Massaj.map((item, index) => (
           <ServiceCard
             index={index}
             key={item.id}
