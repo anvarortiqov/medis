@@ -36,11 +36,12 @@ import Harajatlar from './components/AccauntingInfo/harajatlar'
 import Qabul from './components/Modals/Qabul/index'
 import PaymentInside from './components/PaymentInside/index'
 import HarajatInside from './components/HarajatInside/index'
-
 import QabulCheck from './components/Checks/QabulCheck/index'
 import WorkerInfo from './components/WorkforceSec/workforceInfo.jsx'
 import WorkerSalary from './components/WorkforceSec/salary.jsx'
 import WorkerFaoliyati from './components/WorkforceSec/faoliyati.jsx'
+
+
 import { Provider } from 'react-redux'
 import { store } from './redux/store.jsx'
 
@@ -116,6 +117,24 @@ const router = createBrowserRouter([
       },
       {
         path: 'hodimlar/:position/about-workforce',
+        element: <AboutWorkforce/>,
+        children: [
+          {
+            path: 'worker-info',
+            element: <WorkerInfo/>,
+          },
+          {
+            path: 'worker-faoliyati',
+            element: <WorkerFaoliyati/>,
+          },
+          {
+            path: 'worker-salary',
+            element: <WorkerSalary/>,
+          }
+        ]
+      },
+      {
+        path: 'about-workforce',
         element: <AboutWorkforce/>,
         children: [
           {
