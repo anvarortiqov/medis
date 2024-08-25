@@ -15,6 +15,7 @@ import Statistics from './pages/Statistics/index'
 import Accaunting from './pages/Accaunting/index'
 import QabulXona from './pages/QabulXona/index.jsx'
 import Login from './pages/Login/index'
+import AboutWorkforce from './pages/AboutExployees/index.jsx'
 // components
 import NotFoundPage from './components/NotFound/index'
 import Personal from './components/PatientInfo/patientinfo'
@@ -39,6 +40,11 @@ import Qabul from './components/Modals/Qabul/index'
 import PaymentInside from './components/PaymentInside/index'
 import HarajatInside from './components/HarajatInside/index'
 import QabulCheck from './components/Checks/QabulCheck/index'
+import WorkerInfo from './components/WorkforceSec/workforceInfo.jsx'
+import WorkerSalary from './components/WorkforceSec/salary.jsx'
+import WorkerFaoliyati from './components/WorkforceSec/faoliyati.jsx'
+
+
 import { Provider } from 'react-redux'
 import { store } from './redux/store.jsx'
 
@@ -123,6 +129,24 @@ const router = createBrowserRouter([
           {
             path: "addemployee",
             element: <AddEmployee />
+          }
+        ]
+      },
+      {
+        path: 'about-workforce',
+        element: <AboutWorkforce/>,
+        children: [
+          {
+            path: 'worker-info',
+            element: <WorkerInfo/>,
+          },
+          {
+            path: 'worker-faoliyati',
+            element: <WorkerFaoliyati/>,
+          },
+          {
+            path: 'worker-salary',
+            element: <WorkerSalary/>,
           }
         ]
       },

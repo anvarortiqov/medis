@@ -10,10 +10,18 @@
 }
 .qabul-head{
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     height: 60px;
+}
+.qabul-head input{
+    margin: 0;
+}
+.qabul-head div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 .qabul h2{
     color: rgb(111, 108, 144);
