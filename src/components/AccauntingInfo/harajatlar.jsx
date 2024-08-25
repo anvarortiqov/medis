@@ -3,6 +3,7 @@ import './style.css'
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import HarajatCard from '../Cards/AccoauntingHarCard/index'
+import { Dropdown, Input } from '../Form';
 
 const harajatlar = () => {
 
@@ -47,15 +48,14 @@ const harajatlar = () => {
 
   return (
     <div className='massaj'>
-      <div className='rooms-head'>
-          <input className='input-style' type="search" placeholder='Search...' />
-          <select className='input-style'>
-              <option disabled value="">Choose Category</option>
-              <option value="1">Premium Xonalar</option>
-              <option value="2">2-kishilik Xonalar</option>
-              <option value="4">1-kishilik Xonalar</option>
-              <option value="3">Bo'sh Xonalar</option>
-          </select>
+      <div className='rooms-head rooms-head-wrapper'>
+        <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
+
+        <Dropdown options={[
+          { value: "ACTIVE", label: "ACTIVE" },
+          { value: "DELETED", label: "DELETED" }
+        ]} />
+
       </div>
       <div className='harajat-head'>
         <div>N</div>
@@ -68,12 +68,12 @@ const harajatlar = () => {
       </div>
       <div className='payment-content'>
         {
-            Harajatlar.map((item, index)=>(
-            <HarajatCard 
+          Harajatlar.map((item, index) => (
+            <HarajatCard
               index={index}
-              id={item.id} 
-              name={item.name} 
-              user={item.user} 
+              id={item.id}
+              name={item.name}
+              user={item.user}
               type={item.type}
               price={item.price}
               date={item.date}

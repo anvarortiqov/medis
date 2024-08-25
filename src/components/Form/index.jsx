@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState, useRef, useEffect } from 'react'
 import Typography from '../Typography';
 import "./style.css";
+import PropTypes from "prop-types"
 
 const Form = ({ onFininsh, children, className, action }) => {
     const onSubmit = event => {
@@ -20,7 +21,7 @@ const Form = ({ onFininsh, children, className, action }) => {
     )
 }
 
-export const Input = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
+const Input = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
 
     const [InputClassName, setInputClassName] = useState("label-input")
     const [IsError, setIsError] = useState(false)
@@ -48,7 +49,7 @@ export const Input = ({ children, className, rootClassName, placeholder, htmlTyp
     </label>
 }
 
-export const TextArea = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
+const TextArea = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
 
     const [InputClassName, setInputClassName] = useState("label-textarea")
     const [IsError, setIsError] = useState(false)
@@ -76,24 +77,23 @@ export const TextArea = ({ children, className, rootClassName, placeholder, html
     </label>
 }
 
-export const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) => {
+const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValues, setSelectedValues] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState(multi ? [] : null);
     const dropdownRef = useRef(null);
     const [dropdownDirection, setDropdownDirection] = useState('bottom');
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const handleOptionClick = (option) => {
-        const { value } = option;
         if (multi) {
-            if (selectedValues.includes(value)) {
-                setSelectedValues(selectedValues.filter((val) => val !== value));
+            if (selectedOptions.some((selected) => selected.value === option.value)) {
+                setSelectedOptions(selectedOptions.filter((selected) => selected.value !== option.value));
             } else {
-                setSelectedValues([...selectedValues, value]);
+                setSelectedOptions([...selectedOptions, option]);
             }
         } else {
-            setSelectedValues([value]);
+            setSelectedOptions(option);
             setIsOpen(false);
         }
     };
@@ -109,11 +109,7 @@ export const Dropdown = ({ options = [], multi = false, rootClassName, label, na
             const dropdownRect = dropdownRef.current.getBoundingClientRect();
             const shouldOpenUp = window.innerHeight - dropdownRect.bottom < 200;
 
-            if (shouldOpenUp) {
-                setDropdownDirection('top');
-            } else {
-                setDropdownDirection('bottom');
-            }
+            setDropdownDirection(shouldOpenUp ? 'top' : 'bottom');
 
             document.addEventListener('click', handleClickOutside);
         } else {
@@ -123,6 +119,10 @@ export const Dropdown = ({ options = [], multi = false, rootClassName, label, na
         return () => document.removeEventListener('click', handleClickOutside);
     }, [isOpen]);
 
+    const parseValue = (value) => {
+        return !isNaN(value) && value !== '' ? Number(value) : value;
+    };
+
     return (
         <label onMouseLeave={() => setIsOpen(false)} className={classNames(rootClassName, "label")}>
             <div className="label-wrap">
@@ -130,17 +130,17 @@ export const Dropdown = ({ options = [], multi = false, rootClassName, label, na
                 <div className="dropdown" ref={dropdownRef}>
                     <button type="button" onClick={toggleDropdown} className="dropdown-button">
                         {multi
-                            ? selectedValues.length > 0
-                                ? selectedValues.join(', ')
+                            ? selectedOptions.length > 0
+                                ? selectedOptions.map(opt => opt.label).join(', ')
                                 : 'Select...'
-                            : selectedValues[0] || 'Select...'}
+                            : selectedOptions?.label || 'Select...'}
                     </button>
                     {isOpen && (
                         <ul className={`dropdown-list dropdown-list-${dropdownDirection}`}>
                             {options.map((option) => (
                                 <li
                                     key={option.value}
-                                    className={`dropdown-option ${selectedValues.includes(option.value) ? 'selected' : ''}`}
+                                    className={`dropdown-option ${multi ? selectedOptions.some(selected => selected.value === option.value) : selectedOptions?.value === option.value ? 'selected' : ''}`}
                                     onClick={() => handleOptionClick(option)}
                                 >
                                     {option.label}
@@ -148,14 +148,22 @@ export const Dropdown = ({ options = [], multi = false, rootClassName, label, na
                             ))}
                         </ul>
                     )}
-                    <input type="hidden" name={name} value={selectedValues.join(',')} />
+                    <input
+                        type="hidden"
+                        name={name}
+                        value={multi
+                            ? JSON.stringify(selectedOptions.map(opt => parseValue(opt.value)))
+                            : selectedOptions ? parseValue(selectedOptions.value) : ''
+                        }
+                    />
                 </div>
             </div>
         </label>
     );
 };
 
-export const UploadImage = ({ name, multi = false, rootClassName = '', onChange, label }) => {
+
+const UploadImage = ({ name, multi = false, rootClassName = '', onChange, label }) => {
     const [files, setFiles] = useState([]);
 
     const handleFileChange = (event) => {
@@ -201,5 +209,7 @@ export const UploadImage = ({ name, multi = false, rootClassName = '', onChange,
         </label>
     );
 };
+
+export { Input, TextArea, Dropdown, UploadImage }
 
 export default Form

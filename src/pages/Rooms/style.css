@@ -20,17 +20,17 @@
     display: flex;
     justify-content: space-between;
 }
-.rooms-head input{
-    width: 25%;
+
+.rooms-head-btn{
+    padding-top: 15px;
+    /* min-height: 135px; */
 }
-.rooms-head select{
-    width: 25%;
-}
-.rooms-head button{
-    padding: 0 40px;
-    height: 50px;
-    line-height: 0;
-    font-size: 14px;
+
+.rooms-head-wrapper{
+    padding: 0 20px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 /* room content */
