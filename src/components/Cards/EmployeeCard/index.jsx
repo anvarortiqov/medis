@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { getColor } from '../../../redux/slices/colorsSlice';
+import Status from '../../Status';
 
 
-const index = (props) => {
-  
+const index = ({ index, name, position, status, number, ...props }) => {
+  const ColorsStore = useSelector(state => state.colors);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getColor(status))
+  }, [status]);
+
   const navigate = useNavigate();
 
     const handleClick = ()=> {
         navigate("../../about-workforce/worker-info")
     }
+
 
   const HandleAlert = () => {
     Alert.fire({
@@ -32,20 +42,19 @@ const index = (props) => {
     });
   }
 
-    const {index, name, position, status, number} = props
-
   return (
-    <Link onClick={handleClick} className='serviec-card'>
-        <div>{index + 1}</div>
-        <div>{name}</div>
-        <div>{position}</div>
-        <div>+998 {number}</div>
-        <div>{status}</div>
-        <div>
-          <div className='service-edit'><LuClipboardEdit /></div>
-          <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
-        </div>
-    </Link>
+    <div className='serviec-card'>
+      <div>{index + 1}</div>
+      <div>{name}</div>
+      <div>{position}</div>
+      <div>+998 {number}</div>
+      <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
+      <div>
+        <div className='service-edit'><LuClipboardEdit /></div>
+        <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
+      </div>
+    </div>
+
   )
 }
 

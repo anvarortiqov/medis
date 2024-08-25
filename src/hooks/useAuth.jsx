@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem('token');
+  const token = window.sessionStorage.getItem('token');
 
   useEffect(() => {
     if (token) {

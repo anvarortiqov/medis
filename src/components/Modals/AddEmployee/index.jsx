@@ -1,215 +1,68 @@
-import {useState} from 'react'
+import { useState, useRef, useEffect } from 'react'
 import "./style.css"
+import Typography from '../../Typography'
+import Form, { Dropdown, UploadImage, Input, TextArea } from '../../Form'
 
 const index = () => {
 
-  const [category, setCategory]=useState("default")
-  
+  const handleImageChange = (files) => {
+    console.log({ ...formData, images: files });
+  };
 
-  return (
-    <div className='add-employee'>
-      <form className='add-emoloyee-content'>
-        <div className='add-employee-left'>
-          <div>
-            <label className='form-label-style' htmlFor="ism">Ism</label>
-            <input className='input-style' type="text" name='ism' placeholder='Ismingizni kiriting' required />
-          </div>
-          <div>
-            <label className='form-label-style' htmlFor="familiya">Familiya</label>
-            <input className='input-style' type="text" name='familiya' placeholder='Familiyangizni kiriting' required  />
-          </div>
-          <div>
-            <label className='form-label-style' htmlFor="ochestva">Ochestva</label>
-            <input className='input-style' type="text" name='ochestva' placeholder='Ochestvangizni kiriting' required />
-          </div>         
-          <div>
-            <label className='form-label-style' htmlFor="birthday">Tugulgan kun</label>
-            <input className='input-style' type="date" name='birthday' placeholder='Tugulgan kun' required />
-          </div>      
-          <div>
-            <label className='form-label-style' htmlFor="tel">Telefon Raqam</label>
-            <input className='input-style' type="tel" name='tel' placeholder='Telefon Raqam' required />
-          </div>  
-          <div>
-            <label className='form-label-style' htmlFor="tel2">Qo'shimcha Telefon Raqam</label>
-            <input className='input-style' type="tel" name='tel2' placeholder="Qo'shimcha Telefon Raqam" />
-          </div>  
-          <div>
-            <label className='form-label-style' htmlFor="email">Email</label>
-            <input className='input-style' type="email" name='email' placeholder='Emailingizni kiriting' required />
-          </div>  
-          <div>
-            <label className='form-label-style' htmlFor="address">Address</label>
-            <input className='input-style' type="text" name='address' placeholder='Adresingizni kiriting' required />
-          </div>  
-          <div>
-            <label className='form-label-style' htmlFor="lavozm">Lavozim</label>
-            <select className='input-style' name="lavozm" required>
-              <option value="" disabled>Lavozimni tanlang</option>
-              <option value="1" >Vrach</option>
-              <option value="2" >Hamshira</option>
-              <option value="3" >Kardiolog</option>
-              <option value="4" >Urolog</option>
-              <option value="5" >Lor</option>
-            </select>
-          </div> 
-          <div>
-            <label className='form-label-style' htmlFor="image">Rasm</label>
-            <input className='input-style' type="file" name='image' placeholder='Rasmingizni kiriting' required />
-          </div> 
-          <div className='add-employee-textarea'>
-            <label className='form-label-style' htmlFor="extra">Qo'shimcha Malumot</label>
-            <textarea className='input-style'  type="text" name='extra' placeholder="Qo'shimcha malumot bolsa kiriting" />
-          </div> 
-          <div>
-            <label className='form-label-style' htmlFor="ser5">Status</label>
-            <select className='input-style' name="ser5"  required>
-                <option value="default" disabled>Statusni Tanlang</option>
-                <option value="1" >Faol</option>
-                <option value="2" >No Faol</option>
-            </select>
-          </div>
-          
-          <div className='ish-vaqti'>
-            <label className='form-label-style' htmlFor="">Ish Vaqti</label>
-            <div>
-              <input type="checkbox" id='dush' />
-              <label htmlFor="dush">Dushanba</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush2' />
-              <label htmlFor="dush2">Seshanba</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush3'  />
-              <label htmlFor="dush3">Chorshanba</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush4' />
-              <label htmlFor="dush4">Payshanba</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush5' />
-              <label htmlFor="dush5">Juma</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush6' />
-              <label htmlFor="dush6">Shanba</label>
-            </div>
-            <div>
-              <input type="checkbox" id='dush7' />
-              <label htmlFor="dush7">Yakshanba</label>
-            </div>
-          </div>
-          <div className='ish-vaqti2'>
-            <div>
-            <label className='form-label-style' htmlFor="">Boshlanish Vaqti</label>
-            <label className='form-label-style' htmlFor="">Tugash Vaqti</label>
-            </div>
-            <div>
-              <input type="time" className='input-style'  />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style' />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style'  />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style' />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style' />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style' />
-              <input type="time" className='input-style'  />
-            </div>
-            <div>
-              <input type="time" className='input-style' />
-              <input type="time" className='input-style'  />
-            </div>
-          </div>
-        </div>  
-        <div className='add-employee-right'>
-          <div className='add-employee-salary'>
-            <label className='form-label-style' htmlFor="oylik">Oylik Turini tanlang</label>
-            <select className='input-style' name="oylik" onChange={(cat)=>{setCategory(cat.target.value)}} defaultValue={"default"} >
-              <option value="default" disabled>Oylik Turini tanlang</option>
-              <option value="fixed" >Fixed</option>
-              <option value="kpi" >KPI</option>
-            </select>
-          </div> 
-          {category == 'fixed' 
-            ? 
-            (
-            <div className="add-employee-fixed ">
-              <label className='form-label-style' htmlFor="fixed">Fixed Salary</label>
-              <input className='input-style' type="number" name='fixed' placeholder='Input Fixed Salary' />
-            </div>  
-            )
-            : 
-            ("")
-          } 
-          {category == 'kpi' 
-            ? 
-            (
-              <div className='add-kpi'>
-                <div className="add-employee-fixed ">
-                  <label className='form-label-style form-label-style3' htmlFor="fixed">Fixed Salary</label>
-                  <input className='input-style' type="number" name='fixed' placeholder='Input Fixed Salary' />
-                </div>  
-                <div>
-                  <label className='form-label-style' htmlFor="fixed">Ko'rik</label>
-                  <div className="add-employee-kpi">
-                    <input className='input-style' type="number" name='fixed' placeholder='Input Fixed Salary' />
-                    <select  className='input-style' name='fixed'>
-                      <option value="default" disabled>Type</option>
-                      <option value="percent" >Percent</option>
-                      <option value="number" >Number</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className='form-label-style' htmlFor="fixed">Analiz</label>
-                  <div className="add-employee-kpi">
-                    <input className='input-style' type="number" name='fixed' placeholder='Input Fixed Salary' />
-                    <select  className='input-style' name='fixed'>
-                      <option value="default" disabled>Type</option>
-                      <option value="percent" >Percent</option>
-                      <option value="number" >Number</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className='form-label-style' htmlFor="fixed">Statsionar</label>
-                  <div className="add-employee-kpi">
-                    <input className='input-style' type="number" name='fixed' placeholder='Input Fixed Salary' />
-                    <select  className='input-style' name='fixed'>
-                      <option value="default" disabled>Type</option>
-                      <option value="percent" >Percent</option>
-                      <option value="number" >Number</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            )
-            : 
-            ("")
-          } 
-        </div>
-        <div className='add-employee-btn'>
-          <button className='form-btn'>Submit</button>
-        </div>
-        
-      </form>
+  const onFinish = values => {
+    console.log(values);
+
+  }
+
+  return <section className='add-employee'>
+    <div className="add-employee-title">
+      <Typography name={"h2"}>Hodim ma’lumotlari</Typography>
+      <Typography name={"text"}>Iltimos har bir maydonga to’liq va to’g’ri ma’lumotlarni kiriting !</Typography>
     </div>
-  )
+
+    <hr className='add-employee-line' />
+
+    <Form className={"add-employee-form"} onFininsh={onFinish}>
+      <div className="add-employee-col">
+        <Input required={{ required: true, message: "Kiriting!" }} label={"Ism"} name={"name"} placeholder={"Ismingizni kiriting"} />
+
+        <Input required={{ required: true, message: "Kiriting!" }} label={"Foydalanuvchi ismi"} name={"username"} placeholder={"Username kiriting"} />
+
+        <Input required={{ required: true, message: "Kiriting!" }} label={"Telefon raqam"} name={"phone"} placeholder={"Telefon raqam kiriting"} />
+
+        <Input required={{ required: true, message: "Kiriting!" }} label={"Ish staji"} name={"age"} placeholder={"Ish staji"} />
+
+        <Dropdown options={[
+          { value: 'ACTIVE', label: 'Active' },
+          { value: 'INACTIVE', label: 'Inactive' },
+          { value: 'PENDING', label: 'Pending' }
+        ]} label={"Status"} />
+      </div>
+      <div className="add-employee-col">
+        <Input required={{ required: true, message: "Kiriting!" }} label={"Familiya"} name={"surname"} placeholder={"Familiya kiriting"} />
+
+        <Input required={{ required: true, message: "Kiriting!" }} htmlType='password' label={"Parol"} name={"password"} placeholder={"Parol kiriting"} />
+
+        <Input label={"Qo'shimcha Telefon raqam"} name={"extra_phone"} placeholder={"Telefon raqam "} />
+
+        <Input label={"Tug’ilgan yil,oy,kun"} htmlType='date' name={"birthday"} placeholder={"Tug’ilgan yil,oy,kun"} />
+
+        <UploadImage name="images"
+          multi={true}
+          onChange={handleImageChange} label={'Rasm'} />
+
+      </div>
+      <div className="add-employee-col">
+        <Input label={"Sharif"} name={"middle_name"} placeholder={"Sharifingiz "} />
+
+        <Input label={"Elektron pochta"} name={"email"} placeholder={"Email "} />
+
+        <Input label={"Yashash joyi"} name={"address"} placeholder={"Address"} />
+
+        <TextArea placeholder={"Qo'shimcha ma'lumot"} name={"about"} label={"Qo'shimcha ma'lumot"} />
+      </div>
+    </Form>
+  </section>
 }
 
 export default index

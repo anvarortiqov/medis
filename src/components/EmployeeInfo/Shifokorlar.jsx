@@ -1,62 +1,49 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './style.css'
 import EmployeeCard from '../Cards/EmployeeCard/index'
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
+import axios from 'axios';
 
 const Shifokorlar = () => {
 
-  const Shifokorlar = [
-    {
-      id: 1,
-      name: "Anvarjon Artiqov",
-      number: 990651212, 
-      status: "ishlayapti", 
-      position: "kardiolog"
-    },
-    {
-      id: 2,
-      name: "Anvarjon Artiqov",
-      number: 990651212, 
-      status: "ishlayapti", 
-      position: "kardiolog"
-    },
-    {
-      id: 3,
-      name: "ilhomjon solijonov ",
-      number: 990651212, 
-      status: "ishlayapti", 
-      position: "Urolog"
-    },
-    {
-      id: 4,
-      name: "Anvarjon Artiqov",
-      number: 990651212, 
-      status: "ishlayapti", 
-      position: "Lor"
-    },
-    {
-      id: 5,
-      name: "Anvarjon Artiqov",
-      number: 990651212, 
-      status: "ishlayapti", 
-      position: "kardiolog"
-    },
-  ]
+  const [Data, setData] = useState([])
+
+  useEffect(() => {
+    try {
+      axios.get(import.meta.env.VITE_API + "/main_module/hodimlar/").then(response => {
+        if (response.status === 200) {
+          setData(response.data.results)
+        }
+      })
+    } catch (error) {
+      console.warn(error);
+    }
+  }, []);
+
+  const dataItem = Data.map((item, index) => <Fragment key={index}>
+    <EmployeeCard
+      index={index}
+      name={`${item.surname} ${item.name.at(0)} ${item.middle_name?.at(0) ?? ""}`}
+      number={item.phone}
+      position={item.lavozimi ?? "Ko'rsatilmagan"}
+      status={item.status}
+    />
+  </Fragment>)
 
   return (
     <div className='rahbarlar'>
       <div className='rooms-head'>
-          <input className='input-style' type="search" placeholder='Search...' />
-          <select className='input-style'>
-              <option disabled value="">Choose Category</option>
-              <option value="1">Premium Xonalar</option>
-              <option value="2">2-kishilik Xonalar</option>
-              <option value="4">1-kishilik Xonalar</option>
-              <option value="3">Bo'sh Xonalar</option>
-          </select>
-          
+        <input className='input-style' type="search" placeholder='Search...' />
+        <select className='input-style'>
+          <option disabled value="">Choose Category</option>
+          <option value="1">Premium Xonalar</option>
+          <option value="2">2-kishilik Xonalar</option>
+          <option value="4">1-kishilik Xonalar</option>
+          <option value="3">Bo'sh Xonalar</option>
+        </select>
+
       </div>
       <div className='massaj-head'>
         <div>N</div>
@@ -66,16 +53,7 @@ const Shifokorlar = () => {
         <div>Status</div>
       </div>
       <div className='rahbarlar-content'>
-        {Shifokorlar.map((item,index) => (
-          <EmployeeCard
-            index={index}
-            key={item.id}
-            name={item.name}
-            number={item.number}
-            position={item.position}
-            status={item.status}
-          />
-        ))}
+        {dataItem.length === 0 ? "Yuklanmoqda..." : dataItem}
       </div>
       <div className='pagination'>
         <div className='pagination-left'>
