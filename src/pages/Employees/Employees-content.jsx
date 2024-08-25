@@ -3,9 +3,8 @@ import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
-
+import './style.css'
 import EmployeeCard from "../../components/Cards/EmployeeCard/index"
-import "../../components/EmployeeInfo/style.css";
 
 const EmployeesContent = () => {
 
@@ -39,16 +38,14 @@ const EmployeesContent = () => {
                 <input className='input-style' type="search" placeholder='Search...' />
                 <select className='input-style'>
                     <option disabled value="">Choose Category</option>
-                    <option value="1">Premium Xonalar</option>
-                    <option value="2">2-kishilik Xonalar</option>
-                    <option value="4">1-kishilik Xonalar</option>
-                    <option value="3">Bo'sh Xonalar</option>
+                    <option value="1">Active Shifokorlar</option>
+                    <option value="2">DisActive Shifokorlar</option>
                 </select>
 
             </div>
             <div className='massaj-head'>
                 <div>N</div>
-                <div>Doctor Name</div>
+                <div>Name</div>
                 <div>Position</div>
                 <div>Phone Number</div>
                 <div>Status</div>

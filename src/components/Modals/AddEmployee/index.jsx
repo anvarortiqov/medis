@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+
 import "./style.css"
 import Typography from '../../Typography'
 import Form, { Dropdown, UploadImage, Input, TextArea } from '../../Form'
@@ -60,6 +60,11 @@ const index = () => {
         <Input label={"Yashash joyi"} name={"address"} placeholder={"Address"} />
 
         <TextArea placeholder={"Qo'shimcha ma'lumot"} name={"about"} label={"Qo'shimcha ma'lumot"} />
+
+        <Dropdown options={[
+          { value: 'GINEKOLOG', label: 'Ginekolog' },
+          { value: 'LOR', label: 'Lor' }
+        ]} label={"Lavozimi"} />
       </div>
     </Form>
   </section>

@@ -23,6 +23,10 @@
     display: flex;
     align-items: center;
 }
+.patientdata_navbar  li{
+    display: flex;
+    gap: 20%;
+}
 .patientdata_navbar a.active > li > h3, .patientdata_navbar a.active > li >.pat-data-navbar_icon{
     color: var(--text-blue);
 }
