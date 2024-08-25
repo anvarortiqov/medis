@@ -11,7 +11,7 @@ const index = (props) => {
   const navigate = useNavigate();
 
     const handleClick = ()=> {
-        navigate("../../about-workforce")
+        navigate("../../about-workforce/worker-info")
     }
 
   const HandleAlert = () => {
