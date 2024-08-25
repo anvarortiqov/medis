@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getColor } from '../../../redux/slices/colorsSlice';
@@ -17,12 +17,12 @@ const index = ({ index, name, position, status, number, ...props }) => {
     dispatch(getColor(status))
   }, [status]);
 
+
   const navigate = useNavigate();
 
     const handleClick = ()=> {
         navigate("../../about-workforce")
     }
-
 
   const HandleAlert = () => {
     Alert.fire({
@@ -43,7 +43,7 @@ const index = ({ index, name, position, status, number, ...props }) => {
   }
 
   return (
-    <div className='serviec-card'>
+    <Link onClick={handleClick} className='serviec-card'>
       <div>{index + 1}</div>
       <div>{name}</div>
       <div>{position}</div>
@@ -53,8 +53,7 @@ const index = ({ index, name, position, status, number, ...props }) => {
         <div className='service-edit'><LuClipboardEdit /></div>
         <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
       </div>
-    </div>
-
+    </Link>
   )
 }
 
