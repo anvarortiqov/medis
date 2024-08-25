@@ -55,9 +55,15 @@
     margin-left: 0;
 }
 .header_center h4{
+    display: flex;
+    flex-direction: column;
     margin-left: 10px;
     color: var(--text-dark-blue);
+    line-height: normal;
     font-size: 15px;
+}
+.header_center span{
+    font-size: 13px;
 }
 /* right side of header section */
 .header_right-side{
