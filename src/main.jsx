@@ -166,7 +166,7 @@ const router = createBrowserRouter([
           },
           {
             path: "payment-info",
-            element: <HarajatInside />
+            element: <PaymentInside />
           },
           {
             path: "harajat-info",
