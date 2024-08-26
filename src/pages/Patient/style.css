@@ -12,11 +12,15 @@
     border-bottom-right-radius: 0;
 }
 .patientdata_navbar-block{
+    position: sticky;
+    top: 0;
     width: 95%;
     height: 65px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: var(--bg-color-f5f5f5);
+    z-index: 1;
 }
 .patientdata_navbar{
     width: 100%;

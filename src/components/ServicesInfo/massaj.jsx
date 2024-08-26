@@ -40,28 +40,14 @@ const massaj = () => {
       status: "bo'sh",
       doctor: "Anvarjon Artiqov"
     },
-    {
-      id: 5,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "bo'sh",
-      doctor: "Anvarjon Artiqov"
-    },
-    {
-      id: 6,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "bo'sh",
-      doctor: "Anvarjon Artiqov"
-    },
 
   ]
 
   return (
     <div className='massaj'>
-      <div className='rooms-head rooms-head-wrapper'>
+      <div className='rooms-head '>
         <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
-
+        <div></div>
         <Dropdown options={[
           { value: "ACTIVE", label: "ACTIVE" },
           { value: "DELETED", label: "DELETED" }

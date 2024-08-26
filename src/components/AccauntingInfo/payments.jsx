@@ -56,9 +56,9 @@ const payments = () => {
 
   return (
     <div className='massaj'>
-      <div className='rooms-head rooms-head-wrapper'>
+      <div className='rooms-head '>
         <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
-
+        <div></div>
         <Dropdown options={[
           { value: "ACTIVE", label: "ACTIVE" },
           { value: "DELETED", label: "DELETED" }

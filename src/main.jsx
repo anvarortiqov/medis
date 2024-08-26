@@ -40,6 +40,7 @@ import QabulCheck from './components/Checks/QabulCheck/index'
 import WorkerInfo from './components/WorkforceSec/workforceInfo.jsx'
 import WorkerSalary from './components/WorkforceSec/salary.jsx'
 import WorkerFaoliyati from './components/WorkforceSec/faoliyati.jsx'
+import AddPatient from './components/Modals/AddPatient/index.jsx'
 
 
 import { Provider } from 'react-redux'
@@ -60,7 +61,11 @@ const router = createBrowserRouter([
         element: <QabulXona />,
       },
       {
-        path: "patient",
+        path: "qabulxona/add-patient",
+        element: <AddPatient />,
+      },
+      {
+        path: "qabulxona/patient",
         element: <Patient />,
         children: [
           {

@@ -11,7 +11,7 @@
 .massaj-content,
 .rahbarlar-content,
 .results-content {
-    height: calc(100vh - 350px);
+    min-height: calc(100vh - 400px);
     overflow: hidden;
 }
 

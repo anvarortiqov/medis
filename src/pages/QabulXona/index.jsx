@@ -4,16 +4,11 @@ import Mainavatar1 from "../../assets/images/mainlist_avatar.png";
 import Mainavatar2 from "../../assets/images/mainlist_avatar2.png";
 import Mainavatar3 from "../../assets/images/mainlist_avatar3.png";
 import { FaPlus } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './style.css'
 
 const index = () => {
-
-    const navigate = useNavigate();
-
-    const handleClick = ()=> {
-        navigate("../patient/personal")
-    }
+    
 
     const MainInfoList = [
         {
@@ -182,8 +177,7 @@ const index = () => {
     <div className="main-page_bottom">
       <div className='qabulhona-head'>
         <h1 className='qabulhona-title'>Kasallar Ro'yhati: </h1>
-        
-          <button className='qabulhona-btn form-btn'>Bemor Qo'shish<FaPlus/></button>
+        <Link to="add-patient"><button className='qabulhona-btn form-btn'>Bemor Qo'shish<FaPlus/></button></Link>
       </div>
         <form>
           <input
@@ -209,7 +203,7 @@ const index = () => {
         </form>
         <ul className="main-bottom_left-classlist">
           {MainInfoList.map((patientitem) => (
-            <div onClick={handleClick}>
+            <div >
                 <MainListItem
                     key={patientitem.id}
                     name={patientitem.name}
