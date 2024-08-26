@@ -6,45 +6,60 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getColor } from '../../../redux/slices/colorsSlice';
 import Status from '../../Status';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
-const index = ({ index, name, position, status, number, ...props }) => {
+const index = ({ index, name, position, status, number, data, ...props }) => {
   const ColorsStore = useSelector(state => state.colors);
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getColor(status))
   }, [status]);
- 
 
-  const HandleAlert = () => {
+  const handleItem = (id) => {
+    navigate("/about-workforce/worker-info/" + id)
+  }
+
+  const HandleAlert = (id) => {
     Alert.fire({
-      title: "Do you want to delete this item?",
+      title: "Ush bu hodimni haqiqatdan ham o'chirmoqchimisiz?",
       icon: "question",
       showDenyButton: true,
       showCancelButton: true,
-      denyButtonText: `Yes`,
-      confirmButtonText: "No",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
+      denyButtonText: `Yo'q`,
+      confirmButtonText: "Ha",
+      cancelButtonText: "Bekor qilish"
+    }).then(async (result) => {
+
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
+        await axios.delete(import.meta.env.VITE_API + "/main_module/hodimlar/" + id).then((response) => {
+          // window.location.reload()
+          // Swal.fire("Saved!", "", "success");
+
+          console.log(response);
+
+        })
+
       }
+      // else if (result.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
     });
   }
 
   return (
     // about-workforce/worker-info
     <div className='serviec-card' {...props}>
-      <div>{index + 1}</div>
-      <div><Link to="about-workforce/worker-info">{name}</Link></div>
-      <div>{position}</div>
-      <div>+998 {number}</div>
+      <div onClick={() => handleItem(data.id)}>{index + 1}</div>
+      <div onClick={() => handleItem(data.id)}>{name}</div>
+      <div onClick={() => handleItem(data.id)}>{position}</div>
+      <div onClick={() => handleItem(data.id)}>{number}</div>
       <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
       <div>
         <div className='service-edit'><LuClipboardEdit /></div>
-        <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
+        <div onClick={() => HandleAlert(data.id)} className='service-delete'><MdDelete /></div>
       </div>
     </div>
   )
