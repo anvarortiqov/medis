@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import Alert from 'sweetalert2'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getColor } from '../../../redux/slices/colorsSlice';
 import Status from '../../Status';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const index = ({ index, name, position, status, number, data, ...props }) => {
@@ -34,7 +34,7 @@ const index = ({ index, name, position, status, number, data, ...props }) => {
     }).then(async (result) => {
 
       if (result.isConfirmed) {
-        await axios.delete(import.meta.env.VITE_API + "/main_module/hodimlar/" + id).then((response) => {
+        await axios.patch(import.meta.env.VITE_API + "/main_module/hodimlar/" + id, {status: "DELETED"}).then((response) => {
           // window.location.reload()
           // Swal.fire("Saved!", "", "success");
 

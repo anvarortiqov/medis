@@ -59,35 +59,37 @@ const router = createBrowserRouter([
       {
         path: "qabulxona",
         element: <QabulXona />,
-      },
-      {
-        path: "qabulxona/add-patient",
-        element: <AddPatient />,
-      },
-      {
-        path: "qabulxona/patient",
-        element: <Patient />,
         children: [
           {
-            path: "personal",
-            element: <Personal />
+            path: "add-patient",
+            element: <AddPatient />,
           },
           {
-            path: "analyses",
-            element: <Analyses />
+            path: "patient",
+            element: <Patient />,
+            children: [
+              {
+                path: "personal/:id",
+                element: <Personal />
+              },
+              {
+                path: "analyses/:id",
+                element: <Analyses />
+              },
+              {
+                path: "sickhistory/:id",
+                element: <SicknessHistory />
+              },
+              {
+                path: "statsionar/:id",
+                element: <Statsionar />
+              },
+              {
+                path: "qabul/:id",
+                element: <Qabul />
+              }
+            ]
           },
-          {
-            path: "sickhistory",
-            element: <SicknessHistory />
-          },
-          {
-            path: "statsionar",
-            element: <Statsionar />
-          },
-          {
-            path: "qabul",
-            element: <Qabul />
-          }
         ]
       },
       {
@@ -122,37 +124,37 @@ const router = createBrowserRouter([
       },
       {
         path: 'hodimlar/:position/about-workforce',
-        element: <AboutWorkforce/>,
+        element: <AboutWorkforce />,
         children: [
           {
             path: 'worker-info',
-            element: <WorkerInfo/>,
+            element: <WorkerInfo />,
           },
           {
             path: 'worker-faoliyati',
-            element: <WorkerFaoliyati/>,
+            element: <WorkerFaoliyati />,
           },
           {
             path: 'worker-salary',
-            element: <WorkerSalary/>,
+            element: <WorkerSalary />,
           }
         ]
       },
       {
         path: 'about-workforce',
-        element: <AboutWorkforce/>,
+        element: <AboutWorkforce />,
         children: [
           {
             path: 'worker-info/:id',
-            element: <WorkerInfo/>,
+            element: <WorkerInfo />,
           },
           {
             path: 'worker-faoliyati',
-            element: <WorkerFaoliyati/>,
+            element: <WorkerFaoliyati />,
           },
           {
             path: 'worker-salary',
-            element: <WorkerSalary/>,
+            element: <WorkerSalary />,
           }
         ]
       },

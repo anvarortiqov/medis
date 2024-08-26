@@ -26,27 +26,41 @@ const Input = ({ children, className, rootClassName, placeholder, htmlType = "te
     const [InputClassName, setInputClassName] = useState("label-input")
     const [IsError, setIsError] = useState(false)
 
-    return <label className={classNames(rootClassName, "label")}>
-        <div className="label-wrap">
-            <Typography name={"text"} className='label-text'>{label}</Typography>
-            <input required={required?.required} placeholder={placeholder} className={classNames(className, InputClassName)} name={name} onChange={event => {
-                // onChange(event)
-                if (event.target.value === "" && required?.required) {
-                    setInputClassName(prev => classNames(prev, "label-error"))
-                    setIsError(true)
-                } else {
-                    setInputClassName('label-input')
-                    setIsError(false)
-                }
-            }} onBlur={onBlur} type={htmlType} />
-        </div>
+    return (
+        <label className={classNames(rootClassName, "label")}>
+            <div className="label-wrap">
+                <Typography name={"text"} className='label-text'>{label}</Typography>
+                <input
+                    required={required?.required}
+                    placeholder={placeholder}
+                    className={classNames(className, InputClassName)}
+                    name={name}
+                    onChange={event => {
+                        if (typeof onChange === "function") {
+                            onChange(event)
+                        }
+                        if (event.target.value === "" && required?.required) {
+                            setInputClassName(prev => classNames(prev, "label-error"))
+                            setIsError(true)
+                        } else {
+                            setInputClassName('label-input')
+                            setIsError(false)
+                        }
+                    }}
+                    onBlur={onBlur}
+                    type={htmlType}
+                />
+            </div>
 
-        {required && IsError && <div className='label-error'>
-            {required?.message}
-        </div>}
+            {required && IsError && (
+                <div className='label-error'>
+                    {required?.message}
+                </div>
+            )}
 
-        {children}
-    </label>
+            {children}
+        </label>
+    )
 }
 
 const TextArea = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
@@ -58,7 +72,10 @@ const TextArea = ({ children, className, rootClassName, placeholder, htmlType = 
         <div className="label-wrap">
             <Typography name={"text"} className='label-text'>{label}</Typography>
             <textarea required={required?.required} placeholder={placeholder} className={classNames(className, InputClassName)} name={name} onChange={event => {
-                // onChange(event)
+                if (typeof onChange === "function") {
+                    onChange(event)
+                }
+
                 if (event.target.value === "" && required?.required) {
                     setInputClassName(prev => classNames(prev, "label-error"))
                     setIsError(true)
