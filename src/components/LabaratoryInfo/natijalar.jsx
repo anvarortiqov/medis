@@ -37,28 +37,14 @@ const natijalar = () => {
       status: "Tayyor",
       servicetype: "Qon Analizi"
     },
-    {
-      id: 5,
-      name: "Ali Yuldashev",
-      date: "12,05,2024",
-      status: "Tayyor",
-      servicetype: "Qon Analizi"
-    },
-    {
-      id: 6,
-      name: "Ali Yuldashev",
-      date: "12,05,2024",
-      status: "Tayyor",
-      servicetype: "Qon Analizi"
-    },
 
   ]
 
   return (
     <div className='results-analyses'>
-      <div className='rooms-head rooms-head-wrapper'>
+      <div className='rooms-head '>
         <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
-
+        <div></div>
         <Dropdown options={[
           { value: "ACTIVE", label: "ACTIVE" },
           { value: "DELETED", label: "DELETED" }

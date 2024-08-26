@@ -38,7 +38,7 @@ const index = ({ index, name, position, status, number, ...props }) => {
     // about-workforce/worker-info
     <div className='serviec-card' {...props}>
       <div>{index + 1}</div>
-      <div>{name}</div>
+      <div><Link to="about-workforce/worker-info">{name}</Link></div>
       <div>{position}</div>
       <div>+998 {number}</div>
       <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />

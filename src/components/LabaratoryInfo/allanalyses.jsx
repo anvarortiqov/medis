@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import LabaratoryCard from '../Cards/LabarotoryCard/index'
@@ -29,28 +30,14 @@ const allanalyses = () => {
       status: "Tayyor",
       doctor: "ilhomjon solijonov"
     },
-    {
-      id: 4,
-      name: "Qon Analizi",
-      date: "12,05,2024",
-      status: "Tayyor",
-      doctor: "Anvarjon Artiqov"
-    },
-    {
-      id: 5,
-      name: "fziyo terapia",
-      date: "12,05,2024",
-      status: "Tayyor",
-      doctor: "Anvarjon Artiqov"
-    },
 
   ]
 
   return (
     <div className='results-analyses'>
-      <div className='rooms-head rooms-head-wrapper'>
+      <div className='rooms-head '>
         <Input required={{ required: true, message: "Kiriting!" }} placeholder={"Serach..."} />
-
+        <div></div>
         <Dropdown options={[
           { value: "ACTIVE", label: "ACTIVE" },
           { value: "DELETED", label: "DELETED" }
