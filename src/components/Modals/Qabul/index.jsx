@@ -8,18 +8,22 @@ import { FaDownload } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { amointService, removeServiceItem, saveServices } from '../../../redux/slices/receptionSlice';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Typography from '../../Typography';
 
 
 const index = () => {
   const ServicesStore = useSelector(state => state.reception);
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const [PaidAmount, setPaidAmount] = useState(0);
   const [open, setOpen] = useState(false)
   const [qabulCount, setqabulCount] = useState(1);
   const [FilteredServices, setFilteredServices] = useState([])
   const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
   const count = Array.from(Array(qabulCount).keys())
+  const [Data, setData] = useState(null)
 
   useEffect(() => {
     if (PaidAmount > 0) {
@@ -31,9 +35,18 @@ const index = () => {
     dispatch(removeServiceItem(FilteredServices))
   }, [FilteredServices])
 
-  const HandleOpen = () => setOpen(!open)
+  useEffect(() => {
+    try {
+      axios.get(import.meta.env.VITE_API + "/public/patient/" + id).then(response => {
+        setData(response.data)
+      })
+    } catch (error) {
+      console.error(error);
 
-  console.log(ServicesStore);
+    }
+  }, [])
+
+  const HandleOpen = () => setOpen(!open)
 
   const onSave = () => {
     dispatch(saveServices())
@@ -42,6 +55,10 @@ const index = () => {
   const onDelete = (id) => {
     setFilteredServices(ServicesStore.services.filter(item => item.row !== id))
     setqabulCount(prev => (prev - 1) < 1 ? 1 : prev - 1)
+  }
+
+  if (!Data) {
+    return <Typography name={"h2"}>Yuklanmoqda...</Typography>
   }
 
   return (
@@ -55,10 +72,10 @@ const index = () => {
       {/* promokod */}
       <div className='qabul-head'>
         <div>
-          <h2>#983274has723</h2>
-          <h1>Qabul: Olimov Ali</h1>
+          <h2>#{Data?.id}</h2>
+          <h1>Qabul: {Data?.surname} {Data?.name}</h1>
         </div>
-          <input className='input-style' id='reason' type="text" placeholder='Kelish Sababini Kiritig...' />  
+        <input className='input-style' id='reason' type="text" placeholder='Kelish Sababini Kiritig...' />
       </div>
       <div className='qabul-con' ref={targetRef}>
         <div className='qabul-row'>
@@ -88,7 +105,7 @@ const index = () => {
       </div>
       <div className='qabul-row2'>
         <div>
-          Hzimat Qo'shish
+          Hizmat Qo'shish
         </div>
         <button className='qabul-add' onClick={() => setqabulCount(qabulCount + 1)}>
           <FaPlus />
@@ -115,7 +132,7 @@ const index = () => {
       <div className='qabul-btns'>
         <button onClick={HandleOpen} className='form-btn'>Promo Kod</button>
         <button onClick={onSave} className='form-btn'>Saqlash</button>
-        <button  style={ServicesStore.checkStatus ? { background: "#fff", color: "#000" } : null} disabled={ServicesStore.checkStatus} className='form-btn' onClick={() => toPDF()}>Check</button>
+        <button style={ServicesStore.checkStatus ? { background: "#fff", color: "#000" } : null} disabled={ServicesStore.checkStatus} className='form-btn' onClick={() => toPDF()}>Check</button>
       </div>
     </div>
   )

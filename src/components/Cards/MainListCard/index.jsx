@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import './style.css'
 import '../../../pages/Main/style.css'
 
-const index = (props) => {
-  const {name, year, month, day, number, img, surname} = props
+const index = ({name, year, month, day, number, img, surname, ...props}) => {
+  
   return (
     <Link to="patient/personal">
       <li className="main-classlist-item">
