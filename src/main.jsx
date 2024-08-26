@@ -143,7 +143,7 @@ const router = createBrowserRouter([
         element: <AboutWorkforce/>,
         children: [
           {
-            path: 'worker-info',
+            path: 'worker-info/:id',
             element: <WorkerInfo/>,
           },
           {

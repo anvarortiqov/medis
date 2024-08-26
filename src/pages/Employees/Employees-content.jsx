@@ -26,10 +26,11 @@ const EmployeesContent = () => {
     const dataItem = Data.map((item, index) => <Fragment key={index}>
         <EmployeeCard
             index={index}
-            name={`${item.surname} ${item.name.at(0)} ${item.middle_name?.at(0) ?? ""}`}
+            name={`${item.surname} ${item.name.at(0)}.${item.middle_name?.at(0) ?? ""}`}
             number={item.phone}
             position={item.lavozimi ?? "Ko'rsatilmagan"}
             status={item.status}
+            data={item}
         />
     </Fragment>)
 
@@ -43,7 +44,7 @@ const EmployeesContent = () => {
                     { value: "DELETED", label: "DELETED" }
                 ]} />
             </div>
-            
+
             <div className='massaj-head'>
                 <div>N</div>
                 <div>Name</div>
@@ -52,7 +53,7 @@ const EmployeesContent = () => {
                 <div>Status</div>
             </div>
             <div className='rahbarlar-content'>
-                {dataItem.length === 0 ? "Yuklanmoqda..." : dataItem}
+                {Data.length === 0 ? "Yuklanmoqda..." : dataItem.length === 0 ? "Ma'kumot topilmadi" : dataItem}
             </div>
             <div className='pagination'>
                 <div className='pagination-left'>
