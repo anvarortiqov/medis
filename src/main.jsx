@@ -121,24 +121,6 @@ const router = createBrowserRouter([
         element: <AddEmployee />
       },
       {
-        path: 'hodimlar/:position/about-workforce',
-        element: <AboutWorkforce/>,
-        children: [
-          {
-            path: 'worker-info',
-            element: <WorkerInfo/>,
-          },
-          {
-            path: 'worker-faoliyati',
-            element: <WorkerFaoliyati/>,
-          },
-          {
-            path: 'worker-salary',
-            element: <WorkerSalary/>,
-          }
-        ]
-      },
-      {
         path: 'about-workforce',
         element: <AboutWorkforce/>,
         children: [
