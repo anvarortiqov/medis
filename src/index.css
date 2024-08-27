@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&display=swap');
 
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Poppins';
@@ -16,7 +16,7 @@
   --text-grey: #737791;
   --text-dark-blue: #171f54;
   --text-blue: #5D5FEF;
-  
+
 }
 
 :root {
@@ -28,7 +28,7 @@
 }
 
 a {
-  text-decoration: none ;
+  text-decoration: none;
 }
 
 h1 {
@@ -41,9 +41,9 @@ button:focus-visible {
   outline: 4px auto var(--text-blue);
 }
 
-.input-style{
+.input-style {
   margin-top: 15px;
-  padding: 0 10px ;
+  padding: 0 10px;
   height: 50px;
   box-sizing: border-box;
   /* Neutral/300 */
@@ -55,11 +55,13 @@ button:focus-visible {
   /* Neutral/100 */
   background: rgb(255, 255, 255);
 }
+
 .input-style:focus,
 .input-style:focus-visible {
   outline: 1px auto var(--text-grey);
 }
-.form-label-style{
+
+.form-label-style {
   color: rgb(23, 15, 73);
   font-size: 14px;
   font-weight: 500;
@@ -67,7 +69,8 @@ button:focus-visible {
   letter-spacing: 0%;
   text-align: left;
 }
-.form-btn{
+
+.form-btn {
   border: 1px solid rgb(93, 95, 239);
   color: rgb(255, 255, 255);
   font-size: 18px;
@@ -75,13 +78,20 @@ button:focus-visible {
   line-height: 32px;
   padding: 10px 40px;
   border-radius: 10px;
-  background: linear-gradient(150.16deg, rgb(93, 95, 239) 20.312%,rgba(236, 49, 240, 0.35) 176.867%);
+  background: linear-gradient(150.16deg, rgb(93, 95, 239) 20.312%, rgba(236, 49, 240, 0.35) 176.867%);
 }
-.form-btn:hover{
-  background: linear-gradient(150.16deg, rgb(93, 95, 239),rgba(236, 49, 240, 0.35));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  cursor: pointer;
 
+.form-btn:hover {
+  background: linear-gradient(150.16deg, rgb(93, 95, 239), rgba(236, 49, 240, 0.35));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }

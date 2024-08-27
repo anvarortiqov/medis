@@ -1,223 +1,120 @@
-import React from 'react'
-import MainListItem from "../../components/Cards/MainListCard/index";
-import Mainavatar1 from "../../assets/images/mainlist_avatar.png";
-import Mainavatar2 from "../../assets/images/mainlist_avatar2.png";
-import Mainavatar3 from "../../assets/images/mainlist_avatar3.png";
-import { FaPlus } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { FaDownload } from "react-icons/fa";
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import './style.css'
+import Typography from '../../components/Typography';
+import Form, { Input } from '../../components/Form';
+import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
+import Image from '../../components/Image';
+import axios from 'axios';
+import moment from 'moment';
 
 const index = () => {
-    
 
-    const MainInfoList = [
-        {
-          id: 1,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar1,
-        },
-        {
-          id: 2,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar1,
-        },
-        {
-          id: 3,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar2,
-        },
-        {
-          id: 4,
-          name: "ilhomjon",
-          surname: "Solijonov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar1,
-        },
-        {
-          id: 5,
-          name: "Muslima",
-          surname: "Ortiqova",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar3,
-        },
-        {
-          id: 6,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar2,
-        },
-        {
-          id: 7,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar2,
-        },
-        {
-          id: 8,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar3,
-        },
-        {
-          id: 9,
-          name: "Anvarjon",
-          surname: "Ortiqov",
-          year: 1998,
-          month: 2,
-          day: 18,
-          number: 948373745,
-          img: Mainavatar1,
-        },
-        {
-            id: 9,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 10,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 11,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 12,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 13,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 14,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-          {
-            id: 15,
-            name: "Anvarjon",
-            surname: "Ortiqov",
-            year: 1998,
-            month: 2,
-            day: 18,
-            number: 948373745,
-            img: Mainavatar1,
-          },
-      ];
+  const onFinish = async (values) => {
+    console.log(values);
+  }
+
+  const { pathname } = useLocation();
+
+  const navigate = useNavigate();
+
+  const [Data, setData] = useState([])
+
+  useEffect(() => {
+    try {
+      axios.get(import.meta.env.VITE_API + "/public/patient/").then(response => {
+        if (response.status < 400) {
+          setData([...response.data.results])
+        }
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }, [])
+
+  const dataItem = Data?.map(({ surname, name, middle_name, birthday, phone, extra_phone, id, date_joined }, index) => {
+    index += 1;
+
+    return (
+      <li onClick={() => {
+        window.localStorage.setItem("patient-id", id)
+
+        navigate("/qabulxona/patient/personal/" + id)
+      }} className="list-of-patients-item" key={index}>
+        <Typography name={"text"}>{index}</Typography>
+
+        <div className="list-of-patients-item-wrap">
+          <div className="list-of-patients-item-img">
+            <Image />
+          </div>
+          <Typography name={"text"}>{surname} {name} {middle_name}</Typography>
+        </div>
+
+        <Typography name={"text"}>{moment(birthday).format("DD/MM/YYYY")}</Typography>
+
+        <div>
+          {phone || extra_phone ? phone ? <Typography name={"text"}>{phone}</Typography> : <Typography name={"text"}>{extra_phone}</Typography> : "Yo'q"}
+        </div>
+
+        <Typography name={"text"}>{moment(date_joined).format("DD/MM/YYYY")}</Typography>
+      </li>
+    )
+  })
+
+  if (pathname !== "/qabulxona") {
+    return <section className="list-of-patients">
+      <Outlet />
+    </section>
+  }
 
   return (
-    <div className="main-page_bottom">
-      <div className='qabulhona-head'>
-        <h1 className='qabulhona-title'>Kasallar Ro'yhati: </h1>
-        <Link to="add-patient"><button className='qabulhona-btn form-btn'>Bemor Qo'shish<FaPlus/></button></Link>
+    <section className="list-of-patients">
+      <div className='list-of-patients-head'>
+        <Typography name={"h2"}>Kasallar Ro'yhati:</Typography>
+
+        <button onClick={() => navigate("/qabulxona/add-patient")} className='form-btn' type="submit">Bemor qo'shish &#43;</button>
       </div>
-        <form>
-          <input
-            className="main-head_from-items input-style"
-            type="text"
-            placeholder="Ism"
-          />
-          <input
-            className="main-head_from-items input-style"
-            type="text"
-            placeholder="Familiya"
-          />
-          <input
-            className="main-head_from-items input-style"
-            type="date"
-            placeholder="Tug'ulgan kun"
-          />
-          <input
-            className="main-head_from-items input-style"
-            type="number"
-            placeholder="Telefon Raqam"
-          />
-        </form>
-        <ul className="main-bottom_left-classlist">
-          {MainInfoList.map((patientitem) => (
-            <div >
-                <MainListItem
-                    key={patientitem.id}
-                    name={patientitem.name}
-                    surname={patientitem.surname}
-                    year={patientitem.year}
-                    month={patientitem.month}
-                    day={patientitem.day}
-                    number={patientitem.number}
-                    img={patientitem.img}
-                />
-            </div>
-          ))}
-        </ul>
+
+      <Form className={"list-of-patients-form"} onFininsh={onFinish}>
+        <Input placeholder={"F.I.Sh. kiriting"} required={{ required: true, message: "Kiriting" }} />
+
+        <Input htmlType='date' />
+
+        <Input placeholder={"Telefon kiriting"} required={{ required: true, message: "Kiriting" }} />
+      </Form>
+
+      <div className='list-of-patients-header'>
+        <div>N</div>
+        <div>F.I.Sh</div>
+        <div>Tug'ulgan sana/oy/yil</div>
+        <div>Telefon raqam</div>
+        <div>Ro'yhatdan o'tgan sana</div>
       </div>
+
+      <ul className='list-of-patients-list'>
+        {Data.length === 0 ? "Yuklanmoqda..." : dataItem.length === 0 ? "Ma'lumot topilmadi" : dataItem}
+      </ul>
+
+      <div className='pagination'>
+        <div className='pagination-left'>
+          <GoArrowLeft />
+        </div>
+        <div className='pagination-number'>
+          1
+        </div>
+        <div className='pagination-number'>
+          2
+        </div>
+        <div className='pagination-number'>
+          3
+        </div>
+        <div className='pagination-right'>
+          <GoArrowRight />
+        </div>
+        <button className='form-btn pagination-btn-download'><FaDownload /></button>
+      </div>
+    </section>
   )
 }
 

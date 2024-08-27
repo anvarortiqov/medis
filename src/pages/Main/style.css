@@ -103,12 +103,7 @@
     overflow-y: auto;
     margin: 10px 0 20px 0;
 }
-/* .main-bottom_left-classlist:nth-child(odd) > a > li > div{
-    background-color: red;
-}
-.main-bottom_left-classlist:nth-child(even) > a > li > div{
-    background-color: var(--text-grey);
-} */
+
 .main-bottom_left-classlist::-webkit-scrollbar {
     display: none;
 }
