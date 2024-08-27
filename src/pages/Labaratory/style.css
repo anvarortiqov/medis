@@ -1,5 +1,5 @@
 .labaratory{
-    width: 95%;
+    width: calc(100% - 40px);
 }
 .labaratory .patientdata_navbar-block{
     width: 100%;
