@@ -1,12 +1,12 @@
 .main-page{
-    width: 100%;
+    width: calc(100% - 40px);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .main-page_head{
-    width: 98%;
+    width: 100%;
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -71,27 +71,10 @@
     background: linear-gradient(92.96deg, #5D5FEF 20.08%, rgba(236, 49, 240, 0.35) 173.78%);
     color: var(--color-white);
 }
-/* main page form section css  */
-.main-page_bottom > form {
-    margin: 10px 0;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 28% 28% 20% 20%;
-    justify-content: space-between;
-    align-items: start;
-    height: auto;
-}
-.main-head_from-items{
-    margin: 0;
-    border-radius: 10px!important;
-    padding: 0 12px;
-    height: 50px;
-    border-radius: 20px;
-}
 
 /*main page bottom side  */
 .main-page_bottom{
-    width: 98%;
+    width: 100%;
     height: calc(100vh - 65px);
     display: flex;
     flex-direction: column;
@@ -108,61 +91,3 @@
     display: none;
 }
 
-/* compleated component section css  */
-
-.compleated{
-    margin: 0 0 0 5%;
-    width: 90%;
-    height: 95%;
-    border-radius: 30.538px;
-    border: 5.09px solid var(--bg-color-f5f5f5);
-    background: var(--text-grey);
-    backdrop-filter: blur(25.448572158813477px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.compleated_content{
-    position: relative;
-    width: 608px;
-    height: 455px;
-    flex-shrink: 0;
-    border-radius: 34px;
-    border: 1px solid var(--Neutral-300, #EFF0F6);
-    background: var(--Neutral-100, #FFF);
-    box-shadow: 0px 5px 16px 0px rgba(8, 15, 52, 0.06); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.comp-icon{
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    font-size: 30px;
-    color: var(--text-blue);
-    cursor: pointer;
-}
-.comp-img{
-    width: 140px;
-    height: 130px;
-    flex-shrink: 0;
-}
-.comp-title{
-    margin: 1rem 0;
-    color: var(--text-dark-blue);
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 35px; /* 145.833% */
-}
-.comp-oaragraph{
-    width: 90%;
-    text-align: center;
-    color: var(--text-grey);
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px; /* 166.667% */
-}

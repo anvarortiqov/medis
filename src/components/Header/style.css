@@ -3,7 +3,7 @@
     background-color: var(--color-white);
     display: flex;
     justify-content: center;
-    
+    position: relative;
 }
 
 .header_container{
@@ -88,6 +88,7 @@
 /* header accaunt block css */
 .header_account-block{
     display: flex;
+    cursor: pointer;
 }
 .header-account-block_user-img{
     width: 50px;
@@ -112,6 +113,11 @@
 }
 .header_account-block-icon{
     margin-left: 1rem;
+    transform: rotate(-90deg);
+    transition: all 0.25s ease-in-out;
+}
+.header_account-block-icon-def{
+    transform: rotate(0deg);
 }
 .header-account-block-texts h5{
     color: var(--text-grey);
@@ -119,4 +125,39 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px; /* 142.857% */
+}
+
+.header-extra-menu{
+    min-width: 220px;
+    max-width: 270px;
+    right: 10px;
+    top: 85px;
+    box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.07);   
+    position: absolute;
+    z-index: 1000;
+    background-color: var(--bg-white);
+    padding: 15px;
+    border-radius: 15px;
+}
+.header-extra-menu ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.header-extra-menu li{
+    list-style: none;
+}
+.header-extra-menu li a{
+    font-size: 16px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    color: var(--text-grey);
+}
+.header-extra-menu li a:hover{
+    color: var(--text-dark-blue);
+}
+
+.header-extra-menu-icon{
+    font-size: 18px;
 }

@@ -1,12 +1,13 @@
 .list-of-patients {
-    padding: 20px;
+    padding: 0 20px;
     flex-grow: 1;
 }
 
 .list-of-patients-head {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
+    padding: 10px 0 0;
 }
 
 .list-of-patients-form {
@@ -29,7 +30,7 @@
 }
 
 .list-of-patients-list {
-    min-height: calc(100vh - 400px);
+    min-height: calc(100vh - 440px);
 }
 
 .list-of-patients-list>*+* {

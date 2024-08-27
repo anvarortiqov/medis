@@ -17,7 +17,8 @@ const index = () => {
                 </h3>
               </li>
             </NavLink>
-            
+            <div className='patientnavbar_item'></div>
+            <div className='patientnavbar_item'></div>
           </ul>
       </div>
       <div className='services-content'>

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 
 // icons import
-
 import {IoMdNotificationsOutline } from 'react-icons/io'
 import {IoIosArrowDown} from 'react-icons/io'
+import { CgProfile } from "react-icons/cg";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
 // images import
 import UserImage from '../../assets/images/user-image.png'
 import { Link } from 'react-router-dom'
@@ -12,6 +14,12 @@ import { Link } from 'react-router-dom'
 
 
 const index = () => {
+
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    setOpen(!open)
+}
+
   return (
     <div className='haeder'>
       <div className='header_container'>
@@ -35,13 +43,28 @@ const index = () => {
           <div className='header_notification-block'>
             <IoMdNotificationsOutline  className='header_notification-icon' />
           </div>
-          <div className='header_account-block'>
+          <div className='header_account-block'  onClick={handleOpen}>
               <img className='header-account-block_user-img' src={UserImage} alt="not-found" />
               <div className='header-account-block-texts'>
-                  <h4>Hasanboy <IoIosArrowDown className='header_account-block-icon' /></h4>
+                  <h4>Hasanboy <IoIosArrowDown className={` header_account-block-icon ${open ? "header_account-block-icon-def" : ""} `} /></h4>
                   <h5>Admin</h5>
               </div>
           </div>
+          {
+            open == false 
+            ?
+            (<div></div>)
+            : 
+            (
+              <div className='header-extra-menu'>
+                <ul>
+                  <li><Link to="#"><CgProfile className='header-extra-menu-icon' />  <span>Ilhomjon Solijonov</span></Link></li>
+                  <li><Link to="settings/shifohona"><IoSettingsOutline  className='header-extra-menu-icon' /> <span>Sozlamalar</span></Link></li>
+                  <li><Link to="login"><FiLogOut   className='header-extra-menu-icon' /> <span>Chiqish</span></Link></li>
+                </ul>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>

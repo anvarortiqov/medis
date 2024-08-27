@@ -8,10 +8,7 @@ import { Dropdown, Input } from '../../components/Form';
 const index = () => {
 
 
-    const BookRoomtHandler = () => {
-        let patientadd1 = document.querySelector('.book-room')
-        patientadd1.classList.toggle('book-room-exist')
-    }
+    
 
     const Rooms = [
         {
@@ -71,18 +68,19 @@ const index = () => {
     ]
     return (
         <div className='rooms-box'>
-            <BookRoom />
             <div className='rooms-head-box'>
-                <div className='rooms-head rooms-head-wrapper'>
+                <div className='rooms-head'>
                     <Input required={{required: true, message: "Kiriting!"}}  placeholder={"Serach..."} />
 
                     <Dropdown options={[
-                        { value: "ACTIVE", label: "ACTIVE" },
-                        { value: "DELETED", label: "DELETED" }
+                        { value: "PREMIUM", label: "Premuim Xona" },
+                        { value: "STANDART", label: "Standart Xona" },
+                        { value: "BIRKISHI", label: "Bir Kishilik Xona" },
+                        { value: "IKKIKISHI", label: "Ikki Kishilik Xona" }
                     ]} />
 
                     <label className='rooms-head-btn'>
-                        <button className='form-btn' onClick={BookRoomtHandler}>Xona Qo'shish</button>
+                        <button className='form-btn' >Xona Qo'shish</button>
                     </label>
                 </div>
             </div>

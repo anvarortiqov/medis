@@ -108,10 +108,10 @@ const router = createBrowserRouter([
             path: "addservice",
             element: <AddService />
           },
-          {
-            path: "newservicetype",
-            element: <NewServiceType />
-          }
+          // {
+          //   path: "newservicetype",
+          //   element: <NewServiceType />
+          // }
         ]
       },
       {
