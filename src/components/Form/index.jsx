@@ -21,7 +21,7 @@ const Form = ({ onFininsh, children, className, action }) => {
     )
 }
 
-const Input = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name }) => {
+const Input = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name, disabled, readOnly, value }) => {
 
     const [InputClassName, setInputClassName] = useState("label-input")
     const [IsError, setIsError] = useState(false)
@@ -35,6 +35,9 @@ const Input = ({ children, className, rootClassName, placeholder, htmlType = "te
                     placeholder={placeholder}
                     className={classNames(className, InputClassName)}
                     name={name}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    value={value}
                     onChange={event => {
                         if (typeof onChange === "function") {
                             onChange(event)
@@ -94,7 +97,7 @@ const TextArea = ({ children, className, rootClassName, placeholder, htmlType = 
     </label>
 }
 
-const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) => {
+const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState(multi ? [] : null);
     const dropdownRef = useRef(null);
@@ -103,15 +106,20 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) =
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const handleOptionClick = (option) => {
+        let updatedOptions;
         if (multi) {
             if (selectedOptions.some((selected) => selected.value === option.value)) {
-                setSelectedOptions(selectedOptions.filter((selected) => selected.value !== option.value));
+                updatedOptions = selectedOptions.filter((selected) => selected.value !== option.value);
             } else {
-                setSelectedOptions([...selectedOptions, option]);
+                updatedOptions = [...selectedOptions, option];
             }
+            setSelectedOptions(updatedOptions);
+            onChange && onChange(updatedOptions.map((opt) => opt.value));
         } else {
-            setSelectedOptions(option);
+            updatedOptions = option;
+            setSelectedOptions(updatedOptions);
             setIsOpen(false);
+            onChange && onChange(option.value);
         }
     };
 
@@ -141,14 +149,16 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) =
     };
 
     return (
-        <label onMouseLeave={() => setIsOpen(false)} className={classNames(rootClassName, "label")}>
+        <label onMouseLeave={() => setIsOpen(false)} className={classNames(rootClassName, 'label')}>
             <div className="label-wrap">
-                <Typography name={"text"} className="label-text">{label}</Typography>
+                <Typography name={'text'} className="label-text">
+                    {label}
+                </Typography>
                 <div className="dropdown" ref={dropdownRef}>
                     <button type="button" onClick={toggleDropdown} className="dropdown-button">
                         {multi
                             ? selectedOptions.length > 0
-                                ? selectedOptions.map(opt => opt.label).join(', ')
+                                ? selectedOptions.map((opt) => opt.label).join(', ')
                                 : 'Select...'
                             : selectedOptions?.label || 'Select...'}
                     </button>
@@ -157,7 +167,12 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) =
                             {options.map((option) => (
                                 <li
                                     key={option.value}
-                                    className={`dropdown-option ${multi ? selectedOptions.some(selected => selected.value === option.value) : selectedOptions?.value === option.value ? 'selected' : ''}`}
+                                    className={`dropdown-option ${multi
+                                            ? selectedOptions.some((selected) => selected.value === option.value)
+                                            : selectedOptions?.value === option.value
+                                                ? 'selected'
+                                                : ''
+                                        }`}
                                     onClick={() => handleOptionClick(option)}
                                 >
                                     {option.label}
@@ -168,9 +183,12 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name }) =
                     <input
                         type="hidden"
                         name={name}
-                        value={multi
-                            ? JSON.stringify(selectedOptions.map(opt => parseValue(opt.value)))
-                            : selectedOptions ? parseValue(selectedOptions.value) : ''
+                        value={
+                            multi
+                                ? JSON.stringify(selectedOptions.map((opt) => parseValue(opt.value)))
+                                : selectedOptions
+                                    ? parseValue(selectedOptions.value)
+                                    : ''
                         }
                     />
                 </div>

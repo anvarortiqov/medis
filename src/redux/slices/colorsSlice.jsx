@@ -27,7 +27,7 @@ export const colorsSlice = createSlice({
                     break
                 }
                 case "deleted": {
-                    state.bg = "#FFB7BB"
+                    state.bg = "#FF333F"
                     state.color = "#fff"
                     break
                 }

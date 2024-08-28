@@ -8,30 +8,46 @@ import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import Image from '../../components/Image';
 import axios from 'axios';
 import moment from 'moment';
+import { useFilter } from '../../hooks/useFilter';
+import Pagination from '../../components/Pagination';
 
 const index = () => {
-
-  const onFinish = async (values) => {
-    console.log(values);
-  }
 
   const { pathname } = useLocation();
 
   const navigate = useNavigate();
 
   const [Data, setData] = useState([])
+  const [FilterData, setFilterData] = useState([])
+
+  const [FormInput, setFormInput] = useState("")
+
+  const { Data: data } = useFilter({ data: FilterData, search: FormInput })
 
   useEffect(() => {
     try {
       axios.get(import.meta.env.VITE_API + "/public/patient/").then(response => {
         if (response.status < 400) {
           setData([...response.data.results])
+          setFilterData([...response.data.results])
         }
       })
     } catch (error) {
       console.error(error);
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setData(data);
+
+    if (FormInput === "") {
+      setData(FilterData)
+    }
+  }, [data, FormInput])
+
+  const onFinish = async (values) => {
+    console.log(values);
+  }
 
   const dataItem = Data?.map(({ surname, name, middle_name, birthday, phone, extra_phone, id, date_joined }, index) => {
     index += 1;
@@ -77,11 +93,11 @@ const index = () => {
       </div>
 
       <Form className={"list-of-patients-form"} onFininsh={onFinish}>
-        <Input placeholder={"F.I.Sh. kiriting"} required={{ required: true, message: "Kiriting" }} />
+        <Input onChange={event => setFormInput(event.target.value)} placeholder={"F.I.Sh. kiriting"} required={{ required: true, message: "Kiriting" }} />
 
-        <Input htmlType='date' />
+        <Input onChange={event => setFormInput(event.target.value)} htmlType='date' />
 
-        <Input placeholder={"Telefon kiriting"} required={{ required: true, message: "Kiriting" }} />
+        <Input onChange={event => setFormInput(event.target.value)} placeholder={"Telefon kiriting"} required={{ required: true, message: "Kiriting" }} />
       </Form>
 
       <div className='list-of-patients-header'>
@@ -96,23 +112,8 @@ const index = () => {
         {Data.length === 0 ? "Yuklanmoqda..." : dataItem.length === 0 ? "Ma'lumot topilmadi" : dataItem}
       </ul>
 
-      <div className='pagination'>
-        <div className='pagination-left'>
-          <GoArrowLeft />
-        </div>
-        <div className='pagination-number'>
-          1
-        </div>
-        <div className='pagination-number'>
-          2
-        </div>
-        <div className='pagination-number'>
-          3
-        </div>
-        <div className='pagination-right'>
-          <GoArrowRight />
-        </div>
-        <button className='form-btn pagination-btn-download'><FaDownload /></button>
+      <div className="pagination">
+        <Pagination current={1} total={Data.length} />
       </div>
     </section>
   )
