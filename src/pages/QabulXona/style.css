@@ -37,7 +37,7 @@
     border-bottom: 1px solid rgb(197, 193, 193);
 }
 
-.list-of-patients-item{
+.list-of-patients-item {
     cursor: pointer;
 }
 
@@ -58,5 +58,15 @@
 
     img {
         height: 100%;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    
+    .pagination-container {
+        flex-shrink: 0;
     }
 }

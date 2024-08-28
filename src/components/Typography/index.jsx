@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
+import "./style.css";
 
 const Typography = ({ children, name, onClick, className, ...props }) => {
     switch (name) {

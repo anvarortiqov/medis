@@ -4,7 +4,8 @@ const initialState = {
     services: [],
     totalPrice: 0,
     checkStatus: true,
-    paidAmount: 0
+    paidAmount: 0,
+    paymentMethod: null
 }
 
 export const receptionSlice = createSlice({
@@ -18,7 +19,7 @@ export const receptionSlice = createSlice({
                 state.totalPrice += parseFloat(action.payload.amount)
             }
         },
-        amointService(state, action) {
+        paidAmount(state, action) {
             state.paidAmount = action.payload;
         },
         removeServiceItem(state, action) {
@@ -26,10 +27,13 @@ export const receptionSlice = createSlice({
         },
         saveServices(state) {
             state.checkStatus = false
+        },
+        paymentMethod(state, action){
+            state.paymentMethod = action.payload
         }
     },
 })
 
-export const { addService, amointService, removeServiceItem, saveServices } = receptionSlice.actions
+export const { addService, paidAmount, removeServiceItem, saveServices, paymentMethod } = receptionSlice.actions
 
 export default receptionSlice.reducer
