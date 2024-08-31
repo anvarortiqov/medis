@@ -15,12 +15,11 @@ import { TbLogout } from 'react-icons/tb'
 import { MdOutlineCalculate } from 'react-icons/md'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
-import useAuth from "./../../hooks/useAuth"
+
 
 const index = () => {
 
-    const { setIsAuthenticated } = useAuth();
-    const navigate = useNavigate();
+    
 
     const [open, setOpen] = useState(false)
     const handleAuto = () => {
@@ -31,11 +30,11 @@ const index = () => {
         setOpen2(!open2)
     }
 
-    const onLogout = () => {
-        window.sessionStorage.setItem("token", null);
-        setIsAuthenticated(false);
-        navigate("/login", { replace: true })
+    const HandleYesNo = ()=> {
+        let patientadd1 = document.querySelector('.yes-no-box')
+        patientadd1.classList.toggle('yes-no-box-active')
     }
+    
 
     return (
         <div className="navbar">
@@ -43,7 +42,7 @@ const index = () => {
                 <div className="navbar_head">
                     <div className="head-direction">
                         <FaChartPie className="head_direction-icon" />
-                        <h2 className="head_directin-name">Bo'limlar</h2>
+                        <h2 className="head_directin-name">Shifohona</h2>
                     </div>
                 </div>
                 <ul className="navbar_links">
@@ -106,10 +105,10 @@ const index = () => {
                         <GoGear className="navbar_link-icon" />
                         <h4>Sozlamalar</h4>
                     </NavLink>
-                    <NavLink to='/login' onClick={onLogout} className="navbar_link">
+                    <div  onClick={HandleYesNo} className="navbar_link">
                         <TbLogout className="navbar_link-icon" />
                         <h4>Chiqish</h4>
-                    </NavLink>
+                    </div>
                 </ul>
             </div>
         </div>

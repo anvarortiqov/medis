@@ -6,6 +6,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import './style.css'
 import EmployeeCard from "../../components/Cards/EmployeeCard/index"
 import { Dropdown, Input } from "../../components/Form";
+import Pagination from "../../components/Pagination/index";
 
 const EmployeesContent = () => {
 
@@ -55,22 +56,8 @@ const EmployeesContent = () => {
             <div className='rahbarlar-content'>
                 {Data.length === 0 ? "Yuklanmoqda..." : dataItem.length === 0 ? "Ma'kumot topilmadi" : dataItem}
             </div>
-            <div className='pagination'>
-                <div className='pagination-left'>
-                    <GoArrowLeft />
-                </div>
-                <div className='pagination-number'>
-                    1
-                </div>
-                <div className='pagination-number'>
-                    2
-                </div>
-                <div className='pagination-number'>
-                    3
-                </div>
-                <div className='pagination-right'>
-                    <GoArrowRight />
-                </div>
+            <div className="pagination">
+                <Pagination current={1} total={Data.length} />
                 <button className='form-btn pagination-btn-download'><FaDownload /></button>
             </div>
         </div>

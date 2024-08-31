@@ -48,6 +48,28 @@ const index = () => {
                 </li>
                 </NavLink>
             </ul>
+            <ul className='extra-menu-of-navbar'>
+                <li>
+                    <span>Id: </span>
+                    #f8hf98w
+                </li>
+                <li>
+                    <span>Ism: </span>
+                    ilhomjon
+                </li>
+                <li>
+                    <span>Familiya: </span>
+                    Solijonov
+                </li>
+                <li>
+                    <span>Tel: </span>
+                    +998 99 083 7233
+                </li>
+                <li>
+                    <span>Balans: </span>
+                    200000
+                </li>
+            </ul>
         </div>
         <div className='abemp-container'>
             <Outlet/>

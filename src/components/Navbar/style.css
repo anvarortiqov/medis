@@ -6,6 +6,7 @@
     background-color: var(--bg-white);
     box-sizing: border-box;
     overflow: auto;
+    position: relative;
 }
 .navnar::-webkit-scrollbar{
     display: none;

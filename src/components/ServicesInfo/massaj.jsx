@@ -2,10 +2,9 @@ import React from 'react'
 import './style.css'
 import { usePDF } from 'react-to-pdf';
 import ServiceCard from '../Cards/ServiceCard/index'
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
 import { Dropdown, Input } from '../Form';
+import Pagination from '../Pagination/index';
 
 const massaj = () => {
 
@@ -73,23 +72,9 @@ const massaj = () => {
           />
         ))}
       </div>
-      <div className='pagination'>
-        <div className='pagination-left'>
-          <GoArrowLeft />
-        </div>
-        <div className='pagination-number'>
-          1
-        </div>
-        <div className='pagination-number'>
-          2
-        </div>
-        <div className='pagination-number'>
-          3
-        </div>
-        <div className='pagination-right'>
-          <GoArrowRight />
-        </div>
-        <button className='form-btn pagination-btn-download' onClick={() => toPDF()}><FaDownload /></button>
+      <div className="pagination">
+          <Pagination current={1} total={3} />
+          <button className='form-btn pagination-btn-download'><FaDownload /></button>
       </div>
     </div>
   )
