@@ -1,0 +1,49 @@
+.yes-no-box{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 0, 0, 0.3);
+    z-index: 200000;
+    
+}
+.yes-no-box-active{
+    display: flex;
+}
+
+.yes-no-card{
+    background-color: var(--bg-white);
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.yes-no-btns {
+    display: flex;
+    gap: 15px;
+}
+.yes-no-btns button{
+    padding: 10px 40px;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.yes-no-btns button:hover{
+    transform: scale(1.03);
+}
+.yes-no-btn1{
+    background-color: rgb(98, 153, 14);
+}
+.yes-no-btn2{
+    background-color: red;
+}

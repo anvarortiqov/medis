@@ -129,23 +129,25 @@
 
 .header-extra-menu{
     min-width: 220px;
-    max-width: 270px;
+    width: 280px;
+    max-width: 350px;
     right: 10px;
     top: 85px;
     box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.07);   
     position: absolute;
     z-index: 1000;
     background-color: var(--bg-white);
-    padding: 15px;
+    padding: 30px 20px;
     border-radius: 15px;
 }
 .header-extra-menu ul{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 .header-extra-menu li{
     list-style: none;
+    cursor: pointer;
 }
 .header-extra-menu li a{
     font-size: 16px;

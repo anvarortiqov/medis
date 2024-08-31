@@ -30,7 +30,7 @@
 }
 
 .list-of-patients-list {
-    min-height: calc(100vh - 440px);
+    min-height: calc(100vh - 400px);
 }
 
 .list-of-patients-list>*+* {
@@ -62,11 +62,21 @@
 }
 
 .pagination {
+    width: 100%;
+    position: relative;
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 15px;
     
     .pagination-container {
         flex-shrink: 0;
     }
+}
+.pagination-btn-download{
+    position: absolute;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    top: 0;
 }

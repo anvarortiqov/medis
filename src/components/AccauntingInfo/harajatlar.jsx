@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
+import Pagination from '../Pagination/index'
+import { FaDownload } from "react-icons/fa6";
 import HarajatCard from '../Cards/AccoauntingHarCard/index'
 import { Dropdown, Input } from '../Form';
 
@@ -82,22 +82,9 @@ const harajatlar = () => {
           ))
         }
       </div>
-      <div className='pagination'>
-        <div className='pagination-left'>
-          <GoArrowLeft />
-        </div>
-        <div className='pagination-number'>
-          1
-        </div>
-        <div className='pagination-number'>
-          2
-        </div>
-        <div className='pagination-number'>
-          3
-        </div>
-        <div className='pagination-right'>
-          <GoArrowRight />
-        </div>
+      <div className="pagination">
+          <Pagination current={1} total={3} />
+          <button className='form-btn pagination-btn-download'><FaDownload /></button>
       </div>
     </div>
   )

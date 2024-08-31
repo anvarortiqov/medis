@@ -20,6 +20,11 @@ const index = () => {
     setOpen(!open)
 }
 
+const HandleYesNo = ()=> {
+  let patientadd1 = document.querySelector('.yes-no-box')
+  patientadd1.classList.toggle('yes-no-box-active')
+}
+
   return (
     <div className='haeder'>
       <div className='header_container'>
@@ -58,9 +63,9 @@ const index = () => {
             (
               <div className='header-extra-menu'>
                 <ul>
-                  <li><Link to="#"><CgProfile className='header-extra-menu-icon' />  <span>Ilhomjon Solijonov</span></Link></li>
+                  <li><Link to="#"><CgProfile className='header-extra-menu-icon' />  <span>Profil</span></Link></li>
                   <li><Link to="settings/shifohona"><IoSettingsOutline  className='header-extra-menu-icon' /> <span>Sozlamalar</span></Link></li>
-                  <li><Link to="login"><FiLogOut   className='header-extra-menu-icon' /> <span>Chiqish</span></Link></li>
+                  <li><a onClick={HandleYesNo}><FiLogOut   className='header-extra-menu-icon' /> <span>Chiqish</span></a></li>
                 </ul>
               </div>
             )
