@@ -6,6 +6,7 @@ import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
 import { Dropdown, Input } from '../Form';
+import Pagination from '../Pagination';
 
 const massaj = () => {
 
@@ -74,22 +75,7 @@ const massaj = () => {
         ))}
       </div>
       <div className='pagination'>
-        <div className='pagination-left'>
-          <GoArrowLeft />
-        </div>
-        <div className='pagination-number'>
-          1
-        </div>
-        <div className='pagination-number'>
-          2
-        </div>
-        <div className='pagination-number'>
-          3
-        </div>
-        <div className='pagination-right'>
-          <GoArrowRight />
-        </div>
-        <button className='form-btn pagination-btn-download' onClick={() => toPDF()}><FaDownload /></button>
+        <Pagination current={1} total={10} />
       </div>
     </div>
   )
