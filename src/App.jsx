@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/index'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import useAuth from './hooks/useAuth'
+import YesNo from './components/Modals/YesNo/index'
 
 const App = () => {
   const { isAuthenticated, loading, token } = useAuth();
@@ -19,6 +20,7 @@ const App = () => {
 
   return (
     <div className='app'>
+      <YesNo/>
       <Header />
       <div className='app-block'>
         <Navbar />
