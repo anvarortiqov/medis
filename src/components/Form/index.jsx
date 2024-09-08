@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, { useState, useRef, useEffect } from 'react'
 import Typography from '../Typography';
 import "./style.css";
-import PropTypes from "prop-types"
 
 const Form = ({ onFininsh, children, className, action }) => {
     const onSubmit = event => {
