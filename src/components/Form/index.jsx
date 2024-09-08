@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, { useState, useRef, useEffect } from 'react'
 import Typography from '../Typography';
 import "./style.css";
-import PropTypes from "prop-types"
 
 const Form = ({ onFininsh, children, className, action }) => {
     const onSubmit = event => {
@@ -97,15 +96,21 @@ const TextArea = ({ children, className, rootClassName, placeholder, htmlType = 
     </label>
 }
 
-const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onChange }) => {
+const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onChange, disabled = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState(multi ? [] : null);
     const dropdownRef = useRef(null);
     const [dropdownDirection, setDropdownDirection] = useState('bottom');
 
-    const toggleDropdown = () => setIsOpen(!isOpen);
+    const toggleDropdown = () => {
+        if (!disabled) {
+            setIsOpen((prevState) => !prevState);
+        }
+    };
 
     const handleOptionClick = (option) => {
+        if (disabled) return;
+
         let updatedOptions;
         if (multi) {
             if (selectedOptions.some((selected) => selected.value === option.value)) {
@@ -155,20 +160,27 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onC
                     {label}
                 </Typography>
                 <div className="dropdown" ref={dropdownRef}>
-                    <button type="button" onClick={toggleDropdown} className="dropdown-button">
+                    <button
+                        type="button"
+                        onClick={toggleDropdown}
+                        className="dropdown-button"
+                        disabled={disabled}
+                    >
                         {multi
                             ? selectedOptions.length > 0
                                 ? selectedOptions.map((opt) => opt.label).join(', ')
                                 : 'Select...'
                             : selectedOptions?.label || 'Select...'}
                     </button>
-                    {isOpen && (
+                    {isOpen && !disabled && (
                         <ul className={`dropdown-list dropdown-list-${dropdownDirection}`}>
                             {options.map((option) => (
                                 <li
                                     key={option.value}
                                     className={`dropdown-option ${multi
                                             ? selectedOptions.some((selected) => selected.value === option.value)
+                                                ? 'selected'
+                                                : ''
                                             : selectedOptions?.value === option.value
                                                 ? 'selected'
                                                 : ''
@@ -196,6 +208,7 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onC
         </label>
     );
 };
+
 
 
 const UploadImage = ({ name, multi = false, rootClassName = '', onChange, label }) => {

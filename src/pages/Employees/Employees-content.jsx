@@ -1,5 +1,3 @@
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
 import { FaDownload } from "react-icons/fa6";
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'

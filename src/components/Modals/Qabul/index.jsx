@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./patient-reception.css"
 import Typography from '../../Typography';
 import { Dropdown, Input } from '../../Form';
@@ -8,23 +8,29 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addService, paidAmount, paymentMethod, removeServiceItem, saveServices } from '../../../redux/slices/receptionSlice';
 
-const Item = ({ Services, ServicesType, Doctors, index, onDelete }) => {
-  const dispatch = useDispatch();
-  const [DoctorId, setDoctorId] = useState();
-  const [Service, setService] = useState();
-  const [ServiceType, setServiceType] = useState();
+const Item = ({ ServicesType, Doctors, index, onDelete }) => {
+  const dispatch = useDispatch()
+
+  const [Service, setService] = useState(null);
+  const [ServiceType, setServiceType] = useState(null);
+  const [Doctor, setDoctor] = useState()
   const [Amount, setAmount] = useState(0);
 
-  useEffect(() => {
-    if (!DoctorId) return;
+  const doctors = useMemo(() => {
+    return Doctors?.map(item => {
+      if (item.value === ServiceType) {
+        return item
+      }
+    })
+  }, [ServiceType])
 
-    axios
-      .get(`${import.meta.env.VITE_API}/management/service/${DoctorId}`)
-      .then((response) => {
-        if (response.status >= 400) return;
+  useEffect(() => {
+    try {
+      axios.get(`${import.meta.env.VITE_API}/management/service/${Doctor}`).then(response => {
         setAmount(response.data.amount);
 
-        if (Service && ServiceType) {
+        if (response.status < 400) {
+
           dispatch(
             addService({
               serviceId: response.data.id,
@@ -36,9 +42,11 @@ const Item = ({ Services, ServicesType, Doctors, index, onDelete }) => {
             })
           );
         }
-      })
-      .catch(console.error);
-  }, [DoctorId, Service, ServiceType]);
+      }).catch(console.error)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [Doctor])
 
   return (
     <li className="patient-reception-item">
@@ -46,9 +54,17 @@ const Item = ({ Services, ServicesType, Doctors, index, onDelete }) => {
         {index + 1}
       </Typography>
 
-      <Dropdown onChange={setDoctorId} options={Doctors} />
-      <Dropdown onChange={setService} options={Services} />
-      <Dropdown onChange={setServiceType} options={ServicesType} />
+      <Dropdown
+        onChange={value => setService(value)}
+        options={[
+          { value: 'doctor', label: "Doktor qabuli" },
+          { value: 'laboratory', label: "Labaratoriya" },
+          { value: 'other', label: "Boshqa xizmatlar" },
+        ]}
+      />
+
+      <Dropdown onChange={value => setServiceType(value)} disabled={!Service} options={ServicesType} />
+      <Dropdown onChange={value => setDoctor(value)} disabled={!ServiceType} options={doctors} />
 
       <div className="patient-reception-item-action">
         <Input value={Amount} htmlType="number" readOnly placeholder={0} />
@@ -108,7 +124,7 @@ const Index = () => {
     const filtered = ReceptionStore.services.filter(item => item.index !== index);
 
     dispatch(removeServiceItem(filtered))
-  };  
+  };
 
   const serviceItem = AddServices.map((_, index) => (
     <Item
@@ -135,7 +151,7 @@ const Index = () => {
       </div>
 
       <header className="patient-reception-header">
-        {["№", "Doktor", "Xizmat", "Xizmat turi", "Narxi"].map((text, index) => (
+        {["№", "Xizmat", "Xizmat turi", "Doktor", "Narxi"].map((text, index) => (
           <Typography key={index} name="text">
             {text}
           </Typography>
