@@ -23,12 +23,18 @@ export const receptionSlice = createSlice({
             state.paidAmount = action.payload;
         },
         removeServiceItem(state, action) {
-            state.services = action.payload
+            state.services = action.payload;
+            state.totalPrice = 0
+            
+            action.payload.map(item => {
+                state.totalPrice += item.amount;
+            })
+
         },
         saveServices(state) {
             state.checkStatus = false
         },
-        paymentMethod(state, action){
+        paymentMethod(state, action) {
             state.paymentMethod = action.payload
         }
     },

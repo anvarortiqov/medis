@@ -50,16 +50,12 @@ const index = () => {
             </ul>
             <ul className='extra-menu-of-navbar'>
                 <li>
-                    <span>Id: </span>
+                    <span>User Name: </span>
                     #f8hf98w
                 </li>
                 <li>
-                    <span>Ism: </span>
-                    ilhomjon
-                </li>
-                <li>
-                    <span>Familiya: </span>
-                    Solijonov
+                    <span>F.I.O: </span>
+                    Solijonov ilhomjon Nazirjon O'g'li
                 </li>
                 <li>
                     <span>Tel: </span>
