@@ -15,11 +15,13 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
-
+.list-of-patients-fio{
+    font-size: 15px;
+}
 .list-of-patients-header,
 .list-of-patients-item {
     display: grid;
-    grid-template-columns: 6% repeat(4, 1fr);
+    grid-template-columns: 5% repeat(4, 1fr);
     align-items: center;
     justify-content: space-between;
     text-transform: capitalize;

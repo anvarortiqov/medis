@@ -25,7 +25,7 @@ const index = () => {
             <p>Do you really want to Log-out?</p>
             <div className='yes-no-btns'>
                 <NavLink to="/login" onClick={onLogout} ><button className='yes-no-btn1'>Yes</button></NavLink>
-                <button className='yes-no-btn2' onClick={HandleYesNo}>No</button>
+                <button className='yes-no-btn2'>No</button>
             </div>
         </div>
     </div>
