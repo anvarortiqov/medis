@@ -49,23 +49,16 @@ const index = () => {
           <div className="list-of-patients-item-img">
             <Image />
           </div>
-          <Typography name="text">
-            {surname} {name} {middle_name}
-          </Typography>
+          <Typography className="list-of-patients-fio" name={"text"}>{surname} {name} {middle_name}</Typography>
         </div>
-        <Typography name="text">{moment(birthday).format("DD/MM/YYYY")}</Typography>
+
+        <Typography className="list-of-patients-fio" name={"text"}>{moment(birthday).format("DD/MM/YYYY")}</Typography>
+
         <div>
-          {phone || extra_phone ? (
-            phone ? (
-              <Typography name="text">{phone}</Typography>
-            ) : (
-              <Typography name="text">{extra_phone}</Typography>
-            )
-          ) : (
-            "Yo'q"
-          )}
+          {phone || extra_phone ? phone ? <Typography className="list-of-patients-fio" name={"text"}>{phone}</Typography> : <Typography className="list-of-patients-fio" name={"text"}>{extra_phone}</Typography> : "Yo'q"}
         </div>
-        <Typography name="text">{moment(date_joined).format("DD/MM/YYYY")}</Typography>
+
+        <Typography className="list-of-patients-fio" name={"text"}>{moment(date_joined).format("DD/MM/YYYY")}</Typography>
       </li>
     )
   );

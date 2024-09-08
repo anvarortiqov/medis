@@ -143,11 +143,15 @@ const Index = () => {
 
   return (
     <section className="patient-reception">
-      <div className="add-employee-title">
-        <Typography name="text"># {Patient?.id}</Typography>
-        <Typography name="h2">
-          {Patient?.surname} {Patient?.name}
-        </Typography>
+      <div className='patient-reception-head'>
+        <div>
+          <Typography name="text"># {Patient?.id}</Typography>
+          <Typography className="patient-reception-title" name="h2">
+            {Patient?.surname} {Patient?.name}
+          </Typography>
+        </div>
+        <div></div>
+        <Input  htmlType="reason"  placeholder="Qabul Sababi..."  />
       </div>
 
       <header className="patient-reception-header">
