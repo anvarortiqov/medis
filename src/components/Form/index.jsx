@@ -3,22 +3,47 @@ import React, { useState, useRef, useEffect } from 'react'
 import Typography from '../Typography';
 import "./style.css";
 
-const Form = ({ onFininsh, children, className, action }) => {
-    const onSubmit = event => {
+const Form = ({ onFinish, children, className, action }) => {
+    const parseValue = (value) => {
+        try {
+            const parsed = JSON.parse(value);
+            return parsed;
+        } catch {
 
-        event.preventDefault()
+        }
+
+        if (!isNaN(value) && value.trim() !== '') {
+            return Number(value);
+        }
+
+        if (value.toLowerCase() === 'true') {
+            return true;
+        }
+        if (value.toLowerCase() === 'false') {
+            return false;
+        }
+
+        return value;
+    };
+
+    const onSubmit = (event) => {
+        event.preventDefault();
 
         const formData = new FormData(event.target);
-        const formValues = Object.fromEntries(formData.entries());
-        onFininsh(formValues)
-    }
+        const formValues = Object.fromEntries(
+            Array.from(formData.entries()).map(([key, value]) => [key, parseValue(value)])
+        );
+
+        onFinish(formValues)
+
+    };
 
     return (
         <form className={className} action={action} onSubmit={onSubmit}>
             {children}
         </form>
-    )
-}
+    );
+};
 
 const Input = ({ children, className, rootClassName, placeholder, htmlType = "text", onChange, onBlur, required, label, name, disabled, readOnly, value }) => {
 
@@ -178,12 +203,12 @@ const Dropdown = ({ options = [], multi = false, rootClassName, label, name, onC
                                 <li
                                     key={option.value}
                                     className={`dropdown-option ${multi
-                                            ? selectedOptions.some((selected) => selected.value === option.value)
-                                                ? 'selected'
-                                                : ''
-                                            : selectedOptions?.value === option.value
-                                                ? 'selected'
-                                                : ''
+                                        ? selectedOptions.some((selected) => selected.value === option.value)
+                                            ? 'selected'
+                                            : ''
+                                        : selectedOptions?.value === option.value
+                                            ? 'selected'
+                                            : ''
                                         }`}
                                     onClick={() => handleOptionClick(option)}
                                 >

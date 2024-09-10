@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import './style.css'
 import { usePDF } from 'react-to-pdf';
 import ServiceCard from '../Cards/ServiceCard/index'
@@ -6,42 +6,39 @@ import { FaDownload } from "react-icons/fa6";
 import { Dropdown, Input } from '../Form';
 
 import Pagination from '../Pagination/index';
+import axios from 'axios';
 
 const massaj = () => {
 
   const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
 
-  const Massaj = [
-    {
-      id: 1,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "faol",
-      doctor: "Anvarjon Artiqov"
-    },
-    {
-      id: 2,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "no faol",
-      doctor: "Anvarjon Artiqov"
-    },
-    {
-      id: 3,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "bo'sh",
-      doctor: "Anvarjon Artiqov"
-    },
-    {
-      id: 4,
-      name: "fziyo terapia",
-      price: 123000,
-      status: "bo'sh",
-      doctor: "Anvarjon Artiqov"
-    },
+  const [Data, setData] = useState([]);
 
-  ]
+  const data = useMemo(async () => {
+
+    try {
+      const response = await axios.get(import.meta.env.VITE_API + "/management/xizmat/");
+      if (response.status < 400) {
+        setData(response.data.results);
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
+    return Data
+  }, []);
+
+  const item = Data.map((item, index) => (
+    <ServiceCard
+      index={index}
+      key={index}
+      name={item.name}
+      price={parseFloat(item.amount)}
+      doctor={item.doctor}
+      status={item.status}
+      data={item}
+    />
+  ))
 
   return (
     <div className='massaj'>
@@ -62,20 +59,11 @@ const massaj = () => {
         <div>Status</div>
       </div>
       <div className='massaj-content' ref={targetRef}>
-        {Massaj.map((item, index) => (
-          <ServiceCard
-            index={index}
-            key={item.id}
-            name={item.name}
-            price={item.price}
-            doctor={item.doctor}
-            status={item.status}
-          />
-        ))}
+        {item.length === 0 ? "Yuklanmoqda..." : item}
       </div>
       <div className="pagination">
-          <Pagination current={1} total={3} />
-          <button className='form-btn pagination-btn-download'><FaDownload /></button>
+        <Pagination current={1} total={3} />
+        <button className='form-btn pagination-btn-download'><FaDownload /></button>
       </div>
     </div>
   )
