@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import "./patient-reception.css"
 import Typography from '../../Typography';
 import { Dropdown, Input } from '../../Form';
@@ -8,45 +8,92 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addService, paidAmount, paymentMethod, removeServiceItem, saveServices } from '../../../redux/slices/receptionSlice';
 
-const Item = ({ ServicesType, Doctors, index, onDelete }) => {
-  const dispatch = useDispatch()
+const Item = ({ index, onDelete, onAmountChange }) => {
+  const dispatch = useDispatch();
+  const [service, setService] = useState(null);
+  const [serviceType, setServiceType] = useState(null);
+  const [servicesType, setServicesType] = useState([{ value: "empty", label: "Bo'sh" }]);
+  const [doctor, setDoctor] = useState(null);
+  const [doctors, setDoctors] = useState([{ value: "empty", label: "Bo'sh" }]);
+  const [amount, setAmount] = useState(0);
 
-  const [Service, setService] = useState(null);
-  const [ServiceType, setServiceType] = useState(null);
-  const [Doctor, setDoctor] = useState()
-  const [Amount, setAmount] = useState(0);
+  const fetchServices = useCallback(async () => {
+    if (service === "doctor" || service === "other") {
+      const endpoint = service === "doctor"
+        ? "/main_module/occupation/"
+        : "/management/service/";
 
-  const doctors = useMemo(() => {
-    return Doctors?.map(item => {
-      if (item.value === ServiceType) {
-        return item
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API}${endpoint}`);
+        if (response.status < 400) {
+          setServicesType(response.data.results.map(item => ({ value: item.id, label: item.name })));
+          setServiceType(null);
+          setDoctor(null);
+          setAmount(0);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    })
-  }, [ServiceType])
+    } else {
+      setServicesType([{ value: "empty", label: "Bo'sh" }]);
+    }
+  }, [service]);
+
+  const fetchDoctors = useCallback(async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API}/main_module/hodimlar/`);
+      if (response.status < 400) {
+        setDoctors(response.data.results.map(item =>
+          item.lavozimi === serviceType
+            ? { value: item.id, label: `${item.surname} ${item.name}` }
+            : { value: "empty", label: "Bo'sh" }
+        ));
+      } else {
+        setDoctors([{ value: "empty", label: "Bo'sh" }]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [serviceType]);
+
+  const fetchAmount = useCallback(async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API}/management/service/`);
+      if (response.status < 400) {
+        response.data.results.forEach(item => {
+          if (item.type === serviceType) {
+            const newAmount = parseFloat(item.amount);
+            setAmount(newAmount);
+            onAmountChange(index, newAmount);
+            dispatch(addService({
+              index,
+              serviceId: item.id,
+              amount: newAmount,
+              doctor_name: item.doctor_name,
+              service,
+              serviceType
+            }))
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [doctor, serviceType, index, onAmountChange]);
 
   useEffect(() => {
-    try {
-      axios.get(`${import.meta.env.VITE_API}/management/service/${Doctor}`).then(response => {
-        setAmount(response.data.amount);
+    fetchServices();
+  }, [fetchServices]);
 
-        if (response.status < 400) {
+  useEffect(() => {
+    fetchDoctors();
+  }, [fetchDoctors]);
 
-          dispatch(
-            addService({
-              serviceId: response.data.id,
-              doctor_name: response.data.doctor_name,
-              service: Service,
-              type: ServiceType,
-              amount: parseFloat(response.data.amount),
-              index,
-            })
-          );
-        }
-      }).catch(console.error)
-    } catch (error) {
-      console.error(error)
+  useEffect(() => {
+    if (doctor) {
+      fetchAmount();
     }
-  }, [Doctor])
+  }, [doctor, fetchAmount]);  
 
   return (
     <li className="patient-reception-item">
@@ -55,7 +102,7 @@ const Item = ({ ServicesType, Doctors, index, onDelete }) => {
       </Typography>
 
       <Dropdown
-        onChange={value => setService(value)}
+        onChange={setService}
         options={[
           { value: 'doctor', label: "Doktor qabuli" },
           { value: 'laboratory', label: "Labaratoriya" },
@@ -63,11 +110,11 @@ const Item = ({ ServicesType, Doctors, index, onDelete }) => {
         ]}
       />
 
-      <Dropdown onChange={value => setServiceType(value)} disabled={!Service} options={ServicesType} />
-      <Dropdown onChange={value => setDoctor(value)} disabled={!ServiceType} options={doctors} />
+      <Dropdown onChange={setServiceType} disabled={!service} options={servicesType} />
+      <Dropdown onChange={setDoctor} disabled={!serviceType} options={doctors} />
 
       <div className="patient-reception-item-action">
-        <Input value={Amount} htmlType="number" readOnly placeholder={0} />
+        <Input value={amount} htmlType="number" readOnly placeholder={0} />
         <button onClick={() => onDelete(index)}>
           <FaTrashAlt />
         </button>
@@ -78,66 +125,50 @@ const Item = ({ ServicesType, Doctors, index, onDelete }) => {
 
 const Index = () => {
   const { id } = useParams();
-  const [Patient, setPatient] = useState(null);
-  const [AddServices, setAddServices] = useState([{ id: 0 }]);
-  const [Doctors, setDoctors] = useState([]);
-  const [Services, setServices] = useState([]);
-  const [ServicesType, setServicesType] = useState([]);
-
+  const [patient, setPatient] = useState(null);
+  const [addServices, setAddServices] = useState([{ id: 0, amount: 0 }]);
   const ReceptionStore = useSelector((state) => state.reception);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API}/public/patient/${id}`)
-      .then((response) => response.status < 400 && setPatient(response.data))
-      .catch(console.error);
+    const fetchPatientData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API}/public/patient/${id}`);
+        if (response.status < 400) {
+          setPatient(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPatientData();
   }, [id]);
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API}/management/service/`)
-      .then((response) => {
-        if (response.status >= 400) return;
-
-        const results = response.data.results || [];
-        setDoctors(results.map(({ id, doctor_name }) => ({ value: id, label: doctor_name })));
-        setServices(results.map(({ type, name }) => ({ value: type, label: name })));
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API}/management/service_type/`)
-      .then((response) => {
-        if (response.status >= 400) return;
-
-        setServicesType(response.data.results?.map(({ id, name }) => ({ value: id, label: name })));
-      })
-      .catch(console.error);
-  }, []);
-
-  const onDelete = (index) => {
+  const onDelete = useCallback((index) => {
     setAddServices((prev) => prev.filter((_, i) => i !== index));
-
     const filtered = ReceptionStore.services.filter(item => item.index !== index);
+    dispatch(removeServiceItem(filtered));
+  }, [ReceptionStore.services, dispatch]);
 
-    dispatch(removeServiceItem(filtered))
-  };
+  const onAmountChange = useCallback((index, newAmount) => {
+    setAddServices((prev) => {
+      const updated = [...prev];
+      updated[index].amount = newAmount;
+      return updated;
+    });
+  }, []);
 
-  const serviceItem = AddServices.map((_, index) => (
+  const serviceItems = useMemo(() => addServices.map((_, index) => (
     <Item
       key={index}
       index={index}
-      Doctors={Doctors}
-      Services={Services}
-      ServicesType={ServicesType}
       onDelete={onDelete}
+      onAmountChange={onAmountChange}
     />
-  ))
+  )), [addServices, onDelete, onAmountChange]);
 
-  if (!Patient) {
+  if (!patient) {
     return <Typography name="h2">Yuklanmoqda...</Typography>;
   }
 
@@ -145,13 +176,13 @@ const Index = () => {
     <section className="patient-reception">
       <div className='patient-reception-head'>
         <div>
-          <Typography name="text"># {Patient?.id}</Typography>
+          <Typography name="text"># {patient?.id}</Typography>
           <Typography className="patient-reception-title" name="h2">
-            {Patient?.surname} {Patient?.name}
+            {patient?.surname} {patient?.name}
           </Typography>
         </div>
         <div></div>
-        <Input  htmlType="reason"  placeholder="Qabul Sababi..."  />
+        <Input htmlType="reason" placeholder="Qabul Sababi..." />
       </div>
 
       <header className="patient-reception-header">
@@ -164,11 +195,11 @@ const Index = () => {
 
       <div className="patient-reception-body">
         <ul>
-          {serviceItem}
+          {serviceItems}
         </ul>
 
         <button
-          onClick={() => setAddServices((prev) => [...prev, { id: prev.length }])}
+          onClick={() => setAddServices((prev) => [...prev, { id: prev.length, amount: 0 }])}
           className="patient-reception-btn form-btn"
           type="button"
         >
