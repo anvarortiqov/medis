@@ -96,6 +96,10 @@
     border-radius: 16px;
     background-size: cover;
     margin: 0 1rem 0 1.5rem;
+
+    img{
+        height: 100%;
+    }
 }
 .header-account-block-texts{
     display: flex;

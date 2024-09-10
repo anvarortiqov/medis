@@ -1,7 +1,8 @@
 .serviec-card,
 .massaj-head {
     display: grid;
-    grid-template-columns: 6% 26% 26% 16% 10% 12%;
+    grid-template-columns: 6% repeat(6, 1fr);
+    gap: 6px;
     align-items: center;
     justify-content: space-between;
     text-transform: capitalize;

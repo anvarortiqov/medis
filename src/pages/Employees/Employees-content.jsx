@@ -45,7 +45,7 @@ const EmployeesContent = () => {
             </div>
 
             <div className='massaj-head'>
-                <div>N</div>
+                <div>№</div>
                 <div>Name</div>
                 <div>Position</div>
                 <div>Phone Number</div>

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
@@ -23,19 +24,19 @@ const index = (props) => {
     });
   }
 
-    const {index, name, servicetype, status, date} =props
+  const { index, name, servicetype, status, date, className } = props
 
   return (
-    <div className='serviec-card'>
-        <div>{index + 1}</div>
-        <div>{name}</div>
-        <div>{servicetype}</div>
-        <div>{date}</div>
-        <div>{status}</div>
-        <div>
-          <div className='service-edit'><LuClipboardEdit /></div>
-          <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
-        </div>
+    <div className={classNames('serviec-card', className)}>
+      <div>{index + 1}</div>
+      <div>{name}</div>
+      <div>{servicetype}</div>
+      <div>{date}</div>
+      <div>{status}</div>
+      <div>
+        <div className='service-edit'><LuClipboardEdit /></div>
+        <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>
+      </div>
     </div>
   )
 }

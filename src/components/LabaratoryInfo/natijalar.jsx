@@ -1,13 +1,10 @@
-import React from 'react'
 import './style.css'
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
 import LabaratoryCard2 from '../Cards/LabaratoryCard2/index'
 import { FaDownload } from "react-icons/fa6";
 import { Dropdown, Input } from '../Form';
 import Pagination from '../Pagination/index';
 
-const natijalar = () => {
+const natijalar = () => {  
 
   const Massaj = [
     {
@@ -72,8 +69,8 @@ const natijalar = () => {
         ))}
       </div>
       <div className="pagination">
-          <Pagination current={1} total={3} />
-          <button className='form-btn pagination-btn-download'><FaDownload /></button>
+        <Pagination current={1} total={3} />
+        <button className='form-btn pagination-btn-download'><FaDownload /></button>
       </div>
     </div>
   )

@@ -5,10 +5,12 @@ import useAuth from '../../hooks/useAuth'
 import Form from '../../components/Form'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { getUserData } from '../../redux/slices/userSlice'
 
 const index = () => {
-  const { setIsAuthenticated, setLoading } = useAuth();
-
+  const { setIsAuthenticated, setLoading, token } = useAuth();
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,22 @@ const index = () => {
 
       if (data.key) {
         window.sessionStorage.setItem("token", data.key);
+
+        // try {
+        //   axios.get(import.meta.env.VITE_API + "/dj-rest-auth/user/", {
+        //     headers:{
+        //       Authorization: "Bearer " + data.key
+        //     }
+        //   }).then(userResponse => {
+        //     if (userResponse.status < 400) {
+
+        //       console.log(userResponse);
+
+        //     }
+        //   })
+        // } catch (error) {
+
+        // }
 
         setTimeout(() => {
           setIsAuthenticated(true);
@@ -48,7 +66,7 @@ const index = () => {
             <input name='password' type="password" className='input-style' placeholder='Password kiriting' />
             <button type='submit' className='form-btn'>Kirish</button>
           </Form>
-          
+
           <p>Parolni unitdingizmi? <a href="#">Tiklash</a>.</p>
         </div>
       </div>
