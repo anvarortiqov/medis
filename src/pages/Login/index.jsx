@@ -26,27 +26,27 @@ const index = () => {
       if (data.key) {
         window.sessionStorage.setItem("token", data.key);
 
-        // try {
-        //   axios.get(import.meta.env.VITE_API + "/dj-rest-auth/user/", {
-        //     headers:{
-        //       Authorization: "Bearer " + data.key
-        //     }
-        //   }).then(userResponse => {
-        //     if (userResponse.status < 400) {
+        try {
+          axios.get(import.meta.env.VITE_API + "/dj-rest-auth/user/", {
+            headers: {
+              Authorization: "Token " + data.key
+            }
+          }).then(userResponse => {
+            if (userResponse.status < 400) {
 
-        //       console.log(userResponse);
+              dispatch(getUserData(userResponse.data));
 
-        //     }
-        //   })
-        // } catch (error) {
+              setTimeout(() => {
+                setIsAuthenticated(true);
+                setLoading(false);
+                navigate('/', { replace: true });
+              }, 1500);
 
-        // }
-
-        setTimeout(() => {
-          setIsAuthenticated(true);
-          setLoading(false);
-          navigate('/', { replace: true });
-        }, 1500);
+            }
+          }).catch(console.error)
+        } catch (error) {
+          console.warn(error);
+        }
       }
 
     })
@@ -61,7 +61,7 @@ const index = () => {
         <div className='login-right'>
           <h1>Tizimga Kirish</h1>
           <p>Tizimga kirish orqali siz <a href="#">Foydalanish shartlari</a> va <a href="#">Maxfiylik <br /> siyosatiga</a> rozilik bildirasiz.</p>
-          <Form onFininsh={handleLogin}>
+          <Form onFinish={handleLogin}>
             <input name='username' className='input-style' type="text" placeholder='Username Kiriting' />
             <input name='password' type="password" className='input-style' placeholder='Password kiriting' />
             <button type='submit' className='form-btn'>Kirish</button>
