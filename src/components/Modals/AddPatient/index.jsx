@@ -69,7 +69,7 @@ const index = () => {
 
         <hr className='add-employee-line' />
 
-        <Form className={"add-employee-form"} onFininsh={onFinish}>
+        <Form className={"add-employee-form"} onFinish={onFinish}>
 
           <div className="add-employee-form-content">
             <div className="add-employee-col">

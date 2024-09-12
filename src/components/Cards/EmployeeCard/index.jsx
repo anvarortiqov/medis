@@ -56,7 +56,7 @@ const index = ({ index, name, position, status, number, data, ...props }) => {
       <div onClick={() => handleItem(data.id)}>{name}</div>
       <div onClick={() => handleItem(data.id)}>{position}</div>
       <div onClick={() => handleItem(data.id)}>{number}</div>
-      <Status color={ColorsStore.color} background={ColorsStore.bg} text={status} />
+      <Status text={status} />
       <div>
         <div className='service-edit'><LuClipboardEdit /></div>
         <div onClick={() => HandleAlert(data.id)} className='service-delete'><MdDelete /></div>
