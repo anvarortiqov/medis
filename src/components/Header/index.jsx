@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 
 // icons import
@@ -8,16 +8,19 @@ import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
 // images import
-import UserImage from '../../assets/images/user-image.png'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 import Image from '../Image';
 import axios from 'axios';
+import { getUserData } from '../../redux/slices/userSlice';
 
 const index = () => {
   const UserStore = useSelector(state => state.user);
-
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+
+
   const handleOpen = () => {
     setOpen(!open)
   }
@@ -26,6 +29,24 @@ const index = () => {
     let patientadd1 = document.querySelector('.yes-no-box')
     patientadd1.classList.toggle('yes-no-box-active')
   }
+
+  useEffect(() => {
+    const token = window.sessionStorage.getItem("token");
+
+    try {
+      axios.get(import.meta.env.VITE_API + "/dj-rest-auth/user/", {
+        headers: {
+          Authorization: "Token " + token
+        }
+      }).then(response => {
+        if (response.status < 400) {
+          dispatch(getUserData(response.data));
+        }
+      }).catch(console.error)
+    } catch (error) {
+      console.warn(error);
+    }
+  }, [pathname])
 
   return (
     <div className='haeder'>
@@ -56,7 +77,7 @@ const index = () => {
               <Image src={UserStore.details?.image} title={UserStore.details?.first_name} />
             </div>
             <div className='header-account-block-texts'>
-              <h4><span>{UserStore.details?.first_name ?? "Not Found"}</span> <IoIosArrowDown className={` header_account-block-icon ${open ? "header_account-block-icon-def" : ""} `} /></h4>
+              <h4><span>{UserStore.details?.surname + " " + UserStore.details?.name?.at(0) ?? "Not Found"}</span> <IoIosArrowDown className={` header_account-block-icon ${open ? "header_account-block-icon-def" : ""} `} /></h4>
               <h5>{UserStore.details?.username ?? "Not Found"}</h5>
             </div>
           </div>

@@ -35,7 +35,7 @@ const index = ({ index, name, doctor, status, price, data }) => {
     }).then(async (result) => {
 
       if (result.isConfirmed) {
-        await axios.patch(import.meta.env.VITE_API + "/management/xizmat/" + id, { status: "DELETED" }).then((response) => {
+        await axios.patch(import.meta.env.VITE_API + "/management/xizmat/" + id, { ...data, status: "DELETED" }).then((response) => {
           // window.location.reload()
           // Swal.fire("Saved!", "", "success");
 

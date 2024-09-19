@@ -35,7 +35,6 @@ const index = () => {
           </div>
 
           <div className='add-analys-items'>
-            <Input htmlType='time' name={"name"} placeholder={"Vaqt"} label={"Tahminiy vaqt"} required={{ required: true, message: "Kiriting!" }} />
 
             <Dropdown label={"Xona"} multi options={rooms} />
 

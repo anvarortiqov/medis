@@ -3,6 +3,7 @@ import React from 'react'
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import Alert from 'sweetalert2'
+import Status from '../../Status';
 
 const index = (props) => {
 
@@ -32,7 +33,7 @@ const index = (props) => {
       <div>{name}</div>
       <div>{servicetype}</div>
       <div>{date}</div>
-      <div>{status}</div>
+      <Status text={status} />
       <div>
         <div className='service-edit'><LuClipboardEdit /></div>
         <div onClick={HandleAlert} className='service-delete'><MdDelete /></div>

@@ -19,13 +19,22 @@ const Status = ({ color, background, text }) => {
             case "pending": {
                 return { color: "#fff", background: "#AD6005" }
             }
+            case "completed": {
+                return { color: "#fff", background: "#24C18F" }
+            }
+            case "registered": {
+                return { color: "#fff", background: "#24C18F" }
+            }
+            case "cancelled": {
+                return { color: "#fff", background: "#FF333F" }
+            }
             default: {
                 return { color, background }
             }
         }
     }
     return (
-        <div style={checkColor(text)} className='status'>{text}</div>
+        <div style={checkColor(text)} className='status'>{String(text).toUpperCase()}</div>
     )
 }
 
