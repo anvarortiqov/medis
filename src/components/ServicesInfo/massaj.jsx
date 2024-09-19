@@ -59,7 +59,7 @@ const massaj = () => {
         <div>Status</div>
       </div>
       <div className='massaj-content' ref={targetRef}>
-        {item.length === 0 ? "Yuklanmoqda..." : item}
+        {item.length === 0 ? "Ma'lumot mavjud emas..." : item}
       </div>
       <div className="pagination">
         <Pagination current={1} total={3} />
