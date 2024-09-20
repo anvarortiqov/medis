@@ -1,32 +1,48 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react'
-import "./patient-reception.css"
-import Typography from '../../Typography';
-import { Dropdown, Input } from '../../Form';
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { addService, paidAmount, paymentMethod, removeServiceItem, saveServices } from '../../../redux/slices/receptionSlice';
+import { useEffect, useState, useCallback, useMemo } from "react";
+import "./patient-reception.css";
+import Typography from "../../Typography";
+import { Dropdown, Input } from "../../Form";
+import { FaPlus, FaTrashAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addService,
+  paidAmount,
+  paymentMethod,
+  removeServiceItem,
+  saveServices,
+} from "../../../redux/slices/receptionSlice";
 
 const Item = ({ index, onDelete, onAmountChange }) => {
   const dispatch = useDispatch();
   const [service, setService] = useState(null);
   const [serviceType, setServiceType] = useState(null);
-  const [servicesType, setServicesType] = useState([{ value: "empty", label: "Bo'sh" }]);
+  const [servicesType, setServicesType] = useState([
+    { value: "empty", label: "Bo'sh" },
+  ]);
   const [doctor, setDoctor] = useState(null);
   const [doctors, setDoctors] = useState([{ value: "empty", label: "Bo'sh" }]);
   const [amount, setAmount] = useState(0);
 
   const fetchServices = useCallback(async () => {
     if (service === "doctor" || service === "other") {
-      const endpoint = service === "doctor"
-        ? "/main_module/occupation/"
-        : "/management/service/";
+      const endpoint =
+        service === "doctor"
+          ? "/main_module/occupation/"
+          : "/management/service/";
 
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API}${endpoint}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API}${endpoint}`,
+        );
         if (response.status < 400) {
-          setServicesType(response.data.results.map(item => ({ value: item.id, label: item.name })));
+          setServicesType(
+            response.data.results.map((item) => ({
+              value: item.id,
+              label: item.name,
+            })),
+          );
           setServiceType(null);
           setDoctor(null);
           setAmount(0);
@@ -41,13 +57,17 @@ const Item = ({ index, onDelete, onAmountChange }) => {
 
   const fetchDoctors = useCallback(async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API}/main_module/hodimlar/`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/main_module/hodimlar/`,
+      );
       if (response.status < 400) {
-        setDoctors(response.data.results.map(item =>
-          item.lavozimi === serviceType
-            ? { value: item.id, label: `${item.surname} ${item.name}` }
-            : { value: "empty", label: "Bo'sh" }
-        ));
+        setDoctors(
+          response.data.results.map((item) =>
+            item.lavozimi === serviceType
+              ? { value: item.id, label: `${item.surname} ${item.name}` }
+              : { value: "empty", label: "Bo'sh" },
+          ),
+        );
       } else {
         setDoctors([{ value: "empty", label: "Bo'sh" }]);
       }
@@ -58,21 +78,25 @@ const Item = ({ index, onDelete, onAmountChange }) => {
 
   const fetchAmount = useCallback(async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API}/management/service/`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/management/service/`,
+      );
       if (response.status < 400) {
-        response.data.results.forEach(item => {
+        response.data.results.forEach((item) => {
           if (item.type === serviceType) {
             const newAmount = parseFloat(item.amount);
             setAmount(newAmount);
             onAmountChange(index, newAmount);
-            dispatch(addService({
-              index,
-              serviceId: item.id,
-              amount: newAmount,
-              doctor_name: item.doctor_name,
-              service,
-              serviceType
-            }))
+            dispatch(
+              addService({
+                index,
+                serviceId: item.id,
+                amount: newAmount,
+                doctor_name: item.doctor_name,
+                service,
+                serviceType,
+              }),
+            );
           }
         });
       }
@@ -93,7 +117,7 @@ const Item = ({ index, onDelete, onAmountChange }) => {
     if (doctor) {
       fetchAmount();
     }
-  }, [doctor, fetchAmount]);  
+  }, [doctor, fetchAmount]);
 
   return (
     <li className="patient-reception-item">
@@ -104,14 +128,22 @@ const Item = ({ index, onDelete, onAmountChange }) => {
       <Dropdown
         onChange={setService}
         options={[
-          { value: 'doctor', label: "Doktor qabuli" },
-          { value: 'laboratory', label: "Labaratoriya" },
-          { value: 'other', label: "Boshqa xizmatlar" },
+          { value: "doctor", label: "Doktor qabuli" },
+          { value: "laboratory", label: "Labaratoriya" },
+          { value: "other", label: "Boshqa xizmatlar" },
         ]}
       />
 
-      <Dropdown onChange={setServiceType} disabled={!service} options={servicesType} />
-      <Dropdown onChange={setDoctor} disabled={!serviceType} options={doctors} />
+      <Dropdown
+        onChange={setServiceType}
+        disabled={!service}
+        options={servicesType}
+      />
+      <Dropdown
+        onChange={setDoctor}
+        disabled={!serviceType}
+        options={doctors}
+      />
 
       <div className="patient-reception-item-action">
         <Input value={amount} htmlType="number" readOnly placeholder={0} />
@@ -133,7 +165,9 @@ const Index = () => {
   useEffect(() => {
     const fetchPatientData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API}/public/patient/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API}/public/patient/${id}`,
+        );
         if (response.status < 400) {
           setPatient(response.data);
         }
@@ -145,11 +179,16 @@ const Index = () => {
     fetchPatientData();
   }, [id]);
 
-  const onDelete = useCallback((index) => {
-    setAddServices((prev) => prev.filter((_, i) => i !== index));
-    const filtered = ReceptionStore.services.filter(item => item.index !== index);
-    dispatch(removeServiceItem(filtered));
-  }, [ReceptionStore.services, dispatch]);
+  const onDelete = useCallback(
+    (index) => {
+      setAddServices((prev) => prev.filter((_, i) => i !== index));
+      const filtered = ReceptionStore.services.filter(
+        (item) => item.index !== index,
+      );
+      dispatch(removeServiceItem(filtered));
+    },
+    [ReceptionStore.services, dispatch],
+  );
 
   const onAmountChange = useCallback((index, newAmount) => {
     setAddServices((prev) => {
@@ -159,14 +198,18 @@ const Index = () => {
     });
   }, []);
 
-  const serviceItems = useMemo(() => addServices.map((_, index) => (
-    <Item
-      key={index}
-      index={index}
-      onDelete={onDelete}
-      onAmountChange={onAmountChange}
-    />
-  )), [addServices, onDelete, onAmountChange]);
+  const serviceItems = useMemo(
+    () =>
+      addServices.map((_, index) => (
+        <Item
+          key={index}
+          index={index}
+          onDelete={onDelete}
+          onAmountChange={onAmountChange}
+        />
+      )),
+    [addServices, onDelete, onAmountChange],
+  );
 
   if (!patient) {
     return <Typography name="h2">Yuklanmoqda...</Typography>;
@@ -174,7 +217,7 @@ const Index = () => {
 
   return (
     <section className="patient-reception">
-      <div className='patient-reception-head'>
+      <div className="patient-reception-head">
         <div>
           <Typography name="text"># {patient?.id}</Typography>
           <Typography className="patient-reception-title" name="h2">
@@ -186,20 +229,22 @@ const Index = () => {
       </div>
 
       <header className="patient-reception-header">
-        {["№", "Xizmat", "Xizmat turi", "Doktor", "Narxi"].map((text, index) => (
-          <Typography key={index} name="text">
-            {text}
-          </Typography>
-        ))}
+        {["№", "Xizmat", "Xizmat turi", "Doktor", "Narxi"].map(
+          (text, index) => (
+            <Typography key={index} name="text">
+              {text}
+            </Typography>
+          ),
+        )}
       </header>
 
       <div className="patient-reception-body">
-        <ul>
-          {serviceItems}
-        </ul>
+        <ul>{serviceItems}</ul>
 
         <button
-          onClick={() => setAddServices((prev) => [...prev, { id: prev.length, amount: 0 }])}
+          onClick={() =>
+            setAddServices((prev) => [...prev, { id: prev.length, amount: 0 }])
+          }
           className="patient-reception-btn form-btn"
           type="button"
         >
@@ -208,7 +253,13 @@ const Index = () => {
       </div>
 
       <footer className="patient-reception-footer">
-        <Input value={ReceptionStore.totalPrice} htmlType="number" label="Jami" placeholder={0} readOnly />
+        <Input
+          value={ReceptionStore.totalPrice}
+          htmlType="number"
+          label="Jami"
+          placeholder={0}
+          readOnly
+        />
         <Dropdown
           onChange={(value) => dispatch(paymentMethod(value))}
           label="To'lov turi"
@@ -226,10 +277,18 @@ const Index = () => {
         <button className="form-btn" type="button">
           Promo kod
         </button>
-        <button onClick={() => dispatch(saveServices())} className="form-btn" type="button">
+        <button
+          onClick={() => dispatch(saveServices())}
+          className="form-btn"
+          type="button"
+        >
           Saqlash
         </button>
-        <button disabled={ReceptionStore.checkStatus} className="form-btn" type="button">
+        <button
+          disabled={ReceptionStore.checkStatus}
+          className="form-btn"
+          type="button"
+        >
           Chek chiqazish
         </button>
       </footer>
