@@ -16,13 +16,14 @@ import {
 
 const Item = ({ index, onDelete, onAmountChange }) => {
   const dispatch = useDispatch();
+  const ReceptionStore = useSelector((state) => state.reception);
   const [service, setService] = useState(null);
   const [serviceType, setServiceType] = useState(null);
   const [servicesType, setServicesType] = useState([
-    { value: "empty", label: "Bo'sh" },
+    { value: null, label: "Bo'sh" },
   ]);
   const [doctor, setDoctor] = useState(null);
-  const [doctors, setDoctors] = useState([{ value: "empty", label: "Bo'sh" }]);
+  const [doctors, setDoctors] = useState([{ value: null, label: "Bo'sh" }]);
   const [amount, setAmount] = useState(0);
 
   const fetchServices = useCallback(async () => {
@@ -51,7 +52,7 @@ const Item = ({ index, onDelete, onAmountChange }) => {
         console.error(error);
       }
     } else {
-      setServicesType([{ value: "empty", label: "Bo'sh" }]);
+      setServicesType([{ value: null, label: "Bo'sh" }]);
     }
   }, [service]);
 
@@ -65,11 +66,11 @@ const Item = ({ index, onDelete, onAmountChange }) => {
           response.data.results.map((item) =>
             item.lavozimi === serviceType
               ? { value: item.id, label: `${item.surname} ${item.name}` }
-              : { value: "empty", label: "Bo'sh" },
+              : { value: null, label: "Bo'sh" },
           ),
         );
       } else {
-        setDoctors([{ value: "empty", label: "Bo'sh" }]);
+        setDoctors([{ value: null, label: "Bo'sh" }]);
       }
     } catch (error) {
       console.error(error);
@@ -117,6 +118,14 @@ const Item = ({ index, onDelete, onAmountChange }) => {
     if (doctor) {
       fetchAmount();
     }
+
+    if (!doctor) {
+      dispatch(
+        removeServiceItem(
+          ReceptionStore.services.filter((item) => item.index !== index),
+        ),
+      );
+    }
   }, [doctor, fetchAmount]);
 
   return (
@@ -160,6 +169,7 @@ const Index = () => {
   const [patient, setPatient] = useState(null);
   const [addServices, setAddServices] = useState([{ id: 0, amount: 0 }]);
   const ReceptionStore = useSelector((state) => state.reception);
+  const EmployeeStore = useSelector((state) => state.user.details);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -211,6 +221,24 @@ const Index = () => {
     [addServices, onDelete, onAmountChange],
   );
 
+  const onSave = async () => {
+    try {
+      await axios
+        .post(import.meta.env.VITE_API + "/hospital/qabul/", {
+          ...ReceptionStore,
+          status: "ACTIVE",
+          hodim: EmployeeStore.id,
+          bemor: id,
+        })
+        .then(() => {
+          dispatch(saveServices());
+        })
+        .catch(console.error);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   if (!patient) {
     return <Typography name="h2">Yuklanmoqda...</Typography>;
   }
@@ -254,7 +282,7 @@ const Index = () => {
 
       <footer className="patient-reception-footer">
         <Input
-          value={ReceptionStore.totalPrice}
+          value={ReceptionStore.total_amount}
           htmlType="number"
           label="Jami"
           placeholder={0}
@@ -264,8 +292,8 @@ const Index = () => {
           onChange={(value) => dispatch(paymentMethod(value))}
           label="To'lov turi"
           options={[
-            { value: "Card", label: "Card" },
-            { value: "Naxt pul", label: "Naxt pul" },
+            { value: "CARD", label: "Plastik karta" },
+            { value: "CASH", label: "Naxt pul" },
           ]}
         />
         <Input
@@ -273,15 +301,12 @@ const Index = () => {
           htmlType="number"
           label="To'landi"
           placeholder={0}
+          value={ReceptionStore.paid_amount}
         />
         <button className="form-btn" type="button">
           Promo kod
         </button>
-        <button
-          onClick={() => dispatch(saveServices())}
-          className="form-btn"
-          type="button"
-        >
+        <button onClick={onSave} className="form-btn" type="button">
           Saqlash
         </button>
         <button
