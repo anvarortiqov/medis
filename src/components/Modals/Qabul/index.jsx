@@ -14,7 +14,7 @@ import {
   saveServices,
 } from "../../../redux/slices/receptionSlice";
 
-const Item = ({ index, onDelete, onAmountChange }) => {
+const Item = ({ index, onDelete }) => {
   const dispatch = useDispatch();
   const ReceptionStore = useSelector((state) => state.reception);
   const [service, setService] = useState(null);
@@ -27,106 +27,99 @@ const Item = ({ index, onDelete, onAmountChange }) => {
   const [amount, setAmount] = useState(0);
 
   const fetchServices = useCallback(async () => {
-    if (service === "doctor" || service === "other") {
-      const endpoint =
-        service === "doctor"
-          ? "/main_module/occupation/"
-          : "/management/service/";
+    if (!service) return setServicesType([{ value: null, label: "Bo'sh" }]);
 
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API}${endpoint}`,
-        );
-        if (response.status < 400) {
-          setServicesType(
-            response.data.results.map((item) => ({
-              value: item.id,
-              label: item.name,
-            })),
-          );
-          setServiceType(null);
-          setDoctor(null);
-          setAmount(0);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
+    const endpoint =
+      service === "ANALYSE_NURSE"
+        ? "/main_module/occupation/"
+        : "/management/service/";
+
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API}${endpoint}`,
+      );
+      setServicesType(
+        data.results.map((item) => ({ value: item.id, label: item.name })),
+      );
+    } catch (error) {
+      console.error(error);
       setServicesType([{ value: null, label: "Bo'sh" }]);
     }
   }, [service]);
 
   const fetchDoctors = useCallback(async () => {
+    if (!serviceType) return setDoctors([{ value: null, label: "Bo'sh" }]);
+
     try {
-      const response = await axios.get(
+      const { data } = await axios.get(
         `${import.meta.env.VITE_API}/main_module/hodimlar/`,
       );
-      if (response.status < 400) {
-        setDoctors(
-          response.data.results.map((item) =>
-            item.lavozimi === serviceType
-              ? { value: item.id, label: `${item.surname} ${item.name}` }
-              : { value: null, label: "Bo'sh" },
-          ),
-        );
-      } else {
-        setDoctors([{ value: null, label: "Bo'sh" }]);
-      }
+      setDoctors(
+        data.results
+          .filter((item) => item.lavozimi === serviceType)
+          .map((item) => ({
+            value: item.id,
+            label: `${item.surname} ${item.name}`,
+          })),
+      );
     } catch (error) {
       console.error(error);
+      setDoctors([{ value: null, label: "Bo'sh" }]);
     }
   }, [serviceType]);
 
   const fetchAmount = useCallback(async () => {
+    if (!doctor) return;
+
     try {
-      const response = await axios.get(
+      const { data } = await axios.get(
         `${import.meta.env.VITE_API}/management/service/`,
       );
-      if (response.status < 400) {
-        response.data.results.forEach((item) => {
-          if (item.type === serviceType) {
-            const newAmount = parseFloat(item.amount);
-            setAmount(newAmount);
-            onAmountChange(index, newAmount);
-            dispatch(
-              addService({
-                index,
-                serviceId: item.id,
-                amount: newAmount,
-                doctor_name: item.doctor_name,
-                service,
-                serviceType,
-              }),
-            );
-          }
-        });
+      const serviceItem = data.results.find(
+        (item) => item.type === serviceType,
+      );
+      if (serviceItem) {
+        const newAmount = parseFloat(serviceItem.amount);
+        setAmount(newAmount);
+        dispatch(
+          addService({
+            type: service,
+            data: {
+              index,
+              serviceId: serviceItem.id,
+              amount: newAmount,
+              doctor_name: serviceItem.doctor_name,
+              serviceType,
+              service,
+            },
+          }),
+        );
       }
     } catch (error) {
       console.error(error);
     }
-  }, [doctor, serviceType, index, onAmountChange]);
+  }, [doctor, serviceType, index]);
 
   useEffect(() => {
     fetchServices();
-  }, [fetchServices]);
+  }, [service]);
 
   useEffect(() => {
     fetchDoctors();
-  }, [fetchDoctors]);
+  }, [serviceType]);
 
   useEffect(() => {
     if (doctor) {
       fetchAmount();
+    } else {
+      ["SERVICES", "ANALYSES", "ANALYSE_NURSE"].forEach((type) => {
+        const filtered = ReceptionStore[type.toLowerCase()].filter(
+          (item) => item.index !== index,
+        );
+        dispatch(removeServiceItem({ type, filtered }));
+      });
     }
-
-    if (!doctor) {
-      dispatch(
-        removeServiceItem(
-          ReceptionStore.services.filter((item) => item.index !== index),
-        ),
-      );
-    }
-  }, [doctor, fetchAmount]);
+  }, [doctor]);
 
   return (
     <li className="patient-reception-item">
@@ -137,9 +130,9 @@ const Item = ({ index, onDelete, onAmountChange }) => {
       <Dropdown
         onChange={setService}
         options={[
-          { value: "doctor", label: "Doktor qabuli" },
-          { value: "laboratory", label: "Labaratoriya" },
-          { value: "other", label: "Boshqa xizmatlar" },
+          { value: "ANALYSE_NURSE", label: "Doktor qabuli" },
+          { value: "ANALYSES", label: "Labaratoriya" },
+          { value: "SERVICES", label: "Boshqa xizmatlar" },
         ]}
       />
 
@@ -167,7 +160,7 @@ const Item = ({ index, onDelete, onAmountChange }) => {
 const Index = () => {
   const { id } = useParams();
   const [patient, setPatient] = useState(null);
-  const [addServices, setAddServices] = useState([{ id: 0, amount: 0 }]);
+  const [addServices, setAddServices] = useState([{ id: 0 }]);
   const ReceptionStore = useSelector((state) => state.reception);
   const EmployeeStore = useSelector((state) => state.user.details);
   const dispatch = useDispatch();
@@ -175,67 +168,49 @@ const Index = () => {
   useEffect(() => {
     const fetchPatientData = async () => {
       try {
-        const response = await axios.get(
+        const { data } = await axios.get(
           `${import.meta.env.VITE_API}/public/patient/${id}`,
         );
-        if (response.status < 400) {
-          setPatient(response.data);
-        }
+        setPatient(data);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchPatientData();
   }, [id]);
 
   const onDelete = useCallback(
     (index) => {
       setAddServices((prev) => prev.filter((_, i) => i !== index));
-      const filtered = ReceptionStore.services.filter(
-        (item) => item.index !== index,
-      );
-      dispatch(removeServiceItem(filtered));
-    },
-    [ReceptionStore.services, dispatch],
-  );
 
-  const onAmountChange = useCallback((index, newAmount) => {
-    setAddServices((prev) => {
-      const updated = [...prev];
-      updated[index].amount = newAmount;
-      return updated;
-    });
-  }, []);
+      ["SERVICES", "ANALYSES", "ANALYSE_NURSE"].forEach((type) => {
+        const filtered = ReceptionStore[type.toLowerCase()].filter(
+          (item) => item.index !== index,
+        );
+        dispatch(removeServiceItem({ type, filtered }));
+      });
+    },
+    [
+      ReceptionStore.services,
+      ReceptionStore.analyses,
+      ReceptionStore.analyse_nurse,
+      dispatch,
+    ],
+  );
 
   const serviceItems = useMemo(
     () =>
       addServices.map((_, index) => (
-        <Item
-          key={index}
-          index={index}
-          onDelete={onDelete}
-          onAmountChange={onAmountChange}
-        />
+        <Item key={index} index={index} onDelete={onDelete} />
       )),
-    [addServices, onDelete, onAmountChange],
+    [addServices, onDelete],
   );
 
   const onSave = async () => {
     try {
-      await axios
-        .post(import.meta.env.VITE_API + "/hospital/qabul/", {
-          ...ReceptionStore,
-          status: "ACTIVE",
-          hodim: EmployeeStore.id,
-          bemor: id,
-        })
-        .then(() => {
-          dispatch(saveServices());
-        })
-        .catch(console.error);
+      console.log(ReceptionStore);
     } catch (e) {
-      console.warn(e);
+      console.error(e);
     }
   };
 
@@ -246,13 +221,10 @@ const Index = () => {
   return (
     <section className="patient-reception">
       <div className="patient-reception-head">
-        <div>
-          <Typography name="text"># {patient?.id}</Typography>
-          <Typography className="patient-reception-title" name="h2">
-            {patient?.surname} {patient?.name}
-          </Typography>
-        </div>
-        <div></div>
+        <Typography name="text"># {patient?.id}</Typography>
+        <Typography className="patient-reception-title" name="h2">
+          {patient?.surname} {patient?.name}
+        </Typography>
         <Input htmlType="reason" placeholder="Qabul Sababi..." />
       </div>
 
@@ -268,10 +240,9 @@ const Index = () => {
 
       <div className="patient-reception-body">
         <ul>{serviceItems}</ul>
-
         <button
           onClick={() =>
-            setAddServices((prev) => [...prev, { id: prev.length, amount: 0 }])
+            setAddServices((prev) => [...prev, { id: prev.length }])
           }
           className="patient-reception-btn form-btn"
           type="button"
