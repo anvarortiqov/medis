@@ -1,0 +1,9 @@
+.text{
+    font-size: 30px;
+}
+
+@media (width <= 620px) {
+    .text{
+        font-size: 20px;
+    }
+}
