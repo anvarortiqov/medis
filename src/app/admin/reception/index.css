@@ -1,0 +1,9 @@
+.box-shadow{
+    box-shadow: 0 2px 6px 0 #13124212;
+}
+.min-height{
+    min-height: calc(100vh - 65px);
+}
+.height-reception-content{
+    height: calc(100vh - 260px);
+}

@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
               <Sidebar/>
           </aside>
 
-          <article className={"flex-grow"}>{children}</article>
+          <article className={"flex-grow bg-app_bg"}>{children}</article>
       </main>
       <footer> </footer>
       </body>

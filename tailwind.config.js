@@ -5,7 +5,8 @@ module.exports = {
   theme: {
   	extend: {
   		colors: {
-  			text_color: '#171f54',
+		  	app_bg: "#f7f8f9",
+  			text_color: '#1a2258',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
