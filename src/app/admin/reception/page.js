@@ -1,4 +1,6 @@
+'use client'
 
+import React from "react"
 import './index.css'
 import {Input} from "@/components/ui/input";
 import {Typography} from "@/components/typography/Typography";
@@ -28,6 +30,17 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 const invoices = [
     {
@@ -80,7 +93,10 @@ const invoices = [
         recepted: "03/12/2024",
     },
 ]
+
 const Reception = () => {
+
+    const [date, setDate] = React.useState()
 
     const invoice = invoices.map((invoice, index) => (
         <TableRow key={invoice.invoice}>
@@ -108,8 +124,31 @@ const Reception = () => {
                 </div>
 
                 <div className="flex w-full gap-5 ">
-                    <Input className="bg-white box-shadow" type="text" placeholder="F.I.O"/>
-                    <Input className="bg-white box-shadow" type="date" placeholder="Date"/>
+                    <Input className="bg-w
+                    hite box-shadow" type="text" placeholder="F.I.O"/>
+                    {/*<Input className="bg-white box-shadow" type="date" placeholder="Date"/>*/}
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                variant={"outline"}
+                                className={cn(
+                                    "h-12 w-full justify-start text-left font-normal",
+                                    !date && "text-muted-foreground"
+                                )}
+                            >
+                                <CalendarIcon />
+                                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0">
+                            <Calendar
+                                mode="single"
+                                selected={date}
+                                onSelect={setDate}
+                                initialFocus
+                            />
+                        </PopoverContent>
+                    </Popover>
                     <Input className="bg-white box-shadow" type="number" placeholder="Telefonni Kiriting"/>
                 </div>
             </header>

@@ -67,14 +67,8 @@ export const Sidebar = () => {
                   </Link>
                   <Accordion type="single" collapsible className="navbar-accordion w-full">
                     <AccordionItem value="item-1">
-                      <AccordionTrigger>
-                        <Link
-                            href="/admin/dashboard"
-                            className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                        >
-                          <MdManageAccounts className="h-4 w-4" />
-                          <h4>Management</h4>
-                        </Link>
+                      <AccordionTrigger className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
+                          <h4 className="flex items-center gap-3"> <span><MdManageAccounts className="h-4 w-4" /></span> Management</h4>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className={`navbar-links`}>
@@ -103,14 +97,8 @@ export const Sidebar = () => {
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
-                      <AccordionTrigger>
-                        <Link
-                            href="/admin/dashboard"
-                            className="flex items-center gap-3  hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                        >
-                          <MdOutlineCalculate className="h-4 w-4" />
-                          <h4>Bugalteria</h4>
-                        </Link>
+                      <AccordionTrigger className="flex items-center gap-3  hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
+                          <h4 className="flex items-center gap-3"> <span><MdOutlineCalculate className="h-4 w-4" /></span> Bugalteria</h4>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className={`navbar-links`}>
