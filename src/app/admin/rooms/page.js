@@ -104,7 +104,7 @@ const Rooms = () => {
             characteristics={item.characteristics}
             roomnumber={item.roomnumber}
             status={item.status}
-            className="w-[32%] mb-5"
+            className=""
         />
     ))
 
@@ -132,7 +132,7 @@ const Rooms = () => {
                 </div>
             </header>
             <main className="room-content">
-                <div className="flex justify-between flex-wrap h-auto">
+                <div className="w-full grid grid-cols-3 gap-5 h-auto">
                     {room}
                 </div>
                 <footer>
