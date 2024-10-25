@@ -120,7 +120,7 @@ const Reception = () => {
             <header>
                 <div className="w-full flex items-center justify-between py-3">
                     <Typography type='h1' className="text-[26px]">Kasallar Ro'yhati:</Typography>
-                    <Link href="#"><Button className="header-logo" type="submit">Bemor Qo'shish</Button></Link>
+                    <Link href="reception/addpatientform"><Button className="header-logo" type="submit">Bemor Qo'shish</Button></Link>
                 </div>
 
                 <div className="flex w-full gap-5 ">
