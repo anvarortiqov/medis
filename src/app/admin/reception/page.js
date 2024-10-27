@@ -107,7 +107,7 @@ const Reception = () => {
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
-                        <Link href="#">{invoice.fish}</Link>
+                        <Link href="reception/patient/personal">{invoice.fish}</Link>
                     </div>
                 </TableCell>
                 <TableCell>{invoice.birthday}</TableCell>

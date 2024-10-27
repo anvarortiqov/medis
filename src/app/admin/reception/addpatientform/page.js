@@ -32,6 +32,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {Typography} from "@/components/typography/Typography";
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -49,9 +50,7 @@ const formSchema = z.object({
     username: z.string().min(2, {
         message: "Please inter your Username.",
     }),
-    password: z.number().min(2, {
-        message: "Please inter your Password.",
-    }),
+
 })
 
 
@@ -71,8 +70,8 @@ const AddPatientForm = () => {
     return (
         <div className="w-full p-4">
             <header className="mb-8">
-                <h1 className="text-text_color text-[25px]">Bemor ma’lumotlari</h1>
-                <p className="text-[#6F6C90] text-md pb-3">Iltimos har bir maydonga to’liq va to’g’ri ma’lumotlarni kiriting !</p>
+                <Typography type={`h1`} className="text-text_color ">Bemor ma’lumotlari</Typography>
+                <Typography className="text-[#6F6C90]  pb-3">Iltimos har bir maydonga to’liq va to’g’ri ma’lumotlarni kiriting !</Typography>
                 <hr></hr>
             </header>
 
@@ -137,7 +136,7 @@ const AddPatientForm = () => {
                         />
                         <FormField
                             control={form.control}
-                            name="phone"
+                            name="ism"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Tug'gulgan kun</FormLabel>
@@ -186,7 +185,7 @@ const AddPatientForm = () => {
                         />
                         <FormField
                             control={form.control}
-                            name="password"
+                            name="ism"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Parol</FormLabel>
