@@ -73,14 +73,14 @@ export const Sidebar = () => {
                       <AccordionContent>
                         <div className={`navbar-links`}>
                           <Link
-                              href='services'
+                              href='/admin/services'
                               className="flex items-center gap-3  hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <RiCustomerService2Line/>
                             <h4>Xizmatlar</h4>
                           </Link>
                           <Link
-                              href='/'
+                              href='/admin/employees/management'
                               className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <FaUserDoctor/>

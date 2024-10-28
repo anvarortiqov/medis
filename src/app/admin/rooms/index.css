@@ -5,10 +5,14 @@
 .room-content::-webkit-scrollbar{
     display: none;
 }
+.add-employee-main{
+    height: calc(100vh - 16rem);
+    overflow: auto;
+}
 .services-main{
     height: calc(100vh - 8rem - 65px);
     overflow: auto;
 }
-.services-main::-webkit-scrollbar{
+.services-main::-webkit-scrollbar, .add-employee-main::-webkit-scrollbar{
     display: none;
 }
