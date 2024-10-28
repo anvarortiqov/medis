@@ -5,3 +5,10 @@
 .room-content::-webkit-scrollbar{
     display: none;
 }
+.services-main{
+    height: calc(100vh - 8rem - 65px);
+    overflow: auto;
+}
+.services-main::-webkit-scrollbar{
+    display: none;
+}
