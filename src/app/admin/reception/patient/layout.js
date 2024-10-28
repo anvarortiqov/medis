@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 const navLink = [
     { title: "Bemor" , path: "personal" },
     { title: "Analiz", path: "analiz" },
-    { title: "Kasallik tarixi", path: "sickhistory" },
+    { title: "Kasallik tarixi", path: "sick-history" },
     { title: "Statsionar", path: "statsionar" },
-    { title: "Qabul", path: "qabul" }
+    { title: "Qabul", path: "acceptance" }
 ];
 
 export default function PatientLayout({ children }) {
@@ -24,8 +24,8 @@ export default function PatientLayout({ children }) {
                         <Link
                             key={link.path}
                             href={link.path}
-                            className={` flex justify-center items-center py-[0.3rem] rounded ${
-                                currentSegment === link.path ? "header-logo text-[#fff] " : "text-text_color "
+                            className={` flex justify-center items-center py-[0.3rem]  rounded ${
+                                currentSegment === link.path ? "header-logo text-[#fff] " : "text-[#5D5FEF] "
                             }`}
                         >
 
