@@ -7,3 +7,9 @@
 .height-reception-content{
     height: calc(100vh - 260px);
 }
+.height-patient-screen{
+    height: calc(100vh - 8rem);
+}
+.acceptance-main-height{
+    height: calc(100vh - 20rem);
+}
