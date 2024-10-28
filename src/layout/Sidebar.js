@@ -87,7 +87,7 @@ export const Sidebar = () => {
                             <h4>Hodimlar</h4>
                           </Link>
                           <Link
-                              href='/'
+                              href='/admin/labaratory/analysis'
                               className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <GiSoapExperiment/>

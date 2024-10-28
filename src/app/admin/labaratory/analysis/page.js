@@ -1,6 +1,7 @@
+
 "use client";
 
-import '../rooms/index.css'
+import '../../reception/index.css'
 import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import Link from "next/link";
@@ -34,89 +35,54 @@ const invoices = [
     {
         invoice: "INV001",
         fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
+        servicetype: "Qon Analizi",
+        sana: "12/12/2024",
         status: "Active",
     },
     {
         invoice: "INV001",
         fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
+        servicetype: "Qon Analizi",
+        sana: "12/12/2024",
         status: "Active",
     },
     {
         invoice: "INV001",
         fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
+        servicetype: "Qon Analizi",
+        sana: "12/12/2024",
         status: "Deleted",
     },
     {
         invoice: "INV001",
         fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
-        status: "Deleted",
-    },
-    {
-        invoice: "INV001",
-        fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
-        status: "Active",
-    },
-    {
-        invoice: "INV001",
-        fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
-        status: "Active",
-    },
-    {
-        invoice: "INV001",
-        fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
+        servicetype: "Qon Analizi",
+        sana: "12/12/2024",
         status: "Pending",
-    },
-    {
+    },{
         invoice: "INV001",
         fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
+        servicetype: "Qon Analizi",
+        sana: "12/12/2024",
         status: "Active",
     },
-    {
-        invoice: "INV001",
-        fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
-        status: "Active",
-    },
-    {
-        invoice: "INV001",
-        fish: "Ortiqov Anvar Olimjon og`li",
-        service: "Test",
-        price: 20000,
-        status: "Active",
-    },
+
 ]
 
 
 
-const Services = () => {
+const Analysis = () => {
 
     const invoice = invoices.map((invoice, index) => (
         <TableRow key={invoice.invoice} className="text-text_color text-[15px]">
             <TableCell className="font-medium">{index+1}</TableCell>
             <TableCell>
-                <Link href="#">{invoice.service}</Link>
+                <Link href="#">{invoice.servicetype}</Link>
             </TableCell>
             <TableCell>
                 <Link href="#">{invoice.fish}</Link>
             </TableCell>
-            <TableCell>{invoice.price} so'm</TableCell>
+            <TableCell>{invoice.sana} </TableCell>
             <TableCell>
                 <div className={`py-2 text-center text-white rounded ${
                     invoice.status === 'Active'
@@ -126,7 +92,7 @@ const Services = () => {
                             : invoice.status === 'Deleted'
                                 ? 'bg-red-500'
                                 : ''
-                    }`}
+                }`}
                 >
                     {invoice.status}
                 </div>
@@ -145,35 +111,35 @@ const Services = () => {
     ))
 
     return (
-        <div className="w-full m-auto px-4 flex flex-col justify-between min-height">
+        <div className="w-full m-auto flex flex-col justify-between">
             <header>
-                <div className="flex w-full gap-5 py-3 ">
-                    <Input className="bg-white box-shadow" type="search" placeholder="Qiirish..."/>
+                <div className="grid grid-cols-3 w-full gap-5 py-3 ">
+                    <Input className="bg-white box-shadow" type="search" placeholder="Qidirish..."/>
+                    <div></div>
                     <Select>
                         <SelectTrigger className="bg-white box-shadow">
-                            <SelectValue placeholder="Xizmat Turini Tanlang"/>
+                            <SelectValue placeholder="Analiz turini tanlang"/>
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectLabel>Xizmat Turi</SelectLabel>
+                                <SelectLabel>Analiz Turi</SelectLabel>
                                 <SelectItem value="active">Active</SelectItem>
                                 <SelectItem value="pending">Pending</SelectItem>
                                 <SelectItem value="deleted">Deleted</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
-                    <Link href="services/addservice"><Button className="header-logo px-12" type="submit">Xizmat Qo'shish</Button></Link>
                 </div>
             </header>
-            <main className="services-main">
+            <main className="employee-main ">
                 <Table>
-                    <TableCaption>A list of your recent Services.</TableCaption>
+                    <TableCaption>A list of Analysis.</TableCaption>
                     <TableHeader>
                         <TableRow className="text-[#737791] text-[16px] font-medium">
                             <TableHead className="w-[70px]">№</TableHead>
-                            <TableHead >Xizmat Nomi</TableHead>
-                            <TableHead>F.I.O</TableHead>
-                            <TableHead>Narx</TableHead>
+                            <TableHead>Analiz Turi</TableHead>
+                            <TableHead >Doctor</TableHead>
+                            <TableHead>Sana</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead></TableHead>
                             <TableHead></TableHead>
@@ -212,4 +178,4 @@ const Services = () => {
     );
 };
 
-export default Services;
+export default Analysis;
