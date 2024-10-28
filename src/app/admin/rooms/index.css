@@ -1,18 +1,18 @@
 .room-content{
-    height: calc(100vh - 150px);
-    overflow-y: auto;
+    height: calc(100vh - 13rem);
+    overflow: auto;
 }
 .room-content::-webkit-scrollbar{
     display: none;
 }
-.add-employee-main{
-    height: calc(100vh - 16rem);
+.add-employees-main{
+    height: calc(100vh - 9rem);
     overflow: auto;
 }
 .services-main{
     height: calc(100vh - 8rem - 65px);
     overflow: auto;
 }
-.services-main::-webkit-scrollbar, .add-employee-main::-webkit-scrollbar{
+.services-main::-webkit-scrollbar, .add-employees-main::-webkit-scrollbar{
     display: none;
 }

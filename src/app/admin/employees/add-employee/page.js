@@ -74,16 +74,16 @@ const AddEmployee = () => {
     const [date, setDate] = React.useState()
 
     return (
-        <div className="w-full p-4">
-            <header className="mb-8">
-                <Typography type={`h1`} className="text-text_color ">Bemor ma’lumotlari</Typography>
-                <Typography className="text-[#6F6C90]  pb-3">Iltimos har bir maydonga to’liq va to’g’ri ma’lumotlarni kiriting !</Typography>
+        <div className="w-full flex flex-col gap-2 add-employees-main mt-2">
+            <header className="flex flex-col gap-2">
+                <Typography className="text-text_color text-[25px]">Bemor ma’lumotlari</Typography>
+                <Typography className="text-[#6F6C90]">Iltimos har bir maydonga to’liq va to’g’ri ma’lumotlarni kiriting !</Typography>
                 <hr></hr>
             </header>
 
-            <main className="add-employee-main">
+            <main>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-3 gap-6">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-3 gap-5">
                         <FormField
                             control={form.control}
                             name="name"

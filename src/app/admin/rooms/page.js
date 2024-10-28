@@ -114,8 +114,8 @@ const Rooms = () => {
                 <div className="flex w-full gap-5 py-3 ">
                     <Input className="bg-white box-shadow" type="search" placeholder="Qiirish..."/>
                     <Select>
-                        <SelectTrigger  className="bg-white box-shadow">
-                            <SelectValue placeholder="Xona Turini Tanlang" />
+                        <SelectTrigger className="bg-white box-shadow">
+                            <SelectValue placeholder="Xona Turini Tanlang"/>
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
@@ -131,35 +131,33 @@ const Rooms = () => {
                     <Link href="#"><Button className="header-logo px-12" type="submit">Xona Qo'shish</Button></Link>
                 </div>
             </header>
-            <main className="room-content">
-                <div className="w-full grid grid-cols-3 gap-5 h-auto">
-                    {room}
-                </div>
-                <footer>
-                    <Pagination>
-                        <PaginationContent>
-                            <PaginationItem>
-                                <PaginationPrevious href="#"/>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">1</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">2</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">3</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationEllipsis/>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationNext href="#"/>
-                            </PaginationItem>
-                        </PaginationContent>
-                    </Pagination>
-                </footer>
+            <main className="room-content grid grid-cols-3 gap-3">
+                {room}
             </main>
+            <footer>
+                <Pagination>
+                    <PaginationContent>
+                        <PaginationItem>
+                            <PaginationPrevious href="#"/>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">1</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">2</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">3</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationEllipsis/>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationNext href="#"/>
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
+            </footer>
         </div>
     );
 };
