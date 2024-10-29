@@ -33,7 +33,7 @@ export const Sidebar = () => {
           <div className="hidden border-r bg-muted/40 md:block">
             <div className="flex h-full max-h-screen flex-col gap-2">
               <div className="flex h-14 items-center  px-4 lg:h-[75px] lg:px-6">
-                <HospitalLogo name={"Hospital Name"} logo={'for logotype'} />
+                <HospitalLogo name={"hospital Name"} logo={'for logotype'} />
               </div>
               <div className="flex-1">
                 <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
@@ -73,21 +73,21 @@ export const Sidebar = () => {
                       <AccordionContent>
                         <div className={`navbar-links`}>
                           <Link
-                              href='/'
+                              href='/admin/services'
                               className="flex items-center gap-3  hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <RiCustomerService2Line/>
                             <h4>Xizmatlar</h4>
                           </Link>
                           <Link
-                              href='/'
+                              href='/admin/employees/management'
                               className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <FaUserDoctor/>
                             <h4>Hodimlar</h4>
                           </Link>
                           <Link
-                              href='/'
+                              href='/admin/labaratory/analysis'
                               className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                           >
                             <GiSoapExperiment/>
@@ -121,14 +121,14 @@ export const Sidebar = () => {
                     </AccordionItem>
                   </Accordion>
                   <Link
-                      href="#"
+                      href="/admin/settings/hospital"
                       className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   >
                     <GoGear className="h-4 w-4" />
                     Sozlamalar
                   </Link>
                   <Link
-                      href="#"
+                      href="/login"
                       className="flex items-center gap-3 hover:bg-muted rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   >
                     <TbLogout className="h-4 w-4" />

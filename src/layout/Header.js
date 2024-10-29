@@ -145,9 +145,9 @@ export const Header = () => {
                     <DropdownMenuItem>exampe@gmail.com</DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Sozlamalar</DropdownMenuItem>
+                    <DropdownMenuItem> <Link href="/admin/settings">Sozlamalar</Link> </DropdownMenuItem>
                     <DropdownMenuSeparator/>
-                    <DropdownMenuItem>Chiqish</DropdownMenuItem>
+                    <DropdownMenuItem> <Link href="/login">Chiqish</Link> </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>
